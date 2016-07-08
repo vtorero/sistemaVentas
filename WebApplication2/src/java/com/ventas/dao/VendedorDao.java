@@ -89,4 +89,98 @@ public class VendedorDao extends Dao {
        }
        return lista;
    }
+            
+                   
+      public Vendedor leerID(Vendedor ven) throws Exception{
+       Vendedor vens = null;
+       ResultSet rs;
+       try {
+           this.Conectar();
+           PreparedStatement st = this.getCn().prepareCall("SELECT vCod,vRuc,vRzS,vDir,vLug,vMap,vFnc,vTlf,vCl1,vCl2,vCe1,vCe2,vCom,vFio,vFfo,vMcs,vFot,vUsr,vPas,vAcc FROM vendedor WHERE vCod=?");
+           st.setString(1,ven.getvCod());
+           rs =st.executeQuery();
+           while (rs.next()) {
+               vens = new Vendedor();
+          vens.setvCod(rs.getString("vCod"));
+          vens.setVruc(rs.getString("vRuc"));
+          vens.setVrzs(rs.getString("vRzS"));
+          vens.setVdir(rs.getString("vDir"));
+          vens.setVlug(rs.getString("vLug"));
+          vens.setVmap(rs.getString("vMap"));
+          vens.setVfnc(rs.getString("vFnc"));
+          vens.setVtlf(rs.getString("vTlf"));
+          vens.setVcl1(rs.getString("vCl1"));
+          vens.setVcl2(rs.getString("vCl2"));
+          vens.setVce1(rs.getString("vCe1"));
+          vens.setVce2(rs.getString("vCe2"));
+          vens.setVcom(rs.getFloat("vCom"));
+          vens.setVfio(rs.getString("vFio"));
+          vens.setVffo(rs.getString("vFfo"));
+          vens.setVmcs(rs.getString("vMcs"));
+          //ven.setVfot(rs.getString("vFot").getBytes());
+          vens.setVusr(rs.getString("vUsr"));
+          vens.setVpas(rs.getString("vPas"));
+          vens.setVacc(rs.getString("vAcc"));
+            
+
+              }
+           
+       } catch (Exception e) {
+           throw e;
+       }
+   finally{
+           this.Cerrar();
+}
+       return vens;
+}
+          
+public void modificar(Vendedor ven) throws Exception{
+       try {
+       this.Conectar();
+           PreparedStatement st = this.getCn().prepareStatement("UPDATE vendedor SET vRuc=?,vRzS=?,vDir=?,vLug=?,vMap=?,vFnc=?,vTlf=?,vCl1=?,vCl2=?,vCe1=?,vCe2=?,vCom=?,vFio=?,vFfo=?,vMcs=?,vFot=?,vUsr=?,vPas=?,vAcc=? WHERE vCod = ?");
+           st.setString(1,ven.getVruc());
+           st.setString(2, ven.getVrzs());
+           st.setString(3, ven.getVdir());
+           st.setString(4, ven.getVlug());
+           st.setString(5, ven.getVmap());
+           st.setString(6, ven.getVfnc());
+           st.setString(7, ven.getVtlf());
+           st.setString(8, ven.getVcl1());
+           st.setString(9, ven.getVcl2());
+           st.setString(10, ven.getVce1());
+           st.setString(11, ven.getVce2());
+           st.setFloat(12, ven.getVcom());
+           st.setString(13, ven.getVfio());
+           st.setString(14, ven.getVffo());
+           st.setString(15, ven.getVmcs());
+           st.setBinaryStream(16, ven.getVfot().getInputstream());
+           st.setString(17, ven.getVusr());
+           st.setString(18, ven.getVpas());
+           st.setString(19, ven.getVacc());
+           st.setString(20,ven.getvCod());
+           st.executeUpdate();
+       } catch (Exception e) {
+       throw e;
+       }finally{
+           this.Cerrar();
+        
+       }
+   
+   } 
+    public void eliminar(Vendedor ven) throws Exception{
+       try {
+       this.Conectar();
+           PreparedStatement st = this.getCn().prepareStatement("DELETE FROM vendedor  WHERE vCod = ?");
+           st.setString(1,ven.getvCod());
+           st.executeUpdate();
+       } catch (Exception e) {
+       throw e;
+       }finally{
+           this.Cerrar();
+        
+       }
+   
+   } 
+            
+            
 }
