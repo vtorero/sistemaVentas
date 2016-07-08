@@ -12,28 +12,28 @@
    <ui:define name="content">          
         <p:growl id="msj"/>
         <h:form id="frm">
-            <p:dataTable id="data" value="#{empresaBean.lstEmpresas}" var="empresa">
+            <p:dataTable id="data" value="#{vendedorBean.lstVendedores}" var="vendedor">
                    <p:column headerText="Nombre">
-                    <p:outputLabel value="#{empresa.erzs}"/>
+                       <p:outputLabel value="#{vendedor.vrzs}"/>
                 </p:column>
                 <p:column headerText="Ruc">
-                    <p:outputLabel value="#{empresa.eruc}"/>      
+                    <p:outputLabel value="#{vendedor.vruc}"/>      
                 </p:column>
                    <p:column headerText="Direccion">
-                       <p:outputLabel value="#{empresa.edir}"/>
+                       <p:outputLabel value="#{vendedor.vdir}"/>
                 </p:column>
                 <p:column headerText="Telefono">
-                    <p:outputLabel value="#{empresa.etl1}"/>
+                    <p:outputLabel value="#{vendedor.vtlf}"/>
                 </p:column>
                   <p:column headerText="Modificar">
-                      <p:commandLink value="Modificar" actionListener="#{empresaBean.leerID(empresa)}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos"/>
+                      <p:commandLink value="Modificar" actionListener="#{vendedorBean.leerID(vendedor)}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos"/>
                 </p:column>
                     <p:column headerText="Eliminar">
-                        <p:commandLink value="Eliminar" actionListener="#{empresaBean.eliminar(empresa)}" update="data"/>
+                        <p:commandLink value="Eliminar" actionListener="#{vendedorBean.eliminar(vendedor)}" update="data"/>
                 </p:column>
             </p:dataTable>
-            <p:commandButton value="Nuevo"  actionListener="#{empresaBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos" />
-             <p:commandButton value="Listar" actionListener="#{empresaBean.listar()}" update="data"/>
+            <p:commandButton value="Nuevo"  actionListener="#{vendedorBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos" />
+            <p:commandButton value="Listar" actionListener="#{vendedorBean.listar()}" update="data"/>
         </h:form>
          
         <p:dialog header="Datos" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode" resizable="true">
@@ -41,19 +41,21 @@
             <p:panelGrid  columns="2" columnClasses="label,value" style="border:0">
            
              <h:outputLabel value="Nombre"/>
-             <p:inputText id="txtNombre" value="#{empresaBean.empresa.erzs}"/>
+             <p:inputText id="txtNombre" value="#{vendedorBean.vendedor.vrzs}"/>
              <h:outputLabel value="Ruc"/>
-            <p:inputText id="txtRuc" value="#{empresaBean.empresa.eruc}"/>
+             <p:inputText id="txtRuc" value="#{vendedorBean.vendedor.vruc}"/>
             <h:outputLabel value="Direccion"/>
-            <p:inputText id="txtDir" value="#{empresaBean.empresa.edir}"/>
-            <h:outputLabel value="Telefono 1"/>
-            <p:inputText id="txtTlf1" value="#{empresaBean.empresa.etl1}"/>
-            <h:outputLabel value="Telefono 2"/>
-            <p:inputText id="txtTlf2" value="#{empresaBean.empresa.etl2}"/>
-            <h:outputLabel value="Fax"/>
-            <p:inputText id="txtFax" value="#{empresaBean.empresa.efax}"/>
+            <p:inputText id="txtDir" value="#{vendedorBean.vendedor.vdir}"/>
+            <h:outputLabel value="Telefono fijo"/>
+            <p:inputText id="txtTlf1" value="#{vendedorBean.vendedor.vtlf}"/>
+            <h:outputLabel value="Telefono celular 1"/>
+            <p:inputText id="txtTlf2" value="#{vendedorBean.vendedor.vcl1}"/>
+            <h:outputLabel value="Telefono celular 2"/>
+            <p:inputText id="txtTlf3" value="#{vendedorBean.vendedor.vcl2}"/>
+            <h:outputLabel value="Correo"/>
+            <p:inputText id="txtFax" value="#{vendedorBean.vendedor.vce1}"/>
             <f:facet name="footer">
-            <p:commandButton value="#{empresaBean.accion}" actionListener="#{empresaBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data"/>
+                <p:commandButton value="#{vendedorBean.accion}" actionListener="#{vendedorBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>
             </f:facet>
            </p:panelGrid>

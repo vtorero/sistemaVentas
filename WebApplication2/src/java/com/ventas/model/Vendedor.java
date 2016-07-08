@@ -5,6 +5,7 @@
  */
 package com.ventas.model;
 
+import java.sql.Date;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -18,7 +19,7 @@ private String vrzs;
 private String vdir;
 private String vlug;
 private String vmap;
-private String vfnc;
+private java.sql.Date vfnc;
 private String vtlf;
 private String vcl1;
 private String vcl2;
@@ -81,11 +82,11 @@ private String vacc;
         this.vmap = vmap;
     }
 
-    public String getVfnc() {
+    public Date getVfnc() {
         return vfnc;
     }
 
-    public void setVfnc(String vfnc) {
+    public void setVfnc(Date vfnc) {
         this.vfnc = vfnc;
     }
 
