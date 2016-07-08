@@ -12,7 +12,7 @@ import org.primefaces.model.UploadedFile;
  * @author vjimenez
  */
 public class Vendedor {
-private String vvod;
+private String vCod;
 private String vruc;
 private String vrzs;
 private String vdir;
@@ -33,12 +33,12 @@ private String vusr;
 private String vpas;
 private String vacc;
 
-    public String getVvod() {
-        return vvod;
+    public String getvCod() {
+        return vCod;
     }
 
-    public void setVvod(String vvod) {
-        this.vvod = vvod;
+    public void setvCod(String vCod) {
+        this.vCod = vCod;
     }
 
     public String getVruc() {
