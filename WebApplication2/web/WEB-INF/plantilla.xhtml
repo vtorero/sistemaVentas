@@ -23,10 +23,17 @@
     <p:menuButton value="Mantenimiento">
         <p:menuitem value="Empresas" url="#{appBean.baseUrl}empresa.xhtml" update="messages" icon="ui-icon-disk"/>
         <p:menuitem value="Vendedores" url="#{appBean.baseUrl}vendedor.xhtml" update="messages" icon="ui-icon-disk"/>
-        <p:menuitem value="Productos" url="#{appBean.baseUrl}productos.xhtml" update="messages" icon="ui-icon-arrowrefresh-1-w"/>
-        <p:menuitem value="Ventas" url="#{appBean.baseUrl}ventas.xhtml" ajax="false" icon="ui-icon-close"/>
+        <p:menuitem value="Articulos" url="#{appBean.baseUrl}articulos.xhtml" update="messages" icon="ui-icon-disk"/>
+        <p:menuitem value="Clientes" url="#{appBean.baseUrl}persona.xhtml" ajax="false" icon="ui-icon-disk"/>
         <p:separator />
         <p:menuitem value="Homepage" url="#{appBean.baseUrl}inicio.xhtml" icon="ui-icon-home"/>
+        <p:menuitem value="Cerrar" url="#{appBean.baseUrl}persona.xhtml" ajax="false" icon="ui-icon-close"/>
+    </p:menuButton>
+    <p:menuButton value="Ventas">
+        <p:menuitem value="Facturación" url="#{appBean.baseUrl}empresa.xhtml" update="messages" icon="ui-icon-disk"/>    
+    </p:menuButton>
+    <p:menuButton value="Caja">
+        <p:menuitem value="Movimientos" url="#{appBean.baseUrl}empresa.xhtml" update="messages" icon="ui-icon-disk"/>    
     </p:menuButton>
 </h:form>
             </ui:insert>
