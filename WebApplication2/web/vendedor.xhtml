@@ -10,7 +10,7 @@
         <ui:composition template="./WEB-INF/plantilla.xhtml">
 
    <ui:define name="content">          
-        <p:growl id="msj"/>
+       <p:growl showDetail="true" id="msj"/>
         <h:form id="frm">
             <p:dataTable id="data" value="#{vendedorBean.lstVendedores}" var="vendedor">
                    <p:column headerText="Nombre">
@@ -37,9 +37,8 @@
         </h:form>
          
         <p:dialog header="Datos" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode" resizable="true">
-         <h:form>
-            <p:panelGrid  columns="2" columnClasses="label,value" style="border:0">
-           
+            <h:form enctype="multipart/form-data">
+            <p:panelGrid  columns="2" columnClasses="label,value" style="border:0">   
              <h:outputLabel value="Nombre"/>
              <p:inputText id="txtNombre" value="#{vendedorBean.vendedor.vrzs}"/>
              <h:outputLabel value="Ruc"/>
@@ -54,8 +53,10 @@
             <p:inputText id="txtTlf3" value="#{vendedorBean.vendedor.vcl2}"/>
             <h:outputLabel value="Correo"/>
             <p:inputText id="txtFax" value="#{vendedorBean.vendedor.vce1}"/>
+            <h:outputLabel value="Foto"/>
+             <p:fileUpload id="txtFoto"  mode="simple" value="#{vendedorBean.vendedor.vfot}"/>
             <f:facet name="footer">
-                <p:commandButton value="#{vendedorBean.accion}" actionListener="#{vendedorBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data"/>
+                <p:commandButton value="#{vendedorBean.accion}" actionListener="#{vendedorBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>
             </f:facet>
            </p:panelGrid>

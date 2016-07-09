@@ -20,8 +20,7 @@ public class VendedorDao extends Dao {
      public void registrar(Vendedor ven) throws Exception{
        try {
        this.Conectar();
-       
-           PreparedStatement st = this.getCn().prepareStatement("INSERT into vendedor (vRuc,vRzS,vDir,vLug,vMap,vFnc,vTlf,vCl1,vCl2,vCe1,vCe2,vCom,vFio,vFfo,vMcs,vUsr,vPas,vAcc) values(?,?,?,?,?,STR_TO_DATE( ?, '%m/%d/%Y'),?,?,?,?,?,?,?,?,?,?,?,?)");
+           PreparedStatement st = this.getCn().prepareStatement("INSERT into vendedor (vRuc,vRzS,vDir,vLug,vMap,vFnc,vTlf,vCl1,vCl2,vCe1,vCe2,vCom,vFot,vFio,vFfo,vMcs,vUsr,vPas,vAcc) values(?,?,?,?,?,STR_TO_DATE(?, '%m/%d/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?)");
            st.setString(1,ven.getVruc());
            st.setString(2, ven.getVrzs());
            st.setString(3, ven.getVdir());
@@ -34,13 +33,13 @@ public class VendedorDao extends Dao {
            st.setString(10, ven.getVce1());
            st.setString(11, ven.getVce2());
            st.setFloat(12, ven.getVcom());
-           st.setString(13, ven.getVfio());
-           st.setString(14, ven.getVffo());
-           st.setString(15, ven.getVmcs());
-           //st.setBinaryStream(16, ven.getVfot().getInputstream());
-           st.setString(16, ven.getVusr());
-           st.setString(17, ven.getVpas());
-           st.setString(18, ven.getVacc());
+           st.setBinaryStream(13,ven.getVfot().getInputstream());
+           st.setString(14, ven.getVfio());
+           st.setString(15, ven.getVffo());
+           st.setString(16, ven.getVmcs());
+           st.setString(17, ven.getVusr());
+           st.setString(18, ven.getVpas());
+           st.setString(19, ven.getVacc());
            st.executeUpdate();
        } catch (Exception e) {
        throw e;
@@ -139,7 +138,7 @@ public List<Vendedor> listar() throws Exception{
 public void modificar(Vendedor ven) throws Exception{
        try {
        this.Conectar();
-           PreparedStatement st = this.getCn().prepareStatement("UPDATE vendedor SET vRuc=?,vRzS=?,vDir=?,vLug=?,vMap=?,vFnc=?,vTlf=?,vCl1=?,vCl2=?,vCe1=?,vCe2=?,vCom=?,vFio=?,vFfo=?,vMcs=?,vFot=?,vUsr=?,vPas=?,vAcc=? WHERE vCod = ?");
+           PreparedStatement st = this.getCn().prepareStatement("UPDATE vendedor SET vRuc=?,vRzS=?,vDir=?,vLug=?,vMap=?,vFnc=?,vTlf=?,vCl1=?,vCl2=?,vCe1=?,vCe2=?,vCom=?,vFio=?,vMcs=?,vFot=?,vUsr=?,vPas=?,vAcc=? WHERE vCod = ?");
            st.setString(1,ven.getVruc());
            st.setString(2, ven.getVrzs());
            st.setString(3, ven.getVdir());
@@ -155,11 +154,11 @@ public void modificar(Vendedor ven) throws Exception{
            st.setString(13, ven.getVfio());
            st.setString(14, ven.getVffo());
            st.setString(15, ven.getVmcs());
-           st.setBinaryStream(16, ven.getVfot().getInputstream());
-           st.setString(17, ven.getVusr());
-           st.setString(18, ven.getVpas());
-           st.setString(19, ven.getVacc());
-           st.setString(20,ven.getvCod());
+          // st.setBinaryStream(16, ven.getVfot().getInputstream());
+           st.setString(16, ven.getVusr());
+           st.setString(17, ven.getVpas());
+           st.setString(18, ven.getVacc());
+           st.setString(19,ven.getvCod());
            st.executeUpdate();
        } catch (Exception e) {
        throw e;
