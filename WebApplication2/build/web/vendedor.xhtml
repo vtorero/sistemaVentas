@@ -45,6 +45,10 @@
              <p:inputText id="txtRuc" value="#{vendedorBean.vendedor.vruc}"/>
             <h:outputLabel value="Direccion"/>
             <p:inputText id="txtDir" value="#{vendedorBean.vendedor.vdir}"/>
+            <h:outputLabel value="Fecha de nacimiento"/>
+            <p:inputMask id="date" value="#{vendedorBean.vendedor.vfnc}" mask="99/99/9999"/>
+            
+           
             <h:outputLabel value="Telefono fijo"/>
             <p:inputText id="txtTlf1" value="#{vendedorBean.vendedor.vtlf}"/>
             <h:outputLabel value="Telefono celular 1"/>
@@ -54,7 +58,7 @@
             <h:outputLabel value="Correo"/>
             <p:inputText id="txtFax" value="#{vendedorBean.vendedor.vce1}"/>
             <h:outputLabel value="Foto"/>
-             <p:fileUpload id="txtFoto"  mode="simple" value="#{vendedorBean.vendedor.vfot}"/>
+              <p:fileUpload value="#{vendedorBean.vendedor.vfot}" mode="simple" skinSimple="true"/>
             <f:facet name="footer">
                 <p:commandButton value="#{vendedorBean.accion}" actionListener="#{vendedorBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>

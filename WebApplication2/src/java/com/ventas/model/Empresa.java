@@ -12,7 +12,7 @@ private String emap;
 private String etl1;
 private String etl2;
 private String efax;
-private String efio;
+private java.sql.Date efio;
 private String erep;
 private String eigv;
 private String eufa;
@@ -95,11 +95,11 @@ private String eugt;
         this.efax = efax;
     }
 
-    public String getEfio() {
+    public Date getEfio() {
         return efio;
     }
 
-    public void setEfio(String efio) {
+    public void setEfio(Date efio) {
         this.efio = efio;
     }
 

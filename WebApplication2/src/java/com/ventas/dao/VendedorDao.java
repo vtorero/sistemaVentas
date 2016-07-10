@@ -8,9 +8,13 @@ package com.ventas.dao;
 import com.ventas.model.Vendedor;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -20,13 +24,13 @@ public class VendedorDao extends Dao {
      public void registrar(Vendedor ven) throws Exception{
        try {
        this.Conectar();
-           PreparedStatement st = this.getCn().prepareStatement("INSERT into vendedor (vRuc,vRzS,vDir,vLug,vMap,vFnc,vTlf,vCl1,vCl2,vCe1,vCe2,vCom,vFot,vFio,vFfo,vMcs,vUsr,vPas,vAcc) values(?,?,?,?,?,STR_TO_DATE(?, '%m/%d/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?)");
+           PreparedStatement st = this.getCn().prepareStatement("INSERT into vendedor (vRuc,vRzS,vDir,vLug,vMap,vFnc,vTlf,vCl1,vCl2,vCe1,vCe2,vCom,vFot,vFio,vFfo,vMcs,vUsr,vPas,vAcc) values(?,?,?,?,?,STR_TO_DATE(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?)");
            st.setString(1,ven.getVruc());
            st.setString(2, ven.getVrzs());
            st.setString(3, ven.getVdir());
            st.setString(4, ven.getVlug());
            st.setString(5, ven.getVmap());
-           st.setDate(6, ven.getVfnc());
+           st.setString(6, ven.getVfnc());
            st.setString(7, ven.getVtlf());
            st.setString(8, ven.getVcl1());
            st.setString(9, ven.getVcl2());
@@ -57,7 +61,6 @@ public List<Vendedor> listar() throws Exception{
            rs = st.executeQuery();
            lista = new ArrayList<>();
            while(rs.next()){
-         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
          Vendedor ven = new Vendedor();
          ven.setvCod(rs.getString("vCod"));
           ven.setVruc(rs.getString("vRuc"));
@@ -65,7 +68,7 @@ public List<Vendedor> listar() throws Exception{
           ven.setVdir(rs.getString("vDir"));
           ven.setVlug(rs.getString("vLug"));
           ven.setVmap(rs.getString("vMap"));
-          ven.setVfnc(rs.getDate("vFnc"));
+          ven.setVfnc(rs.getString("vFnc"));
           ven.setVtlf(rs.getString("vTlf"));
           ven.setVcl1(rs.getString("vCl1"));
           ven.setVcl2(rs.getString("vCl2"));
@@ -75,7 +78,6 @@ public List<Vendedor> listar() throws Exception{
           ven.setVfio(rs.getString("vFio"));
           ven.setVffo(rs.getString("vFfo"));
           ven.setVmcs(rs.getString("vMcs"));
-          //ven.setVfot(rs.getString("vFot").getBytes());
           ven.setVusr(rs.getString("vUsr"));
           ven.setVpas(rs.getString("vPas"));
           ven.setVacc(rs.getString("vAcc"));
@@ -97,7 +99,7 @@ public List<Vendedor> listar() throws Exception{
        ResultSet rs;
        try {
            this.Conectar();
-           PreparedStatement st = this.getCn().prepareCall("SELECT vCod,vRuc,vRzS,vDir,vLug,vMap,vFnc,vTlf,vCl1,vCl2,vCe1,vCe2,vCom,vFio,vFfo,vMcs,vFot,vUsr,vPas,vAcc FROM vendedor WHERE vCod=?");
+           PreparedStatement st = this.getCn().prepareCall("SELECT vCod,vRuc,vRzS,vDir,vLug,vMap,DATE_FORMAT(vFnc,'%d/%m/%Y') vFnc,vTlf,vCl1,vCl2,vCe1,vCe2,vCom,vFio,vFfo,vMcs,vFot,vUsr,vPas,vAcc FROM vendedor WHERE vCod=?");
            st.setString(1,ven.getvCod());
            rs =st.executeQuery();
            while (rs.next()) {
@@ -108,7 +110,7 @@ public List<Vendedor> listar() throws Exception{
           vens.setVdir(rs.getString("vDir"));
           vens.setVlug(rs.getString("vLug"));
           vens.setVmap(rs.getString("vMap"));
-          vens.setVfnc(rs.getDate("vFnc"));
+          vens.setVfnc(rs.getString("vFnc"));
           vens.setVtlf(rs.getString("vTlf"));
           vens.setVcl1(rs.getString("vCl1"));
           vens.setVcl2(rs.getString("vCl2"));
@@ -137,28 +139,33 @@ public List<Vendedor> listar() throws Exception{
           
 public void modificar(Vendedor ven) throws Exception{
        try {
+//         DateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+//         java.util.Date fecha = null; // crea objetos tipo util.Date y sql.Date
+//         java.sql.Date fecha2 = null;
+//         fecha = ft.parse(ven.getVfnc()); // convierte el string en util.Date
+//         fecha2 = new java.sql.Date(fecha.getTime());
        this.Conectar();
-           PreparedStatement st = this.getCn().prepareStatement("UPDATE vendedor SET vRuc=?,vRzS=?,vDir=?,vLug=?,vMap=?,vFnc=?,vTlf=?,vCl1=?,vCl2=?,vCe1=?,vCe2=?,vCom=?,vFio=?,vMcs=?,vFot=?,vUsr=?,vPas=?,vAcc=? WHERE vCod = ?");
+           PreparedStatement st = this.getCn().prepareStatement("UPDATE vendedor SET vRuc=?,vRzS=?,vDir=?,vLug=?,vMap=?,vFnc=STR_TO_DATE(?,'%d/%m/%Y'),vTlf=?,vCl1=?,vCl2=?,vCe1=?,vCe2=?,vCom=?,vFot=?,vFio=?,vFfo=?,vMcs=?,vUsr=?,vPas=?,vAcc=? WHERE vCod = ?");
            st.setString(1,ven.getVruc());
            st.setString(2, ven.getVrzs());
            st.setString(3, ven.getVdir());
            st.setString(4, ven.getVlug());
            st.setString(5, ven.getVmap());
-           st.setDate(6, ven.getVfnc());
+           st.setString(6, ven.getVfnc());
            st.setString(7, ven.getVtlf());
            st.setString(8, ven.getVcl1());
            st.setString(9, ven.getVcl2());
            st.setString(10, ven.getVce1());
            st.setString(11, ven.getVce2());
            st.setFloat(12, ven.getVcom());
-           st.setString(13, ven.getVfio());
-           st.setString(14, ven.getVffo());
-           st.setString(15, ven.getVmcs());
-          // st.setBinaryStream(16, ven.getVfot().getInputstream());
-           st.setString(16, ven.getVusr());
-           st.setString(17, ven.getVpas());
-           st.setString(18, ven.getVacc());
-           st.setString(19,ven.getvCod());
+           st.setBinaryStream(13,ven.getVfot().getInputstream());
+           st.setString(14, ven.getVfio());
+           st.setString(15, ven.getVffo());
+           st.setString(16, ven.getVmcs());
+           st.setString(17, ven.getVusr());
+           st.setString(18, ven.getVpas());
+           st.setString(19, ven.getVacc());
+           st.setString(20,ven.getvCod());
            st.executeUpdate();
        } catch (Exception e) {
        throw e;
@@ -181,7 +188,23 @@ public void modificar(Vendedor ven) throws Exception{
         
        }
    
-   } 
+   }
+    
+      private String getparsedDate(String date) throws Exception {
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
+        String s1 = date;
+        String s2 = null;
+        Date d;
+        try {
+            d = sdf.parse(s1);
+            s2 = (new SimpleDateFormat("yyyy-MM-dd")).format(d);
+
+        } catch (ParseException e) {
+        }
+
+        return s2;
+
+    }
             
             
 }

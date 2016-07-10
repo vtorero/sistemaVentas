@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ventas.model;
 
-import java.sql.Date;
+
+import java.util.Date;
 import org.primefaces.model.UploadedFile;
 
-/**
- *
- * @author vjimenez
- */
 public class Vendedor {
 private String vCod;
 private String vruc;
@@ -19,7 +12,7 @@ private String vrzs;
 private String vdir;
 private String vlug;
 private String vmap;
-private java.sql.Date vfnc;
+private String vfnc;
 private String vtlf;
 private String vcl1;
 private String vcl2;
@@ -82,11 +75,11 @@ private String vacc;
         this.vmap = vmap;
     }
 
-    public Date getVfnc() {
+    public String getVfnc() {
         return vfnc;
     }
 
-    public void setVfnc(Date vfnc) {
+    public void setVfnc(String vfnc) {
         this.vfnc = vfnc;
     }
 

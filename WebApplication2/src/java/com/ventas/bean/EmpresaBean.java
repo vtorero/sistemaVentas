@@ -55,6 +55,7 @@ public void operar(){
     }
         public void registrar(){
         EmpresaDao dao;
+        
         try {
             dao = new EmpresaDao();
             dao.registrar(empresa);

@@ -23,7 +23,7 @@ public class EmpresaDao extends Dao {
            st.setString(6, emp.getEtl1());
            st.setString(7, emp.getEtl2());
            st.setString(8, emp.getEfax());
-           st.setString(9, emp.getEfio());
+           st.setDate(9, emp.getEfio());
            st.setString(10, emp.getErep());
            st.setString(11, emp.getEigv());
            st.executeUpdate();
@@ -53,7 +53,7 @@ public class EmpresaDao extends Dao {
            emp.setEtl1(rs.getString("eTl1"));
            emp.setEtl2(rs.getString("eTl2"));
            emp.setEfax(rs.getString("eFax"));
-           emp.setEfio(rs.getString("eFio"));
+           emp.setEfio(rs.getDate("eFio"));
            emp.setErep(rs.getString("eRep"));
            emp.setEigv(rs.getString("eIgv"));
            emp.setEufa(rs.getString("eUfa"));
@@ -94,7 +94,7 @@ public class EmpresaDao extends Dao {
              emps.setEtl1(rs.getString("eTl1"));
              emps.setEtl2(rs.getString("eTl2"));
              emps.setEfax(rs.getString("eFax"));
-             emps.setEfio(rs.getString("eFio"));
+             emps.setEfio(rs.getDate("eFio"));
              emps.setErep(rs.getString("eRep"));
              emps.setEigv(rs.getString("eIgv"));
              emps.setEufa(rs.getString("eUfa"));
@@ -129,7 +129,7 @@ public void modificar(Empresa emp) throws Exception{
            st.setString(6, emp.getEtl1());
            st.setString(7, emp.getEtl2());
            st.setString(8, emp.getEfax());
-           st.setString(9, emp.getEfio());
+           st.setDate(9, emp.getEfio());
            st.setString(10, emp.getErep());
            st.setString(11, emp.getEigv());
            st.setInt(12,emp.getEcod());
