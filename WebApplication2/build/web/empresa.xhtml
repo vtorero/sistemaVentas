@@ -54,7 +54,11 @@
             <h:outputLabel value="Fax"/>
             <p:inputText id="txtFax" value="#{empresaBean.empresa.efax}" size="9"/>
             <h:outputLabel value="Fecha inicio de operaciones"/>
-            <p:calendar id="popup" value="#{empresaBean.empresa.efio}" mode="" />
+            <p:inputMask id="date" value="#{empresaBean.empresa.efio}" mask="99/99/9999"/>
+            <h:outputLabel value="Representante legal"/>
+            <p:inputText id="txtRep" value="#{empresaBean.empresa.erep}" size="40"/>
+             <h:outputLabel value="I.G.V"/>
+             <p:inputText id="txtigv" value="#{empresaBean.empresa.eigv}" size="4"/>
             <f:facet name="footer">
             <p:commandButton value="#{empresaBean.accion}" actionListener="#{empresaBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>
