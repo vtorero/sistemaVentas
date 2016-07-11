@@ -6,6 +6,7 @@
 package com.ventas.dao;
 
 import com.ventas.model.Vendedor;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
@@ -15,12 +16,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
  * @author vjimenez
  */
-public class VendedorDao extends Dao {
+public class VendedorDao extends Dao {  
      public void registrar(Vendedor ven) throws Exception{
        try {
        this.Conectar();
@@ -55,6 +60,7 @@ public class VendedorDao extends Dao {
 public List<Vendedor> listar() throws Exception{
    List<Vendedor> lista;
    ResultSet rs;
+   
        try {
            this.Conectar();
            PreparedStatement st = this.getCn().prepareCall("SELECT vCod,vRuc,vRzS,vDir,vLug,vMap,vFnc,vTlf,vCl1,vCl2,vCe1,vCe2,vCom,vFio,vFfo,vMcs,vFot,vUsr,vPas,vAcc FROM vendedor");
@@ -98,8 +104,9 @@ public List<Vendedor> listar() throws Exception{
        Vendedor vens = null;
        ResultSet rs;
        try {
+           byte[] bytes = null;
            this.Conectar();
-           PreparedStatement st = this.getCn().prepareCall("SELECT vCod,vRuc,vRzS,vDir,vLug,vMap,DATE_FORMAT(vFnc,'%d/%m/%Y') vFnc,vTlf,vCl1,vCl2,vCe1,vCe2,vCom,vFio,vFfo,vMcs,vFot,vUsr,vPas,vAcc FROM vendedor WHERE vCod=?");
+           PreparedStatement st = this.getCn().prepareCall("SELECT vCod,vRuc,vRzS,vDir,vLug,vMap,DATE_FORMAT(vFnc,'%d/%m/%Y') vFnc,vTlf,vCl1,vCl2,vCe1,vCe2,vCom, DATE_FORMAT(vFio,'%d/%m/%Y') vFio, DATE_FORMAT(vFfo,'%d/%m/%Y') vFfo,vMcs,vFot,vUsr,vPas,vAcc FROM vendedor WHERE vCod=?");
            st.setString(1,ven.getvCod());
            rs =st.executeQuery();
            while (rs.next()) {
@@ -120,7 +127,7 @@ public List<Vendedor> listar() throws Exception{
           vens.setVfio(rs.getString("vFio"));
           vens.setVffo(rs.getString("vFfo"));
           vens.setVmcs(rs.getString("vMcs"));
-          //ven.setVfot(rs.getString("vFot").getBytes());
+          bytes= rs.getBytes("vFot");
           vens.setVusr(rs.getString("vUsr"));
           vens.setVpas(rs.getString("vPas"));
           vens.setVacc(rs.getString("vAcc"));
@@ -145,7 +152,7 @@ public void modificar(Vendedor ven) throws Exception{
 //         fecha = ft.parse(ven.getVfnc()); // convierte el string en util.Date
 //         fecha2 = new java.sql.Date(fecha.getTime());
        this.Conectar();
-           PreparedStatement st = this.getCn().prepareStatement("UPDATE vendedor SET vRuc=?,vRzS=?,vDir=?,vLug=?,vMap=?,vFnc=STR_TO_DATE(?,'%d/%m/%Y'),vTlf=?,vCl1=?,vCl2=?,vCe1=?,vCe2=?,vCom=?,vFot=?,vFio=?,vFfo=?,vMcs=?,vUsr=?,vPas=?,vAcc=? WHERE vCod = ?");
+           PreparedStatement st = this.getCn().prepareStatement("UPDATE vendedor SET vRuc=?,vRzS=?,vDir=?,vLug=?,vMap=?,vFnc=STR_TO_DATE(?,'%d/%m/%Y'),vTlf=?,vCl1=?,vCl2=?,vCe1=?,vCe2=?,vCom=?,vFot=?,vFio=STR_TO_DATE(?,'%d/%m/%Y'),vFfo=STR_TO_DATE(?,'%d/%m/%Y'),vMcs=?,vUsr=?,vPas=?,vAcc=? WHERE vCod = ?");
            st.setString(1,ven.getVruc());
            st.setString(2, ven.getVrzs());
            st.setString(3, ven.getVdir());
@@ -158,7 +165,13 @@ public void modificar(Vendedor ven) throws Exception{
            st.setString(10, ven.getVce1());
            st.setString(11, ven.getVce2());
            st.setFloat(12, ven.getVcom());
-           st.setBinaryStream(13,ven.getVfot().getInputstream());
+           if(!ven.getVfot().getFileName().equals(""))
+           {
+               st.setBinaryStream(13,ven.getVfot().getInputstream());
+           }else{
+              st.setBinaryStream(13,ven.getVfot().getInputstream());
+                     
+           }
            st.setString(14, ven.getVfio());
            st.setString(15, ven.getVffo());
            st.setString(16, ven.getVmcs());
@@ -168,7 +181,9 @@ public void modificar(Vendedor ven) throws Exception{
            st.setString(20,ven.getvCod());
            st.executeUpdate();
        } catch (Exception e) {
-       throw e;
+       FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Error",  "Mensaje: " + e.getMessage()) );
+        throw e;
        }finally{
            this.Cerrar();
         

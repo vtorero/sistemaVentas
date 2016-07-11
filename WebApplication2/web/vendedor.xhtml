@@ -68,7 +68,7 @@
              <h:outputLabel value="Usuario"/>
             <p:inputText id="txtUsuario" value="#{vendedorBean.vendedor.vusr}" size="10"/>
              <h:outputLabel value="Password"/>
-             <p:password id="txtPass" value="#{vendedorBean.vendedor.vpas}"></p:password>
+             <p:inputText id="txtPass" value="#{vendedorBean.vendedor.vpas}"/>
             <h:outputLabel id="txtAccesos" value="Accesos de usuario"/>
             <p:selectOneMenu value="#{vendedorBean.vendedor.vacc}">
             <f:selectItem itemLabel="Digitar" itemValue="1"/>
@@ -78,7 +78,8 @@
             <f:selectItem itemLabel="Todo" itemValue="5"/>
             </p:selectOneMenu>
             <h:outputLabel value="Foto"/>
-             <p:fileUpload value="#{vendedorBean.vendedor.vfot}" mode="simple" skinSimple="true"/>
+            <p:fileUpload value="#{vendedorBean.vendedor.vfot}" mode="single" label="Cargar" cancelLabel="cancelar" uploadLabel="Subir"/>
+             <p:graphicImage value="#{vendedorBean.vendedor.verFoto}"/>
             <f:facet name="footer">
                 <p:commandButton value="#{vendedorBean.accion}" actionListener="#{vendedorBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>

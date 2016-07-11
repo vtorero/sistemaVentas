@@ -3,6 +3,7 @@ package com.ventas.model;
 
 
 import java.util.Date;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 public class Vendedor {
@@ -23,9 +24,18 @@ private String vfio;
 private String vffo;
 private String vmcs;
 private UploadedFile vfot;
+private StreamedContent verFoto;
 private String vusr;
 private String vpas;
 private String vacc;
+
+    public StreamedContent getVerFoto() {
+        return verFoto;
+    }
+
+    public void setVerFoto(StreamedContent verFoto) {
+        this.verFoto = verFoto;
+    }
 
     public String getvCod() {
         return vCod;
