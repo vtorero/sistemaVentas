@@ -14,7 +14,7 @@
        <p:growl showDetail="true" id="msj"/>
         <h:form id="frm">
             <p:dataTable id="data" value="#{vendedorBean.lstVendedores}" var="vendedor">
-                 <p:column filterBy="#{vendedor.vrzs}" headerText="Nombre" filterMatchMode="contains">
+                 <p:column filterBy="#{vendedor.vrzs}" headerText="Nombre" filterMatchMode="">
             <h:outputText value="#{vendedor.vrzs}" />
         </p:column>   
         
