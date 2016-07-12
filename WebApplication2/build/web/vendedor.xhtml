@@ -9,13 +9,15 @@
 
         <ui:composition template="./WEB-INF/plantilla.xhtml">
 
-   <ui:define name="content">          
+   <ui:define name="content">  
+        <h2>Vendedores</h2> 
        <p:growl showDetail="true" id="msj"/>
         <h:form id="frm">
             <p:dataTable id="data" value="#{vendedorBean.lstVendedores}" var="vendedor">
-                   <p:column headerText="Nombre">
-                       <p:outputLabel value="#{vendedor.vrzs}"/>
-                </p:column>
+                 <p:column filterBy="#{vendedor.vrzs}" headerText="Nombre" filterMatchMode="contains">
+            <h:outputText value="#{vendedor.vrzs}" />
+        </p:column>   
+        
                 <p:column headerText="Ruc">
                     <p:outputLabel value="#{vendedor.vruc}"/>      
                 </p:column>

@@ -37,7 +37,7 @@
              <p:commandButton value="Listar" actionListener="#{empresaBean.listar()}" update="data"/>
         </h:form>
          
-        <p:dialog header="Datos de #{empresaBean.empresa.erzs}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode" resizable="true">
+        <p:dialog header="Datos de #{empresaBean.empresa.erzs}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode"  dynamic="true" resizable="true">
          <h:form>
             <p:panelGrid  columns="2" columnClasses="label,value" style="border:0">
            
