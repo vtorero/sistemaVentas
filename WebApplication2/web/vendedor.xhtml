@@ -80,8 +80,18 @@
             <f:selectItem itemLabel="Todo" itemValue="5"/>
             </p:selectOneMenu>
             <h:outputLabel value="Foto"/>
-            <p:fileUpload value="#{vendedorBean.vendedor.vfot}" mode="single" label="Cargar" cancelLabel="cancelar" uploadLabel="Subir"/>
-             <p:graphicImage value="#{vendedorBean.vendedor.verFoto}"/>
+            <h:panelGroup>
+                <p:fileUpload fileUploadListener="#{vendedorBean.subirimagen}" mode="advanced" dragDropSupport="false"
+                 uploadLabel="Subir" 
+                 cancelLabel="Cancelar"
+                 label="Seleccionar"
+                 sizeLimit="512000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+            </h:panelGroup>
+            <h:outputLabel value="Imagen"/>
+                     <img src="#{vendedorBean.vendedor.rutaFoto}"/> 
+    
+                
+        
             <f:facet name="footer">
                 <p:commandButton value="#{vendedorBean.accion}" actionListener="#{vendedorBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>

@@ -1,10 +1,10 @@
 
 package com.ventas.model;
 
+import javax.persistence.Lob;
 
-import java.util.Date;
-import org.primefaces.model.StreamedContent;
-import org.primefaces.model.UploadedFile;
+
+
 
 public class Vendedor {
 private String vCod;
@@ -23,19 +23,22 @@ private float vcom;
 private String vfio;
 private String vffo;
 private String vmcs;
-private UploadedFile vfot;
-private StreamedContent verFoto;
+@Lob()
+private byte[] vfot;
+private String rutaFoto;
 private String vusr;
 private String vpas;
 private String vacc;
 
-    public StreamedContent getVerFoto() {
-        return verFoto;
+    public String getRutaFoto() {
+        return rutaFoto;
     }
 
-    public void setVerFoto(StreamedContent verFoto) {
-        this.verFoto = verFoto;
+    public void setRutaFoto(String rutaFoto) {
+        this.rutaFoto = rutaFoto;
     }
+
+  
 
     public String getvCod() {
         return vCod;
@@ -165,11 +168,11 @@ private String vacc;
         this.vmcs = vmcs;
     }
 
-    public UploadedFile getVfot() {
+    public byte[] getVfot() {
         return vfot;
     }
 
-    public void setVfot(UploadedFile vfot) {
+    public void setVfot(byte[] vfot) {
         this.vfot = vfot;
     }
 

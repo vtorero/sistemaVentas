@@ -2,19 +2,31 @@ package com.ventas.bean;
 
 import com.ventas.dao.VendedorDao;
 import com.ventas.model.Vendedor;
+import com.ventas.util.MyUtil;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import org.primefaces.event.FileUploadEvent;
 
 @ManagedBean
 @ViewScoped
 public class VendedorBean {
         private Vendedor vendedor = new Vendedor();
     private List<Vendedor> lstVendedores;
+    public String imagenVendedor; 
         private String accion; 
 
     public Vendedor getVendedor() {
         return vendedor;
+    }
+
+    public String getImagenVendedor() {
+        return imagenVendedor;
+    }
+
+    public void setImagenVendedor(String imagenVendedor) {
+        this.imagenVendedor = imagenVendedor;
     }
 
     public void setVendedor(Vendedor vendedor) {
@@ -93,7 +105,7 @@ public void operar(){
       
       }
       
-           public void eliminar(Vendedor ven){
+        public void eliminar(Vendedor ven){
         VendedorDao dao;
         try {
             dao = new VendedorDao();
@@ -101,5 +113,18 @@ public void operar(){
             this.listar();        
         } catch (Exception e) {
         }
-    }   
+    }
+
+    public void subirimagen(FileUploadEvent event){
+    FacesMessage mensaje= new FacesMessage();
+    try
+    {vendedor.setVfot(event.getFile().getContents());
+     imagenVendedor = MyUtil.guardarBlodEnficheroTemporal(vendedor.getVfot(), event.getFile().getFileName());
+       mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
+    mensaje.setSummary("Subio imagen exitosamente");
+    }catch(Exception e)    {
+    mensaje.setSeverity(FacesMessage.SEVERITY_ERROR);
+    mensaje.setSummary("Problemas al subir la imagen");
+    }
+    }  
 }

@@ -6,7 +6,7 @@
 package com.ventas.dao;
 
 import com.ventas.model.Vendedor;
-import java.io.InputStream;
+import com.ventas.util.MyUtil;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
@@ -18,8 +18,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
+
 
 /**
  *
@@ -42,7 +41,7 @@ public class VendedorDao extends Dao {
            st.setString(10, ven.getVce1());
            st.setString(11, ven.getVce2());
            st.setFloat(12, ven.getVcom());
-           st.setBinaryStream(13,ven.getVfot().getInputstream());
+           st.setBytes(13, ven.getVfot());
            st.setString(14, ven.getVfio());
            st.setString(15, ven.getVffo());
            st.setString(16, ven.getVmcs());
@@ -128,6 +127,7 @@ public List<Vendedor> listar() throws Exception{
           vens.setVffo(rs.getString("vFfo"));
           vens.setVmcs(rs.getString("vMcs"));
           bytes= rs.getBytes("vFot");
+          vens.setRutaFoto(MyUtil.guardarBlodEnficheroTemporal(bytes,rs.getString("VUsr")+".jpg"));
           vens.setVusr(rs.getString("vUsr"));
           vens.setVpas(rs.getString("vPas"));
           vens.setVacc(rs.getString("vAcc"));
@@ -165,13 +165,7 @@ public void modificar(Vendedor ven) throws Exception{
            st.setString(10, ven.getVce1());
            st.setString(11, ven.getVce2());
            st.setFloat(12, ven.getVcom());
-           if(!ven.getVfot().getFileName().equals(""))
-           {
-               st.setBinaryStream(13,ven.getVfot().getInputstream());
-           }else{
-              st.setBinaryStream(13,ven.getVfot().getInputstream());
-                     
-           }
+           st.setBytes(13,ven.getVfot());
            st.setString(14, ven.getVfio());
            st.setString(15, ven.getVffo());
            st.setString(16, ven.getVmcs());
