@@ -119,7 +119,8 @@ public void operar(){
     FacesMessage mensaje= new FacesMessage();
     try
     {vendedor.setVfot(event.getFile().getContents());
-     imagenVendedor = MyUtil.guardarBlodEnficheroTemporal(vendedor.getVfot(), event.getFile().getFileName());
+    vendedor.setVrft(vendedor.getvCod()+"-"+event.getFile().getFileName());
+     imagenVendedor = MyUtil.guardarBlodEnficheroTemporal(vendedor.getVfot(), vendedor.getvCod()+"-"+event.getFile().getFileName());
        mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
     mensaje.setSummary("Subio imagen exitosamente");
     }catch(Exception e)    {

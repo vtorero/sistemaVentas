@@ -25,20 +25,19 @@ private String vffo;
 private String vmcs;
 @Lob()
 private byte[] vfot;
-private String rutaFoto;
+private String vrft;
 private String vusr;
 private String vpas;
 private String vacc;
 
-    public String getRutaFoto() {
-        return rutaFoto;
+    public String getVrft() {
+        return vrft;
     }
 
-    public void setRutaFoto(String rutaFoto) {
-        this.rutaFoto = rutaFoto;
+    public void setVrft(String vrft) {
+        this.vrft = vrft;
     }
 
-  
 
     public String getvCod() {
         return vCod;
