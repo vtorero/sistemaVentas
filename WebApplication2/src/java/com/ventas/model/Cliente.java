@@ -5,173 +5,175 @@
  */
 package com.ventas.model;
 
+import javax.persistence.Lob;
+
 /**
  *
  * @author vjimenez
  */
 public class Cliente {
-   private int cCod;
-  private String cRuc;
-  private String cRzS;
-  private String cDir;
-  private String cLug;
-  private String cMap;
-  private String cFnc;
-  private String cTl1;
-  private String cTl2;
-  private String cCl1;
-  private String cCl2;
-  private String cCe1;
-  private String cCe2;
-  private String cFio;
-  private String cCat;
-  private String cPds;
-  private Vendedor vCod;
-  private String cFot;
-
-    public int getcCod() {
-        return cCod;
+   private int ccod;
+  private String cruc;
+  private String crzs;
+  private String cdir;
+  private String clug;
+  private String cmap;
+  private String cfnc;
+  private String ctl1;
+  private String ctl2;
+  private String ccl1;
+  private String ccl2;
+  private String cce1;
+  private String cce2;
+  private String cfio;
+  private String ccat;
+  private String cpds;
+  private Vendedor vcod;
+  @Lob()
+private byte[] cfot;;
+ 
+    public int getCcod() {
+        return ccod;
     }
 
-    public void setcCod(int cCod) {
-        this.cCod = cCod;
+    public void setCcod(int ccod) {
+        this.ccod = ccod;
     }
 
-    public String getcRuc() {
-        return cRuc;
+    public String getCruc() {
+        return cruc;
     }
 
-    public void setcRuc(String cRuc) {
-        this.cRuc = cRuc;
+    public void setCruc(String cruc) {
+        this.cruc = cruc;
     }
 
-    public String getcRzS() {
-        return cRzS;
+    public String getCrzs() {
+        return crzs;
     }
 
-    public void setcRzS(String cRzS) {
-        this.cRzS = cRzS;
+    public void setCrzs(String crzs) {
+        this.crzs = crzs;
     }
 
-    public String getcDir() {
-        return cDir;
+    public String getCdir() {
+        return cdir;
     }
 
-    public void setcDir(String cDir) {
-        this.cDir = cDir;
+    public void setCdir(String cdir) {
+        this.cdir = cdir;
     }
 
-    public String getcLug() {
-        return cLug;
+    public String getClug() {
+        return clug;
     }
 
-    public void setcLug(String cLug) {
-        this.cLug = cLug;
+    public void setClug(String clug) {
+        this.clug = clug;
     }
 
-    public String getcMap() {
-        return cMap;
+    public String getCmap() {
+        return cmap;
     }
 
-    public void setcMap(String cMap) {
-        this.cMap = cMap;
+    public void setCmap(String cmap) {
+        this.cmap = cmap;
     }
 
-    public String getcFnc() {
-        return cFnc;
+    public String getCfnc() {
+        return cfnc;
     }
 
-    public void setcFnc(String cFnc) {
-        this.cFnc = cFnc;
+    public void setCfnc(String cfnc) {
+        this.cfnc = cfnc;
     }
 
-    public String getcTl1() {
-        return cTl1;
+    public String getCtl1() {
+        return ctl1;
     }
 
-    public void setcTl1(String cTl1) {
-        this.cTl1 = cTl1;
+    public void setCtl1(String ctl1) {
+        this.ctl1 = ctl1;
     }
 
-    public String getcTl2() {
-        return cTl2;
+    public String getCtl2() {
+        return ctl2;
     }
 
-    public void setcTl2(String cTl2) {
-        this.cTl2 = cTl2;
+    public void setCtl2(String ctl2) {
+        this.ctl2 = ctl2;
     }
 
-    public String getcCl1() {
-        return cCl1;
+    public String getCcl1() {
+        return ccl1;
     }
 
-    public void setcCl1(String cCl1) {
-        this.cCl1 = cCl1;
+    public void setCcl1(String ccl1) {
+        this.ccl1 = ccl1;
     }
 
-    public String getcCl2() {
-        return cCl2;
+    public String getCcl2() {
+        return ccl2;
     }
 
-    public void setcCl2(String cCl2) {
-        this.cCl2 = cCl2;
+    public void setCcl2(String ccl2) {
+        this.ccl2 = ccl2;
     }
 
-    public String getcCe1() {
-        return cCe1;
+    public String getCce1() {
+        return cce1;
     }
 
-    public void setcCe1(String cCe1) {
-        this.cCe1 = cCe1;
+    public void setCce1(String cce1) {
+        this.cce1 = cce1;
     }
 
-    public String getcCe2() {
-        return cCe2;
+    public String getCce2() {
+        return cce2;
     }
 
-    public void setcCe2(String cCe2) {
-        this.cCe2 = cCe2;
+    public void setCce2(String cce2) {
+        this.cce2 = cce2;
     }
 
-    public String getcFio() {
-        return cFio;
+    public String getCfio() {
+        return cfio;
     }
 
-    public void setcFio(String cFio) {
-        this.cFio = cFio;
+    public void setCfio(String cfio) {
+        this.cfio = cfio;
     }
 
-    public String getcCat() {
-        return cCat;
+    public String getCcat() {
+        return ccat;
     }
 
-    public void setcCat(String cCat) {
-        this.cCat = cCat;
+    public void setCcat(String ccat) {
+        this.ccat = ccat;
     }
 
-    public String getcPds() {
-        return cPds;
+    public String getCpds() {
+        return cpds;
     }
 
-    public void setcPds(String cPds) {
-        this.cPds = cPds;
+    public void setCpds(String cpds) {
+        this.cpds = cpds;
     }
 
-    public Vendedor getvCod() {
-        return vCod;
+    public Vendedor getVcod() {
+        return vcod;
     }
 
-    public void setvCod(Vendedor vCod) {
-        this.vCod = vCod;
+    public void setVcod(Vendedor vcod) {
+        this.vcod = vcod;
     }
 
-    public String getcFot() {
-        return cFot;
+    public byte[] getCfot() {
+        return cfot;
     }
 
-    public void setcFot(String cFot) {
-        this.cFot = cFot;
+    public void setCfot(byte[] cfot) {
+        this.cfot = cfot;
     }
-  
-  
+    
 }
