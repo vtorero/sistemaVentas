@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+
+        <ui:composition template="./WEB-INF/plantilla.xhtml">
+
+   <ui:define name="content">  
+        <h2>Vendedores</h2> 
+       <p:growl showDetail="true" id="msj"/>
+        <h:form id="frm">
+            <p:dataTable id="data" value="#{vendedorBean.lstVendedores}" var="vendedor">
+                 <p:column filterBy="#{vendedor.vrzs}" headerText="Nombre" filterMatchMode="">
+            <h:outputText value="#{vendedor.vrzs}" />
+        </p:column>   
+        
+                <p:column headerText="Ruc">
+                    <p:outputLabel value="#{vendedor.vruc}"/>      
+                </p:column>
+                   <p:column headerText="Direccion">
+                       <p:outputLabel value="#{vendedor.vdir}"/>
+                </p:column>
+                <p:column headerText="Telefono">
+                    <p:outputLabel value="#{vendedor.vtlf}"/>
+                </p:column>
+                  <p:column headerText="Modificar">
+                      <p:commandLink value="Modificar" actionListener="#{vendedorBean.leerID(vendedor)}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos"/>
+                </p:column>
+                    <p:column headerText="Eliminar">
+                        <p:commandLink value="Eliminar" actionListener="#{vendedorBean.eliminar(vendedor)}" update="data"/>
+                </p:column>
+            </p:dataTable>
+            <p:commandButton value="Nuevo"  actionListener="#{vendedorBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos" />
+            <p:commandButton value="Listar" actionListener="#{vendedorBean.listar()}" update="data"/>
+        </h:form>
+         
+        <p:dialog header="Modificar usuario: #{vendedorBean.vendedor.vrzs}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode" resizable="true">
+            <h:form enctype="multipart/form-data">
+            <p:panelGrid  columns="4" columnClasses="label,value" style="border:0">   
+             <h:outputLabel value="Nombre"/>
+             <p:inputText id="txtNombre" value="#{vendedorBean.vendedor.vrzs}" size="40"/>
+             <h:outputLabel value="Ruc"/>
+             <p:inputText id="txtRuc" value="#{vendedorBean.vendedor.vruc}" size="15"/>
+            <h:outputLabel value="Direccion"/>
+            <p:inputText id="txtDir" value="#{vendedorBean.vendedor.vdir}" size="40"/>
+            <h:outputLabel value="Fecha de nacimiento"/>
+            <p:inputMask id="date" value="#{vendedorBean.vendedor.vfnc}" mask="99/99/9999" size="9"/>
+           <h:outputLabel value="Telefono fijo"/>
+            <p:inputText id="txtTlf1" value="#{vendedorBean.vendedor.vtlf}" size="8"/>
+            <h:outputLabel value="Telefono celular 1"/>
+            <p:inputText id="txtTlf2" value="#{vendedorBean.vendedor.vcl1}" size="8"/>
+            <h:outputLabel value="Telefono celular 2"/>
+            <p:inputText id="txtTlf3" value="#{vendedorBean.vendedor.vcl2}" size="8"/>
+            <h:outputLabel value="Correo 1"/>
+            <p:inputText id="txtCorreo" value="#{vendedorBean.vendedor.vce1}" size="30"/>
+            <h:outputLabel value="Correo 2"/>
+            <p:inputText id="txtCorreo2" value="#{vendedorBean.vendedor.vce2}" size="30"/>
+              <h:outputLabel value="% Comisión"/>
+            <p:inputText id="txtCom" value="#{vendedorBean.vendedor.vcom}" size="4"/>
+             <h:outputLabel value="Fecha de inicio operaciones"/>
+            <p:inputMask id="dateio" value="#{vendedorBean.vendedor.vfio}" mask="99/99/9999" size="9"/>
+             <h:outputLabel value="Fecha de cese de operaciones"/>
+            <p:inputMask id="datefo" value="#{vendedorBean.vendedor.vffo}" mask="99/99/9999" size="9"/>
+             <h:outputLabel value="Motivo de cese"/>
+            <p:inputText id="txtmotivoCese" value="#{vendedorBean.vendedor.vmcs}" size="30"/>
+             <h:outputLabel value="Usuario"/>
+            <p:inputText id="txtUsuario" value="#{vendedorBean.vendedor.vusr}" size="10"/>
+             <h:outputLabel value="Password"/>
+             <p:inputText id="txtPass" value="#{vendedorBean.vendedor.vpas}"/>
+            <h:outputLabel id="txtAccesos" value="Accesos de usuario"/>
+            <p:selectOneMenu value="#{vendedorBean.vendedor.vacc}">
+            <f:selectItem itemLabel="Digitar" itemValue="1"/>
+            <f:selectItem itemLabel="Consultar" itemValue="2"/>
+            <f:selectItem itemLabel="Reportes" itemValue="3"/>
+            <f:selectItem itemLabel="Consultas y Reportes" itemValue="4"/>
+            <f:selectItem itemLabel="Todo" itemValue="5"/>
+            </p:selectOneMenu>
+            <h:outputLabel value="Foto"/>
+            <h:panelGroup>
+                <p:fileUpload fileUploadListener="#{vendedorBean.subirimagen}" mode="advanced" dragDropSupport="false"
+                 uploadLabel="Subir" 
+                 cancelLabel="Cancelar"
+                 label="Seleccionar"
+                 sizeLimit="512000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                 update="fotoVendedor"/>
+            </h:panelGroup>
+            <h:outputLabel value="Imagen"/>
+            <p:graphicImage id="fotoVendedor" value="http://localhost:8080/WebApplication2/resources/img/tmp/#{vendedorBean.vendedor.vrft}" width="150" height="100"/>
+                            
+            
+    
+                
+        
+            <f:facet name="footer">
+                <p:commandButton value="#{vendedorBean.accion}" actionListener="#{vendedorBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
+            <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>
+            </f:facet>
+           </p:panelGrid>
+             </h:form>
+        </p:dialog>
+             
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
