@@ -99,9 +99,9 @@ public List<Cliente> listar() throws Exception{
        Cliente clis = null;
        ResultSet rs;
        try {
-           byte[] bytes = null;
            this.Conectar();
-           PreparedStatement st = this.getCn().prepareCall("SELECT vCod,vRuc,vRzS,vDir,vLug,vMap,DATE_FORMAT(vFnc,'%d/%m/%Y') vFnc,vTlf,vCl1,vCl2,vCe1,vCe2,vCom, DATE_FORMAT(vFio,'%d/%m/%Y') vFio, DATE_FORMAT(vFfo,'%d/%m/%Y') vFfo,vMcs,vRft,vFot,vUsr,vPas,vAcc FROM cliente WHERE cCod=?");
+           PreparedStatement st = this.getCn().prepareCall("SELECT "
+                   + "cCod,cRuc,cRzS,cDir,cLug,cMap,cFnc,cTl1,cTl2,cCl1,cCl2,cCe1,cCe2,cFio,cCat,cPds,vCod,cFot FROM cliente WHERE cCod=?");
            st.setInt(1,cli.getCcod());
            rs =st.executeQuery();
            while (rs.next()) {
@@ -124,6 +124,9 @@ public List<Cliente> listar() throws Exception{
           clis.setCpds(rs.getString("cPds"));
           //cli.setC(rs.getString("vMcs"));
           clis.setCfot(rs.getBytes("cFot"));//wwwww
+
+
+
             
 
               }
@@ -139,14 +142,14 @@ public List<Cliente> listar() throws Exception{
           
 public void modificar(Cliente cli) throws Exception{
        try {
-//         DateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
-//         java.util.Date fecha = null; // crea objetos tipo util.Date y sql.Date
-//         java.sql.Date fecha2 = null;
-//         fecha = ft.parse(ven.getVfnc()); // convierte el string en util.Date
-//         fecha2 = new java.sql.Date(fecha.getTime());
+
        this.Conectar();
-           PreparedStatement st = this.getCn().prepareStatement("UPDATE cliente SET vRuc=?,vRzS=?,vDir=?,vLug=?,vMap=?,vFnc=STR_TO_DATE(?,'%d/%m/%Y'),vTlf=?,vCl1=?,vCl2=?,vCe1=?,vCe2=?,vCom=?,vRft=?,vFot=?,vFio=STR_TO_DATE(?,'%d/%m/%Y'),vFfo=STR_TO_DATE(?,'%d/%m/%Y'),vMcs=?,vUsr=?,vPas=?,vAcc=? WHERE vCod = ?");
-            st.setString(1,cli.getCruc());
+
+           PreparedStatement st = this.getCn().prepareStatement("UPDATE cliente SET "
+                   + "cCod=?,cRuc=?,cRzS=?,cDir=?,cLug=?,cMap=?,cFnc=?,cTl1=?,cTl2=?,cCl1=?,cCl2=?,cCe1=?,cCe2=?,cFio=?,cCat=?,cPds=?,vCod=?,cFot=? WHERE cCod = ?");
+           st.setString(1,cli.getCruc());
+           st.setString(1,cli.getCruc());
+
            st.setString(2, cli.getCrzs());
            st.setString(3, cli.getCdir());
            st.setString(4, cli.getClug());
@@ -176,7 +179,7 @@ public void modificar(Cliente cli) throws Exception{
        try {
        this.Conectar();
            PreparedStatement st = this.getCn().prepareStatement("DELETE FROM cliente  WHERE cCod = ?");
-           st.setInt(1,cli.getCcod());
+          st.setInt(1,cli.getCcod());
            st.executeUpdate();
        } catch (Exception e) {
        throw e;
