@@ -6,16 +6,10 @@
 package com.ventas.dao;
 
 import com.ventas.model.Cliente;
-import com.ventas.util.MyUtil;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -81,7 +75,7 @@ public List<Cliente> listar() throws Exception{
           cli.setCcat(rs.getString("cCat"));
           cli.setCpds(rs.getString("cPds"));
           //cli.setC(rs.getString("vMcs"));
-          cli.setCfot(rs.getBytes("cFot"));//wwwww
+          cli.setCfot(rs.getBytes("cFot"));
           lista.add(cli);
            }
        } catch (Exception e) {
