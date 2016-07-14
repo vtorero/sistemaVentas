@@ -23,7 +23,7 @@ public class ClienteDao extends Dao {
        try {
        this.Conectar();
            PreparedStatement st = this.getCn().prepareStatement("INSERT into cliente"
-                   + "(cRuc,cRzS,cDir,cLug,cMap,cFnc,cTl1,cTl2,cCl1,cCl2,cCe1,cCe2,cFio,cCat,cPds,vCod,cFot) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                   + "(cRuc,cRzS,cDir,cLug,cMap,cFnc,cTl1,cTl2,cCl1,cCl2,cCe1,cCe2,cFio,cCat,cPds,vCod,cFot) values(?,?,?,?,?,STR_TO_DATE(?,'%d/%m/%Y'),?,?,?,?,?,?,STR_TO_DATE(?,'%d/%m/%Y'),?,?,?,?)");
            st.setString(1,cli.getCruc());
            st.setString(2, cli.getCrzs());
            st.setString(3, cli.getCdir());
@@ -32,13 +32,15 @@ public class ClienteDao extends Dao {
            st.setString(6, cli.getCfnc());
            st.setString(7, cli.getCtl1());
            st.setString(8, cli.getCtl2());
-           st.setString(9, cli.getCce1());
-           st.setString(10, cli.getCce2());
-           st.setString(11, cli.getCfio());
-           st.setString(12, cli.getCcat());
-           st.setString(13, cli.getCpds());
-           //st.setString(14, cli.getC);
-           st.setBytes(15, cli.getCfot());
+           st.setString(9, cli.getCcl1());
+           st.setString(10, cli.getCcl2());
+           st.setString(11, cli.getCce1());
+           st.setString(12, cli.getCce2());
+           st.setString(13, cli.getCfio());
+           st.setString(14, cli.getCcat());
+           st.setDouble(15, cli.getCpds());
+           st.setInt(16, cli.getVcod());
+           st.setBytes(17, cli.getCfot());
            st.executeUpdate();
        } catch (Exception e) {
        throw e;
@@ -73,7 +75,7 @@ public List<Cliente> listar() throws Exception{
           cli.setCce2(rs.getString("cCe2"));
           cli.setCfio(rs.getString("cfio"));
           cli.setCcat(rs.getString("cCat"));
-          cli.setCpds(rs.getString("cPds"));
+          cli.setCpds(rs.getDouble("cPds"));
           //cli.setC(rs.getString("vMcs"));
           cli.setCfot(rs.getBytes("cFot"));
           lista.add(cli);
@@ -95,7 +97,7 @@ public List<Cliente> listar() throws Exception{
        try {
            this.Conectar();
            PreparedStatement st = this.getCn().prepareCall("SELECT "
-                   + "cCod,cRuc,cRzS,cDir,cLug,cMap,cFnc,cTl1,cTl2,cCl1,cCl2,cCe1,cCe2,cFio,cCat,cPds,vCod,cFot FROM cliente WHERE cCod=?");
+            + "cCod,cRuc,cRzS,cDir,cLug,cMap,DATE_FORMAT(cFnc,'%d/%m/%Y') cFnc,cTl1,cTl2,cCl1,cCl2,cCe1,cCe2,DATE_FORMAT(cFio,'%d/%m/%Y') cFio,cCat,cPds,vCod,cFot FROM cliente WHERE cCod=?");
            st.setInt(1,cli.getCcod());
            rs =st.executeQuery();
            while (rs.next()) {
@@ -115,9 +117,9 @@ public List<Cliente> listar() throws Exception{
           clis.setCce2(rs.getString("cCe2"));
           clis.setCfio(rs.getString("cfio"));
           clis.setCcat(rs.getString("cCat"));
-          clis.setCpds(rs.getString("cPds"));
-          //cli.setC(rs.getString("vMcs"));
-          clis.setCfot(rs.getBytes("cFot"));//wwwww
+          clis.setCpds(rs.getDouble("cPds"));
+          clis.setVcod(rs.getInt("vCod"));
+          clis.setCfot(rs.getBytes("cFot"));
 
 
 
@@ -140,10 +142,8 @@ public void modificar(Cliente cli) throws Exception{
        this.Conectar();
 
            PreparedStatement st = this.getCn().prepareStatement("UPDATE cliente SET "
-                   + "cCod=?,cRuc=?,cRzS=?,cDir=?,cLug=?,cMap=?,cFnc=?,cTl1=?,cTl2=?,cCl1=?,cCl2=?,cCe1=?,cCe2=?,cFio=?,cCat=?,cPds=?,vCod=?,cFot=? WHERE cCod = ?");
+                   + "cRuc=?,cRzS=?,cDir=?,cLug=?,cMap=?,cFnc=STR_TO_DATE(?,'%d/%m/%Y'),cTl1=?,cTl2=?,cCl1=?,cCl2=?,cCe1=?,cCe2=?,cFio=STR_TO_DATE(?,'%d/%m/%Y'),cCat=?,cPds=?,vCod=?,cFot=? WHERE cCod = ?");
            st.setString(1,cli.getCruc());
-           st.setString(1,cli.getCruc());
-
            st.setString(2, cli.getCrzs());
            st.setString(3, cli.getCdir());
            st.setString(4, cli.getClug());
@@ -151,13 +151,16 @@ public void modificar(Cliente cli) throws Exception{
            st.setString(6, cli.getCfnc());
            st.setString(7, cli.getCtl1());
            st.setString(8, cli.getCtl2());
-           st.setString(9, cli.getCce1());
-           st.setString(10, cli.getCce2());
-           st.setString(11, cli.getCfio());
-           st.setString(12, cli.getCcat());
-           st.setString(13, cli.getCpds());
-           //st.setString(14, cli.getC);
-           st.setBytes(15, cli.getCfot());
+           st.setString(9, cli.getCcl1());
+           st.setString(10, cli.getCcl2());
+           st.setString(11, cli.getCce1());
+           st.setString(12, cli.getCce2());
+           st.setString(13, cli.getCfio());
+           st.setString(14, cli.getCcat());
+           st.setDouble(15, cli.getCpds());
+           st.setInt(16,cli.getVcod());
+           st.setBytes(17, cli.getCfot());
+           st.setInt(18, cli.getCcod());
            st.executeUpdate();
        } catch (Exception e) {
        FacesContext context = FacesContext.getCurrentInstance();

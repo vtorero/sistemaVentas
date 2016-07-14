@@ -59,7 +59,6 @@ public class VendedorDao extends Dao {
 public List<Vendedor> listar() throws Exception{
    List<Vendedor> lista;
    ResultSet rs;
-   
        try {
            this.Conectar();
            PreparedStatement st = this.getCn().prepareCall("SELECT vCod,vRuc,vRzS,vDir,vLug,vMap,vFnc,vTlf,vCl1,vCl2,vCe1,vCe2,vCom,vFio,vFfo,vMcs,vFot,vUsr,vPas,vAcc FROM vendedor");
@@ -67,7 +66,7 @@ public List<Vendedor> listar() throws Exception{
            lista = new ArrayList<>();
            while(rs.next()){
          Vendedor ven = new Vendedor();
-         ven.setvCod(rs.getString("vCod"));
+         ven.setVcod(rs.getString("vCod"));
           ven.setVruc(rs.getString("vRuc"));
           ven.setVrzs(rs.getString("vRzS"));
           ven.setVdir(rs.getString("vDir"));
@@ -106,11 +105,11 @@ public List<Vendedor> listar() throws Exception{
            byte[] bytes = null;
            this.Conectar();
            PreparedStatement st = this.getCn().prepareCall("SELECT vCod,vRuc,vRzS,vDir,vLug,vMap,DATE_FORMAT(vFnc,'%d/%m/%Y') vFnc,vTlf,vCl1,vCl2,vCe1,vCe2,vCom, DATE_FORMAT(vFio,'%d/%m/%Y') vFio, DATE_FORMAT(vFfo,'%d/%m/%Y') vFfo,vMcs,vRft,vFot,vUsr,vPas,vAcc FROM vendedor WHERE vCod=?");
-           st.setString(1,ven.getvCod());
+           st.setString(1,ven.getVcod());
            rs =st.executeQuery();
            while (rs.next()) {
                vens = new Vendedor();
-          vens.setvCod(rs.getString("vCod"));
+          vens.setVcod(rs.getString("vCod"));
           vens.setVruc(rs.getString("vRuc"));
           vens.setVrzs(rs.getString("vRzS"));
           vens.setVdir(rs.getString("vDir"));
@@ -173,7 +172,7 @@ public void modificar(Vendedor ven) throws Exception{
            st.setString(18, ven.getVusr());
            st.setString(19, ven.getVpas());
            st.setString(20, ven.getVacc());
-           st.setString(21,ven.getvCod());
+           st.setString(21,ven.getVcod());
            st.executeUpdate();
        } catch (Exception e) {
        FacesContext context = FacesContext.getCurrentInstance();
@@ -189,7 +188,7 @@ public void modificar(Vendedor ven) throws Exception{
        try {
        this.Conectar();
            PreparedStatement st = this.getCn().prepareStatement("DELETE FROM vendedor  WHERE vCod = ?");
-           st.setString(1,ven.getvCod());
+           st.setString(1,ven.getVcod());
            st.executeUpdate();
        } catch (Exception e) {
        throw e;

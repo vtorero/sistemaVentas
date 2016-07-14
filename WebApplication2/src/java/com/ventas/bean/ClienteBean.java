@@ -2,6 +2,7 @@ package com.ventas.bean;
 
 import com.ventas.dao.ClienteDao;
 import com.ventas.model.Cliente;
+import com.ventas.model.Vendedor;
 import com.ventas.util.MyUtil;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -13,10 +14,20 @@ import org.primefaces.event.FileUploadEvent;
 @ViewScoped
 public class ClienteBean {
         private Cliente cliente = new Cliente();
+        private Vendedor vendedor = new Vendedor();
     private List<Cliente> lstClientes;
     public String imagenCliente; 
         private String accion; 
 
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+    }
+
+        
     public Cliente getCliente() {
         return cliente;
     }

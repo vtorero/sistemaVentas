@@ -1,34 +1,31 @@
-
 package com.ventas.model;
 
 import javax.persistence.Lob;
 
-
-
-
 public class Vendedor {
-private String vCod;
-private String vruc;
-private String vrzs;
-private String vdir;
-private String vlug;
-private String vmap;
-private String vfnc;
-private String vtlf;
-private String vcl1;
-private String vcl2;
-private String vce1;
-private String vce2;
-private float vcom;
-private String vfio;
-private String vffo;
-private String vmcs;
-@Lob()
-private byte[] vfot;
-private String vrft;
-private String vusr;
-private String vpas;
-private String vacc;
+
+    private String vcod;
+    private String vruc;
+    private String vrzs;
+    private String vdir;
+    private String vlug;
+    private String vmap;
+    private String vfnc;
+    private String vtlf;
+    private String vcl1;
+    private String vcl2;
+    private String vce1;
+    private String vce2;
+    private float vcom;
+    private String vfio;
+    private String vffo;
+    private String vmcs;
+    @Lob()
+    private byte[] vfot;
+    private String vrft;
+    private String vusr;
+    private String vpas;
+    private String vacc;
 
     public String getVrft() {
         return vrft;
@@ -38,14 +35,14 @@ private String vacc;
         this.vrft = vrft;
     }
 
-
-    public String getvCod() {
-        return vCod;
+    public String getVcod() {
+        return vcod;
     }
 
-    public void setvCod(String vCod) {
-        this.vCod = vCod;
+    public void setVcod(String vcod) {
+        this.vcod = vcod;
     }
+
 
     public String getVruc() {
         return vruc;

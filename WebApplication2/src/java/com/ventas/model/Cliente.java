@@ -27,8 +27,8 @@ public class Cliente {
   private String cce2;
   private String cfio;
   private String ccat;
-  private String cpds;
-  private Vendedor vcod;
+  private double cpds;
+  private int vcod;
   @Lob()
 private byte[] cfot;;
  
@@ -152,19 +152,19 @@ private byte[] cfot;;
         this.ccat = ccat;
     }
 
-    public String getCpds() {
+    public double getCpds() {
         return cpds;
     }
 
-    public void setCpds(String cpds) {
+    public void setCpds(double cpds) {
         this.cpds = cpds;
     }
 
-    public Vendedor getVcod() {
+    public int getVcod() {
         return vcod;
     }
 
-    public void setVcod(Vendedor vcod) {
+    public void setVcod(int vcod) {
         this.vcod = vcod;
     }
 
