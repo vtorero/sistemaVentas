@@ -81,7 +81,7 @@ public List<Cliente> listar() throws Exception{
           cli.setCcat(rs.getString("cCat"));
           cli.setCpds(rs.getString("cPds"));
           //cli.setC(rs.getString("vMcs"));
-          cli.setCfot(rs.getBytes("cFot"));
+          cli.setCfot(rs.getBytes("cFot"));//wwwww
           lista.add(cli);
            }
        } catch (Exception e) {
