@@ -64,13 +64,13 @@
               <h:outputLabel value="% Descuento"/>
               <p:inputText id="txtCom" value="#{clienteBean.cliente.cpds}" size="4"/>
               <h:outputLabel value="Vendedor"/>
-              <p:selectOneMenu id="vendedorlista" value="#{clienteBean.cliente.vcod}">
+              <p:selectOneMenu id="vendedorlista" value="#{clienteBean.cliente.vcod}" filter="true" filterMatchMode="contains">
                   <f:selectItems value="#{vendedorBean.lstVendedores}" var="ven" itemLabel="#{ven.vrzs}" itemValue="#{ven.vcod}"></f:selectItems>
              </p:selectOneMenu>
              <h:outputLabel value="Fecha de inicio operaciones"/>
             <p:inputMask id="dateio" value="#{clienteBean.cliente.cfio}" mask="99/99/9999" size="9"/>
              <h:outputLabel value="Categoria"/>
-             <p:selectOneMenu value="#{clienteBean.cliente.ccat}">
+             <p:selectOneMenu value="#{clienteBean.cliente.ccat}" filter="true" filterMatchMode="contains">
             <f:selectItem itemLabel="Seleccionar" itemValue="#{null}"/>     
             <f:selectItem itemLabel="Fabricante" itemValue="1"/>
             <f:selectItem itemLabel="Mayorista" itemValue="2"/>
