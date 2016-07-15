@@ -8,8 +8,8 @@
     <body>
 
         <ui:composition template="./WEB-INF/plantilla.xhtml">
-
    <ui:define name="content">  
+       <f:event type="preRenderView" listener="#{vendedorBean.listar()}"/>
         <h2>Vendedores</h2> 
        <p:growl showDetail="true" id="msj"/>
         <h:form id="frm">
@@ -38,9 +38,9 @@
             <p:commandButton value="Listar" actionListener="#{vendedorBean.listar()}" update="data"/>
         </h:form>
          
-        <p:dialog header="Modificar usuario: #{vendedorBean.vendedor.vrzs}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode" resizable="true">
+        <p:dialog header="Modificar usuario: #{vendedorBean.vendedor.vrzs}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="drop" resizable="true">
             <h:form enctype="multipart/form-data">
-            <p:panelGrid  columns="4" columnClasses="label,value" style="border:0">   
+            <p:panelGrid  columns="2" columnClasses="label,value" style="border:0">   
              <h:outputLabel value="Nombre"/>
              <p:inputText id="txtNombre" value="#{vendedorBean.vendedor.vrzs}" size="40"/>
              <h:outputLabel value="Ruc"/>
@@ -80,16 +80,20 @@
             <f:selectItem itemLabel="Todo" itemValue="5"/>
             </p:selectOneMenu>
             <h:outputLabel value="Foto"/>
-            <h:panelGroup>
-                <p:fileUpload fileUploadListener="#{vendedorBean.subirimagen}" mode="advanced" dragDropSupport="false"
+                  <h:panelGroup>
+                      <p:fileUpload value="#{vendedorBean.vendedor.vfot}" fileUploadListener="#{vendedorBean.subirimagen}" 
+                mode="advanced" dragDropSupport="true"
                  uploadLabel="Subir" 
                  cancelLabel="Cancelar"
                  label="Seleccionar"
                  sizeLimit="512000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                 update="fotoVendedor"/>
+                 update="fotoVendedor">
+                            <h:outputLink value="DisplayImage?id=#{vendedorBean.vendedor.vcod}&amp;campo=vFot&amp;tabla=vendedor&amp;codigo=vCod" target="_blank" >
+                        <h:graphicImage id="fotoVendedor" value="DisplayImage?id=#{vendedorBean.vendedor.vcod}&amp;campo=vFot&amp;tabla=vendedor&amp;codigo=vCod" width="100" height="80"></h:graphicImage>
+                    </h:outputLink>
+                      </p:fileUpload>
+                    
             </h:panelGroup>
-            <h:outputLabel value="Imagen"/>
-            <p:graphicImage id="fotoVendedor" value="http://localhost:8080/WebApplication2/resources/img/tmp/#{vendedorBean.vendedor.vrft}" width="150" height="100"/>
             <f:facet name="footer">
                 <p:commandButton value="#{vendedorBean.accion}" actionListener="#{vendedorBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>

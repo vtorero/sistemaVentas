@@ -8,6 +8,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 
 @ManagedBean
@@ -126,17 +127,21 @@ public void operar(){
         }
     }
 
-    public void subirimagen(FileUploadEvent event){
-    FacesMessage mensaje= new FacesMessage();
-    try
-    {cliente.setCfot(event.getFile().getContents());
-    //cliente.(cliente.getCcod()+"-"+event.getFile().getFileName());
-     imagenCliente = MyUtil.guardarBlodEnficheroTemporal(cliente.getCfot(), cliente.getCcod()+"-"+event.getFile().getFileName());
-       mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
-    mensaje.setSummary("Subio imagen exitosamente");
-    }catch(Exception e)    {
-    mensaje.setSeverity(FacesMessage.SEVERITY_ERROR);
-    mensaje.setSummary("Problemas al subir la imagen");
+     public void subirimagen(FileUploadEvent event){
+    
+    if (event!= null) {
+            try {
+                  cliente.setCfot(event.getFile().getInputstream());
+               FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+ 
+            } catch (Exception e) {
+                System.out.println("Exception-File Upload." + e.getMessage());
+            }
+        }
+        else{
+        FacesMessage msg = new FacesMessage("Please select image!!");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+        }  
     }
-    }  
 }

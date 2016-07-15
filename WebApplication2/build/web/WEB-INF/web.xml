@@ -29,6 +29,16 @@
    <filter-name>PrimeFaces Upload Filter</filter-name>
    <servlet-name>Faces Servlet</servlet-name>
   </filter-mapping>
+  <servlet>
+        <description></description>
+        <display-name>DisplayImage</display-name>
+        <servlet-name>DisplayImage</servlet-name>
+        <servlet-class>com.ventas.util.DisplayImage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DisplayImage</servlet-name>
+        <url-pattern>/DisplayImage</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

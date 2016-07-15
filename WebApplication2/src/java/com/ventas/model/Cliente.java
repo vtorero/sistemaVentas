@@ -5,7 +5,8 @@
  */
 package com.ventas.model;
 
-import javax.persistence.Lob;
+import java.io.InputStream;
+
 
 /**
  *
@@ -29,8 +30,8 @@ public class Cliente {
   private String ccat;
   private double cpds;
   private int vcod;
-  @Lob()
-private byte[] cfot;;
+
+private InputStream cfot;;
  
     public int getCcod() {
         return ccod;
@@ -168,12 +169,14 @@ private byte[] cfot;;
         this.vcod = vcod;
     }
 
-    public byte[] getCfot() {
+    public InputStream getCfot() {
         return cfot;
     }
 
-    public void setCfot(byte[] cfot) {
+    public void setCfot(InputStream cfot) {
         this.cfot = cfot;
     }
+
+ 
     
 }

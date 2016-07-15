@@ -6,22 +6,13 @@
 package com.ventas.dao;
 
 import com.ventas.model.Vendedor;
-import com.ventas.util.MyUtil;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletResponse;
-import org.primefaces.model.DefaultStreamedContent;
+
 
 
 /**
@@ -45,7 +36,7 @@ public class VendedorDao extends Dao {
            st.setString(10, ven.getVce1());
            st.setString(11, ven.getVce2());
            st.setFloat(12, ven.getVcom());
-           st.setBytes(13, ven.getVfot());
+           st.setBinaryStream(13, ven.getVfot());
            st.setString(14, ven.getVfio());
            st.setString(15, ven.getVffo());
            st.setString(16, ven.getVmcs());
@@ -169,7 +160,7 @@ public void modificar(Vendedor ven) throws Exception{
            st.setString(11, ven.getVce2());
            st.setFloat(12, ven.getVcom());
            st.setString(13,ven.getVrft());
-           st.setBytes(14,ven.getVfot());
+           st.setBinaryStream(14,ven.getVfot());
            st.setString(15, ven.getVfio());
            st.setString(16, ven.getVffo());
            st.setString(17, ven.getVmcs());
@@ -203,21 +194,7 @@ public void modificar(Vendedor ven) throws Exception{
    
    }
     
-      private String getparsedDate(String date) throws Exception {
-        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
-        String s1 = date;
-        String s2 = null;
-        Date d;
-        try {
-            d = sdf.parse(s1);
-            s2 = (new SimpleDateFormat("yyyy-MM-dd")).format(d);
 
-        } catch (ParseException e) {
-        }
-
-        return s2;
-
-    }
             
             
 }

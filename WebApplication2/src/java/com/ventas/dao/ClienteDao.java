@@ -40,7 +40,7 @@ public class ClienteDao extends Dao {
            st.setString(14, cli.getCcat());
            st.setDouble(15, cli.getCpds());
            st.setInt(16, cli.getVcod());
-           st.setBytes(17, cli.getCfot());
+           st.setBinaryStream(17, cli.getCfot());
            st.executeUpdate();
        } catch (Exception e) {
        throw e;
@@ -77,7 +77,7 @@ public List<Cliente> listar() throws Exception{
           cli.setCcat(rs.getString("cCat"));
           cli.setCpds(rs.getDouble("cPds"));
           //cli.setC(rs.getString("vMcs"));
-          cli.setCfot(rs.getBytes("cFot"));
+          cli.setCfot(rs.getBinaryStream("cFot"));
           lista.add(cli);
            }
        } catch (Exception e) {
@@ -119,7 +119,7 @@ public List<Cliente> listar() throws Exception{
           clis.setCcat(rs.getString("cCat"));
           clis.setCpds(rs.getDouble("cPds"));
           clis.setVcod(rs.getInt("vCod"));
-          clis.setCfot(rs.getBytes("cFot"));
+          clis.setCfot(rs.getBinaryStream("cFot"));
 
 
 
@@ -159,7 +159,7 @@ public void modificar(Cliente cli) throws Exception{
            st.setString(14, cli.getCcat());
            st.setDouble(15, cli.getCpds());
            st.setInt(16,cli.getVcod());
-           st.setBytes(17, cli.getCfot());
+           st.setBinaryStream(17, cli.getCfot());
            st.setInt(18, cli.getCcod());
            st.executeUpdate();
        } catch (Exception e) {

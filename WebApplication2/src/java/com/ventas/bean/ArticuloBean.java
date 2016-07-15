@@ -3,20 +3,22 @@ package com.ventas.bean;
 import com.ventas.dao.ArticuloDao;
 import com.ventas.model.Articulo;
 import com.ventas.model.Vendedor;
-import com.ventas.util.MyUtil;
+import java.io.InputStream;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 @ManagedBean
 @ViewScoped
 public class ArticuloBean {
-        private Articulo articulo = new Articulo();
-        private Vendedor vendedor = new Vendedor();
+    private Articulo articulo = new Articulo();
+    private Vendedor vendedor = new Vendedor();
     private List<Articulo> lstArticulos;
-    public String imagenArticulo; 
+    private UploadedFile file;
         private String accion; 
 
     public Vendedor getVendedor() {
@@ -30,14 +32,6 @@ public class ArticuloBean {
         
     public Articulo getArticulo() {
         return articulo;
-    }
-
-    public String getImagenArticulo() {
-        return imagenArticulo;
-    }
-
-    public void setImagenArticulo(String imagenArticulo) {
-        this.imagenArticulo = imagenArticulo;
     }
 
     public void setArticulo(Articulo articulo) {
@@ -127,16 +121,20 @@ public void operar(){
     }
 
     public void subirimagen(FileUploadEvent event){
-    FacesMessage mensaje= new FacesMessage();
-    try
-    {articulo.setaFot(event.getFile().getContents());
-    //articulo.(articulo.getCcod()+"-"+event.getFile().getFileName());
-     imagenArticulo = MyUtil.guardarBlodEnficheroTemporal(articulo.getaFot(), articulo.getCart()+"-"+event.getFile().getFileName());
-       mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
-    mensaje.setSummary("Subio imagen exitosamente");
-    }catch(Exception e)    {
-    mensaje.setSeverity(FacesMessage.SEVERITY_ERROR);
-    mensaje.setSummary("Problemas al subir la imagen");
+    
+    if (event!= null) {
+            try {
+                  articulo.setAfot(event.getFile().getInputstream());
+               FacesMessage msg = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+ 
+            } catch (Exception e) {
+                System.out.println("Exception-File Upload." + e.getMessage());
+            }
+        }
+        else{
+        FacesMessage msg = new FacesMessage("Please select image!!");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+        }  
     }
-    }  
 }

@@ -6,6 +6,7 @@
 package com.ventas.dao;
 
 import com.ventas.model.Articulo;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class ArticuloDao extends Dao {
        try {
        this.Conectar();
            PreparedStatement st = this.getCn().prepareStatement("INSERT into articulo"
-                   + "(aDs1,aDs2,aUvt,aPru,aCom,aSto,aSts,aFot) values(?,?,?,?,?,?,?)");
+                   + "(aDs1,aDs2,aUvt,aPru,aCom,aSto,aSts,aFot) values(?,?,?,?,?,?,?,?)");
            st.setString(1,art.getAds1());
            st.setString(2, art.getAds2());
            st.setString(3, art.getAuvt());
@@ -31,7 +32,7 @@ public class ArticuloDao extends Dao {
            st.setDouble(5, art.getAcom());
            st.setDouble(6, art.getAsto());
            st.setDouble(7, art.getAsts());
-           st.setBytes(8, art.getaFot());
+           st.setBinaryStream(8,art.getAfot());
            
            st.executeUpdate();
        } catch (Exception e) {
@@ -59,7 +60,6 @@ public List<Articulo> listar() throws Exception{
           art.setApru(rs.getDouble("aPru"));
           art.setAsto(rs.getDouble("aSto"));
           art.setAsts(rs.getDouble("aSts"));
-          art.setaFot(rs.getBytes("aFot"));
           lista.add(art);
            }
        } catch (Exception e) {
@@ -91,7 +91,8 @@ public List<Articulo> listar() throws Exception{
           arts.setApru(rs.getDouble("aPru"));
           arts.setAsto(rs.getDouble("aSto"));
           arts.setAsts(rs.getDouble("aSts"));
-          arts.setaFot(rs.getBytes("aFot"));
+          InputStream fin2 = rs.getBinaryStream("aFot");
+          arts.setAfot(fin2);
           }
            
        } catch (Exception e) {
@@ -117,8 +118,8 @@ public void modificar(Articulo art) throws Exception{
            st.setDouble(5, art.getAcom());
            st.setDouble(6, art.getAsto());
            st.setDouble(7, art.getAsts());
-           st.setBytes(8,art.getaFot());
-           st.setInt(18, art.getCart());
+           st.setBinaryStream(8,art.getAfot());
+           st.setInt(9, art.getCart());
            st.executeUpdate();
        } catch (Exception e) {
        FacesContext context = FacesContext.getCurrentInstance();

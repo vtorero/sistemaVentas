@@ -5,7 +5,9 @@
  */
 package com.ventas.model;
 
+import java.io.InputStream;
 import javax.persistence.Lob;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -20,11 +22,18 @@ public class Articulo {
   private double acom;
   private double asto;
   private double asts;
-  @Lob()
-  private byte[] aFot;
-
+  private InputStream afot;
+    
     public int getCart() {
         return cart;
+    }
+
+    public InputStream getAfot() {
+        return afot;
+    }
+
+    public void setAfot(InputStream afot) {
+        this.afot = afot;
     }
 
     public void setCart(int cart) {
@@ -87,13 +96,4 @@ public class Articulo {
         this.asts = asts;
     }
 
-    public byte[] getaFot() {
-        return aFot;
-    }
-
-    public void setaFot(byte[] aFot) {
-        this.aFot = aFot;
-    }
-  
-  
 }

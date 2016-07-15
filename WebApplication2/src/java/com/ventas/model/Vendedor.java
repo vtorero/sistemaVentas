@@ -1,6 +1,7 @@
 package com.ventas.model;
 
-import javax.persistence.Lob;
+import java.io.InputStream;
+
 
 public class Vendedor {
 
@@ -20,13 +21,21 @@ public class Vendedor {
     private String vfio;
     private String vffo;
     private String vmcs;
-    @Lob()
-    private byte[] vfot;
+    private InputStream vfot;
     private String vrft;
     private String vusr;
     private String vpas;
     private String vacc;
 
+    public InputStream getVfot() {
+        return vfot;
+    }
+
+    public void setVfot(InputStream vfot) {
+        this.vfot = vfot;
+    }
+
+    
     public String getVrft() {
         return vrft;
     }
@@ -164,13 +173,7 @@ public class Vendedor {
         this.vmcs = vmcs;
     }
 
-    public byte[] getVfot() {
-        return vfot;
-    }
 
-    public void setVfot(byte[] vfot) {
-        this.vfot = vfot;
-    }
 
     public String getVusr() {
         return vusr;
