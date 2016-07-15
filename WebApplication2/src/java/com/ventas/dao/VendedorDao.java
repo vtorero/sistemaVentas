@@ -7,6 +7,8 @@ package com.ventas.dao;
 
 import com.ventas.model.Vendedor;
 import com.ventas.util.MyUtil;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
@@ -18,6 +20,8 @@ import java.util.List;
 import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
+import org.primefaces.model.DefaultStreamedContent;
 
 
 /**

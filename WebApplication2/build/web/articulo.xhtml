@@ -14,28 +14,22 @@
        <p:growl showDetail="true" id="msj"/>
         <h:form id="frm">
             <p:dataTable id="data" value="#{articuloBean.lstArticulos}" var="articulo">
-                 <p:column headerText="Nombres">
+                 <p:column headerText="Nombre Corto">
                      <h:outputText value="#{articulo.ads1}" />
         </p:column>   
-                <p:column headerText="Ruc">
-                    <p:outputLabel value="#{articulo.ads2}"/>      
+                <p:column headerText="Unidad de Venta">
+                    <p:outputLabel value="#{articulo.auvt}"/>      
                 </p:column>
-                   <p:column headerText="Direccion">
-                       <p:outputLabel value="#{articulo.auvt}"/>
+                   <p:column headerText="Precio Venta:">
+                       <p:outputLabel value="#{articulo.apru}"/>
                 </p:column>
-                <p:column headerText="Telefono">
-                    <p:outputLabel value="#{articulo.acom}"/>
+                <p:column headerText="Stock">
+                    <p:outputLabel value="#{articulo.asto}"/>
                 </p:column>
-                <p:column headerText="Telefono">
-                    <p:outputLabel value="#{articulo.acom}"/>
+                <p:column headerText="Stock Seguridad">
+                    <p:outputLabel value="#{articulo.asts}"/>
                 </p:column>
-                <p:column headerText="Telefono">
-                    <p:outputLabel value="#{articulo.acom}"/>
-                </p:column>
-                <p:column headerText="Telefono">
-                    <p:outputLabel value="#{articulo.acom}"/>
-                </p:column>
-                  <p:column headerText="Modificar">
+                 <p:column headerText="Modificar">
                       <p:commandLink value="Modificar" actionListener="#{articuloBean.leerID(articulo)}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos"/>
                 </p:column>
                     <p:column headerText="Eliminar">
@@ -45,46 +39,22 @@
             <p:commandButton value="Nuevo"  actionListener="#{articuloBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos" />
             <p:commandButton value="Listar" actionListener="#{articuloBean.listar()}" update="data"/>
         </h:form>
-        <p:dialog header="Modificar Cliente: #{articuloBean.articulo.crzs}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode" resizable="true">
+       <p:dialog header="Modificar Producto #{articuloBean.articulo.ads1}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode" resizable="true">
             <h:form enctype="multipart/form-data">
             <p:panelGrid  columns="2" columnClasses="label,value" style="border:0">   
-             <h:outputLabel value="Nombre"/>
-             <p:inputText id="txtNombre" value="#{articuloBean.articulo.crzs}" size="40"/>
-             <h:outputLabel value="Ruc"/>
-             <p:inputText id="txtRuc" value="#{articuloBean.articulo.cruc}" size="15"/>
-            <h:outputLabel value="Direccion"/>
-            <p:inputText id="txtDir" value="#{articuloBean.articulo.cdir}" size="40"/>
-            <h:outputLabel value="Fecha de nacimiento"/>
-            <p:inputMask id="date" value="#{articuloBean.articulo.cfnc}" mask="99/99/9999" size="9"/>
-           <h:outputLabel value="Telefono 1"/>
-           <p:inputText id="txtTlf1" value="#{articuloBean.articulo.ctl1}" size="8"/>
-           <h:outputLabel value="Telefono 2"/>
-           <p:inputText id="txtTlf2" value="#{articuloBean.articulo.ctl2}" size="8"/>
-            <h:outputLabel value="Telefono celular 1"/>
-            <p:inputText id="txtTlc1" value="#{articuloBean.articulo.ccl1}" size="8"/>
-            <h:outputLabel value="Telefono celular 2"/>
-            <p:inputText id="txtTlc2" value="#{articuloBean.articulo.ccl2}" size="8"/>
-            <h:outputLabel value="Correo 1"/>
-            <p:inputText id="txtCorreo" value="#{articuloBean.articulo.cce1}" size="30"/>
-            <h:outputLabel value="Correo 2"/>
-            <p:inputText id="txtCorreo2" value="#{articuloBean.articulo.cce2}" size="30"/>
-              <h:outputLabel value="% Descuento"/>
-              <p:inputText id="txtCom" value="#{articuloBean.articulo.cpds}" size="4"/>
-              <h:outputLabel value="Vendedor"/>
-              <p:selectOneMenu id="vendedorlista" value="#{articuloBean.articulo.vcod}">
-                  <f:selectItems value="#{vendedorBean.lstVendedores}" var="ven" itemLabel="#{ven.vrzs}" itemValue="#{ven.vcod}"></f:selectItems>
-             </p:selectOneMenu>
-             <h:outputLabel value="Fecha de inicio operaciones"/>
-            <p:inputMask id="dateio" value="#{articuloBean.articulo.cfio}" mask="99/99/9999" size="9"/>
-             <h:outputLabel value="Categoria"/>
-             <p:selectOneMenu value="#{articuloBean.articulo.ccat}">
-            <f:selectItem itemLabel="Seleccionar" itemValue="#{null}"/>     
-            <f:selectItem itemLabel="Fabricante" itemValue="1"/>
-            <f:selectItem itemLabel="Mayorista" itemValue="2"/>
-            <f:selectItem itemLabel="Minorista" itemValue="3"/>
-            <f:selectItem itemLabel="personal" itemValue="4"/>
-            </p:selectOneMenu>
-            <h:outputLabel value="Foto"/>
+             <h:outputLabel value="Descripción Corta"/>
+             <p:inputText id="txtNombre" value="#{articuloBean.articulo.ads1}" size="40"/>
+             <h:outputLabel value="Descripción Detallada"/>
+             <p:inputTextarea id="txtDeta" value="#{articuloBean.articulo.ads2}" rows="3" cols="30"/>
+            <h:outputLabel value="Unidad de venta"/>
+            <p:inputText id="txtDir" value="#{articuloBean.articulo.auvt}" size="40"/>
+            <h:outputLabel value="Precio unitario"/>
+            <p:inputText id="preciou" value="#{articuloBean.articulo.apru}"/>
+           <h:outputLabel value="Stock"/>
+           <p:inputText id="txtTlf1" value="#{articuloBean.articulo.asto}" size="8"/>
+           <h:outputLabel value="Stock Seguridad"/>
+           <p:inputText id="txtTlf2" value="#{articuloBean.articulo.asts}" size="8"/>
+           <h:outputLabel value="Foto"/>
             <h:panelGroup>
                 <p:fileUpload fileUploadListener="#{articuloBean.subirimagen}" mode="advanced" dragDropSupport="false"
                  uploadLabel="Subir" 
@@ -94,7 +64,7 @@
                  update="fotoVendedor"/>
             </h:panelGroup>
             <h:outputLabel value="Imagen"/>
-            <p:graphicImage id="fotoVendedor" value="http://localhost:8080/WebApplication2/resources/img/tmp/#{articuloBean.articulo.crzs}" width="150" height="100"/>
+            <p:graphicImage id="fotoVendedor" value="http://localhost:8080/WebApplication2/resources/img/tmp/#{articuloBean.articulo.cart}" width="150" height="100"/>
             <f:facet name="footer">
                 <p:commandButton value="#{articuloBean.accion}" actionListener="#{articuloBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>
