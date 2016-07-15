@@ -4,12 +4,14 @@ import com.ventas.dao.ClienteDao;
 import com.ventas.model.Cliente;
 import com.ventas.model.Vendedor;
 import com.ventas.util.MyUtil;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.SelectEvent;
 
 @ManagedBean
 @ViewScoped
@@ -127,6 +129,10 @@ public void operar(){
         }
     }
 
+         public void onDateSelect(SelectEvent event) {
+        cliente.setCfnc(event.toString());
+    }
+        
      public void subirimagen(FileUploadEvent event){
     
     if (event!= null) {

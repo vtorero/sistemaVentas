@@ -6,6 +6,7 @@
 package com.ventas.model;
 
 import java.io.InputStream;
+import java.util.Date;
 
 
 /**
@@ -80,6 +81,7 @@ private InputStream cfot;;
     public void setCmap(String cmap) {
         this.cmap = cmap;
     }
+
 
     public String getCfnc() {
         return cfnc;
