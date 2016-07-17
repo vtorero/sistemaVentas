@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
    xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <body>
 
         <ui:composition template="./WEB-INF/plantilla.xhtml">
@@ -40,28 +41,32 @@
          
         <p:dialog header="Modificar usuario: #{vendedorBean.vendedor.vrzs}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="drop" resizable="true">
             <h:form enctype="multipart/form-data">
-            <p:panelGrid  columns="2" columnClasses="label,value" style="border:0">   
-             <h:outputLabel value="Nombre"/>
-             <p:inputText id="txtNombre" value="#{vendedorBean.vendedor.vrzs}" size="40"/>
-             <h:outputLabel value="Ruc"/>
-             <p:inputText id="txtRuc" value="#{vendedorBean.vendedor.vruc}" size="15"/>
-            <h:outputLabel value="Direccion"/>
-            <p:inputText id="txtDir" value="#{vendedorBean.vendedor.vdir}" size="40"/>
-            <h:outputLabel value="Fecha de nacimiento"/>
-            <p:inputMask id="date" value="#{vendedorBean.vendedor.vfnc}" mask="99/99/9999" size="9"/>
-           <h:outputLabel value="Telefono fijo"/>
-            <p:inputText id="txtTlf1" value="#{vendedorBean.vendedor.vtlf}" size="8"/>
-            <h:outputLabel value="Telefono celular 1"/>
-            <p:inputText id="txtTlf2" value="#{vendedorBean.vendedor.vcl1}" size="8"/>
-            <h:outputLabel value="Telefono celular 2"/>
-            <p:inputText id="txtTlf3" value="#{vendedorBean.vendedor.vcl2}" size="8"/>
-            <h:outputLabel value="Correo 1"/>
-            <p:inputText id="txtCorreo" value="#{vendedorBean.vendedor.vce1}" size="30"/>
-            <h:outputLabel value="Correo 2"/>
-            <p:inputText id="txtCorreo2" value="#{vendedorBean.vendedor.vce2}" size="30"/>
-              <h:outputLabel value="% Comisión"/>
-            <p:inputText id="txtCom" value="#{vendedorBean.vendedor.vcom}" size="4"/>
-             <h:outputLabel value="Fecha de inicio operaciones"/>
+                <p:panelGrid columns="2" columnClasses="label,value">   
+               
+                     <h:outputLabel value="Nombre" />
+                     <p:inputText id="txtNombre"  required="true" value="#{vendedorBean.vendedor.vrzs}" size="40"/>
+               
+               
+                    <h:outputLabel value="Ruc"/>
+                     <p:inputText id="txtRuc" value="#{vendedorBean.vendedor.vruc}" size="15"/>
+               
+                    <h:outputLabel value="Direccion"/>
+                    <p:inputText id="txtDir" value="#{vendedorBean.vendedor.vdir}" size="40"/>
+                    <h:outputLabel value="Fecha de nacimiento"/>
+                    <p:inputMask id="date" value="#{vendedorBean.vendedor.vfnc}" mask="99/99/9999" size="9"/>
+                    <h:outputLabel value="Tlf fijo: "/>
+                    <p:inputText id="txtTlf1" value="#{vendedorBean.vendedor.vtlf}" size="9"/>
+                    <h:outputLabel value="Tlf celular 1: "/>
+                    <p:inputText id="txtTlf2" value="#{vendedorBean.vendedor.vcl1}" size="9"/>
+                    <h:outputLabel value="Tlf celular 2: "/>
+                    <p:inputText id="txtTlf3" value="#{vendedorBean.vendedor.vcl2}" size="9"/>       
+                    <h:outputLabel value="Correo 1: "/>
+                    <p:inputText id="txtCorreo" value="#{vendedorBean.vendedor.vce1}" size="30"/>
+                   <h:outputLabel value="Correo 2: "/>
+                   <p:inputText id="txtCorreo2" value="#{vendedorBean.vendedor.vce2}" size="30"/>
+                    <h:outputLabel value="% Comisión: "/>
+                   <p:inputText id="txtCom" value="#{vendedorBean.vendedor.vcom}" size="4"/>
+                                <h:outputLabel value="Fecha de inicio operaciones"/>
             <p:inputMask id="dateio" value="#{vendedorBean.vendedor.vfio}" mask="99/99/9999" size="9"/>
              <h:outputLabel value="Fecha de cese de operaciones"/>
             <p:inputMask id="datefo" value="#{vendedorBean.vendedor.vffo}" mask="99/99/9999" size="9"/>
@@ -80,7 +85,7 @@
             <f:selectItem itemLabel="Todo" itemValue="5"/>
             </p:selectOneMenu>
             <h:outputLabel value="Foto"/>
-                  <h:panelGroup>
+                <h:panelGroup>
                       <p:fileUpload value="#{vendedorBean.vendedor.vfot}" fileUploadListener="#{vendedorBean.subirimagen}" 
                 mode="advanced" dragDropSupport="true"
                  uploadLabel="Subir" 
@@ -89,16 +94,16 @@
                  sizeLimit="512000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                  update="fotoVendedor">
                             <h:outputLink value="DisplayImage?id=#{vendedorBean.vendedor.vcod}&amp;campo=vFot&amp;tabla=vendedor&amp;codigo=vCod" target="_blank" >
-                        <h:graphicImage id="fotoVendedor" value="DisplayImage?id=#{vendedorBean.vendedor.vcod}&amp;campo=vFot&amp;tabla=vendedor&amp;codigo=vCod" width="100" height="80"></h:graphicImage>
+                        <h:graphicImage id="fotoVendedor" value="DisplayImage?id=#{vendedorBean.vendedor.vcod}&amp;campo=vFot&amp;tabla=vendedor&amp;codigo=vCod" width="60" height="40"></h:graphicImage>
                     </h:outputLink>
-                      </p:fileUpload>
-                    
+                      </p:fileUpload>         
             </h:panelGroup>
             <f:facet name="footer">
                 <p:commandButton value="#{vendedorBean.accion}" actionListener="#{vendedorBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>
             </f:facet>
-           </p:panelGrid>
+                    </p:panelGrid>
+
              </h:form>
         </p:dialog>
             </ui:define>

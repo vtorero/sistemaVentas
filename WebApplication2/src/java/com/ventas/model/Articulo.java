@@ -6,8 +6,7 @@
 package com.ventas.model;
 
 import java.io.InputStream;
-import javax.persistence.Lob;
-import org.primefaces.model.UploadedFile;
+
 
 /**
  *
