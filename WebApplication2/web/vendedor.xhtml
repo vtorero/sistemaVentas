@@ -14,18 +14,18 @@
         <h2>Vendedores</h2> 
        <p:growl showDetail="true" id="msj"/>
         <h:form id="frm">
-            <p:dataTable id="data" value="#{vendedorBean.lstVendedores}" var="vendedor">
+            <p:dataTable id="data" value="#{vendedorBean.lstVendedores}" var="vendedor" style="text-align: center">
                  <p:column headerText="Nombres">
             <h:outputText value="#{vendedor.vrzs}" />
         </p:column>   
         
-                <p:column headerText="Ruc">
+                <p:column headerText="R.U.C">
                     <p:outputLabel value="#{vendedor.vruc}"/>      
                 </p:column>
-                   <p:column headerText="Direccion">
+                   <p:column headerText="Dirección">
                        <p:outputLabel value="#{vendedor.vdir}"/>
                 </p:column>
-                <p:column headerText="Telefono">
+                <p:column headerText="Teléfono">
                     <p:outputLabel value="#{vendedor.vtlf}"/>
                 </p:column>
                   <p:column headerText="Modificar">
@@ -35,11 +35,11 @@
                         <p:commandLink value="Eliminar" actionListener="#{vendedorBean.eliminar(vendedor)}" update="data"/>
                 </p:column>
             </p:dataTable>
-            <p:commandButton value="Nuevo"  actionListener="#{vendedorBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos" />
-            <p:commandButton value="Listar" actionListener="#{vendedorBean.listar()}" update="data"/>
+            <p:commandButton value="Agregar"  actionListener="#{vendedorBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos" />
+            
         </h:form>
          
-        <p:dialog header="Modificar usuario: #{vendedorBean.vendedor.vrzs}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="drop" resizable="true">
+        <p:dialog header="Vendedor: #{vendedorBean.vendedor.vrzs}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="drop" resizable="true">
             <h:form enctype="multipart/form-data">
                 <p:panelGrid columns="2" columnClasses="label,value">   
                
@@ -93,11 +93,12 @@
                  label="Seleccionar"
                  sizeLimit="512000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                  update="fotoVendedor">
-                            <h:outputLink value="DisplayImage?id=#{vendedorBean.vendedor.vcod}&amp;campo=vFot&amp;tabla=vendedor&amp;codigo=vCod" target="_blank" >
-                        <h:graphicImage id="fotoVendedor" value="DisplayImage?id=#{vendedorBean.vendedor.vcod}&amp;campo=vFot&amp;tabla=vendedor&amp;codigo=vCod" width="60" height="40"></h:graphicImage>
-                    </h:outputLink>
-                      </p:fileUpload>         
-            </h:panelGroup>
+                            <p:lightBox styleClass="imagebox" id="fotoVendedor"><h:outputLink value="DisplayImage?id=#{vendedorBean.vendedor.vcod}&amp;campo=vFot&amp;tabla=vendedor&amp;codigo=vCod" title="#{vendedorBean.vendedor.vrzs}">  
+        <h:graphicImage value="DisplayImage?id=#{vendedorBean.vendedor.vcod}&amp;campo=vFot&amp;tabla=vendedor&amp;codigo=vCod" id="foto" style="height: 77px;width:100px"/>  
+    </h:outputLink>
+  </p:lightBox>
+                      </p:fileUpload> 
+ </h:panelGroup>
             <f:facet name="footer">
                 <p:commandButton value="#{vendedorBean.accion}" actionListener="#{vendedorBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>

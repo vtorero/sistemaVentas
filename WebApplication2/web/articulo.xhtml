@@ -11,16 +11,16 @@
    <ui:define name="content">  
        <f:event type="preRenderView" listener="#{articuloBean.listar()}"/>
         <h2>Articulos</h2> 
-       <p:growl showDetail="true" id="msj"/>
+       <p:growl showDetail="false" id="msj"/>
         <h:form id="frm">
-            <p:dataTable id="data" value="#{articuloBean.lstArticulos}" var="articulo">
+            <p:dataTable id="data" value="#{articuloBean.lstArticulos}" var="articulo" style="text-align: center">
                  <p:column headerText="Nombre Corto">
                      <h:outputText value="#{articulo.ads1}" />
-        </p:column>   
+                </p:column>   
                 <p:column headerText="Unidad de Venta">
                     <p:outputLabel value="#{articulo.auvt}"/>      
                 </p:column>
-                   <p:column headerText="Precio Venta:">
+                   <p:column headerText="Precio Venta">
                        <p:outputLabel value="#{articulo.apru}"/>
                 </p:column>
                 <p:column headerText="Stock">
@@ -36,16 +36,16 @@
                         <p:commandLink value="Eliminar" actionListener="#{articuloBean.eliminar(articulo)}" update="data"/>
                 </p:column>
             </p:dataTable>
-            <p:commandButton value="Nuevo"  actionListener="#{articuloBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos" />
-            <p:commandButton value="Listar" actionListener="#{articuloBean.listar()}" update="data"/>
+            <p:commandButton value="Agregar"  actionListener="#{articuloBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos" />
+            
         </h:form>
-       <p:dialog header="Modificar Producto #{articuloBean.articulo.ads1}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode" resizable="true">
+       <p:dialog header="Articulo: #{articuloBean.articulo.ads1}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode" resizable="true">
             <h:form enctype="multipart/form-data">
             <p:panelGrid  columns="2" columnClasses="label,value" style="border:0">   
              <h:outputLabel value="Descripción Corta"/>
-             <p:inputText id="txtNombre" value="#{articuloBean.articulo.ads1}" size="40"/>
+             <p:inputText id="txtNombre" value="#{articuloBean.articulo.ads1}" size="40" required="true"/>
              <h:outputLabel value="Descripción Detallada"/>
-             <p:inputTextarea id="txtDeta" value="#{articuloBean.articulo.ads2}" rows="3" cols="30"/>
+             <p:inputTextarea id="txtDeta" value="#{articuloBean.articulo.ads2}" rows="3" cols="40"/>
             <h:outputLabel value="Unidad de venta"/>
             <p:inputText id="txtuni" value="#{articuloBean.articulo.auvt}" size="15"/>
              <h:outputLabel value="Comisión"/>
@@ -63,13 +63,13 @@
                  cancelLabel="Cancelar"
                  label="Seleccionar"
                  sizeLimit="512000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                 update="fotoArticulo"/>
-                <h:outputLink value="DisplayImage?id=#{articuloBean.articulo.cart}&amp;campo=aFot&amp;tabla=articulo&amp;codigo=cArt" target="_blank" >
-                        <h:graphicImage id="fotoArticulo" value="DisplayImage?id=#{articuloBean.articulo.cart}&amp;campo=aFot&amp;tabla=articulo&amp;codigo=cArt" width="100" height="80"></h:graphicImage>
-                    </h:outputLink>
-            </h:panelGroup>
-            
-            
+                 update="fotoArticulo">
+                <p:lightBox styleClass="imagebox" id="fotoArticulo"><h:outputLink value="DisplayImage?id=#{articuloBean.articulo.cart}&amp;campo=aFot&amp;tabla=articulo&amp;codigo=cArt" title="#{articuloBean.articulo.ads1}">  
+        <h:graphicImage value="DisplayImage?id=#{articuloBean.articulo.cart}&amp;campo=aFot&amp;tabla=articulo&amp;codigo=cArt" id="goto" style="height: 77px;width:100px"/>  
+    </h:outputLink>
+  </p:lightBox>
+                </p:fileUpload>
+            </h:panelGroup>         
             <f:facet name="footer">
                 <p:commandButton value="#{articuloBean.accion}" actionListener="#{articuloBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>
@@ -79,6 +79,5 @@
         </p:dialog>
             </ui:define>
         </ui:composition>
-
     </body>
 </html>

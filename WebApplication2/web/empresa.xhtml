@@ -14,17 +14,17 @@
        <h2>Empresas</h2>       
         <p:growl id="msj"/>
         <h:form id="frm">
-            <p:dataTable id="data" value="#{empresaBean.lstEmpresas}" var="empresa">
-                   <p:column headerText="Nombre">
+            <p:dataTable id="data" value="#{empresaBean.lstEmpresas}" var="empresa" style="text-align: center">
+                   <p:column headerText="Razón social">
                     <p:outputLabel value="#{empresa.erzs}"/>
                 </p:column>
-                <p:column headerText="Ruc">
+                <p:column headerText="R.U.C">
                     <p:outputLabel value="#{empresa.eruc}"/>      
                 </p:column>
-                   <p:column headerText="Direccion">
+                   <p:column headerText="Dirección">
                        <p:outputLabel value="#{empresa.edir}"/>
                 </p:column>
-                <p:column headerText="Telefono">
+                <p:column headerText="Teléfono">
                     <p:outputLabel value="#{empresa.etl1}"/>
                 </p:column>
                   <p:column headerText="Modificar">
@@ -34,15 +34,15 @@
                         <p:commandLink value="Eliminar" actionListener="#{empresaBean.eliminar(empresa)}" update="data"/>
                 </p:column>
             </p:dataTable>
-            <p:commandButton value="Nuevo"  actionListener="#{empresaBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos" />
-             <p:commandButton value="Listar" actionListener="#{empresaBean.listar()}" update="data"/>
+            <p:commandButton value="Agregar"  actionListener="#{empresaBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos" />
+             
         </h:form>
          
-        <p:dialog header="Datos de #{empresaBean.empresa.erzs}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode"  dynamic="true" resizable="true">
+        <p:dialog header="Empresa: #{empresaBean.empresa.erzs}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode"  dynamic="true" resizable="true">
          <h:form>
             <p:panelGrid  columns="2" columnClasses="label,value" style="border:0">
            
-             <h:outputLabel value="Nombre o razon social"/>
+             <h:outputLabel value="Razón social"/>
              <p:inputText id="txtNombre" value="#{empresaBean.empresa.erzs}" size="50"/>
              <h:outputLabel value="Ruc"/>
             <p:inputText id="txtRuc" value="#{empresaBean.empresa.eruc}"  size="9"/>
