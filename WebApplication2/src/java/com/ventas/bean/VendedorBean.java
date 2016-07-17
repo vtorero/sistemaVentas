@@ -2,7 +2,6 @@ package com.ventas.bean;
 
 import com.ventas.dao.VendedorDao;
 import com.ventas.model.Vendedor;
-import com.ventas.util.MyUtil;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -113,6 +112,8 @@ public void operar(){
             dao.eliminar(ven);
             this.listar();        
         } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error de Eliminación", e.getMessage()));
+      
         }
     }
 

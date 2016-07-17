@@ -192,7 +192,7 @@ public void modificar(Vendedor ven) throws Exception{
            st.setString(1,ven.getVcod());
            st.executeUpdate();
        } catch (Exception e) {
-       throw e;
+     throw e;
        }finally{
            this.Cerrar();
         

@@ -14,6 +14,7 @@
         <h2>Vendedores</h2> 
        <p:growl showDetail="true" id="msj"/>
         <h:form id="frm">
+               <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:dataTable id="data" value="#{vendedorBean.lstVendedores}" var="vendedor" style="text-align: center">
                  <p:column headerText="Nombres">
             <h:outputText value="#{vendedor.vrzs}" />
