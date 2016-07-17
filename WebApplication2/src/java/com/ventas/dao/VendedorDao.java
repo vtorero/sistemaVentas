@@ -10,10 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
-
 
 /**
  *
@@ -176,8 +172,6 @@ public void modificar(Vendedor ven) throws Exception{
            st.setString(21,ven.getVcod());
            st.executeUpdate();
        } catch (Exception e) {
-       FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Error",  "Mensaje: " + e.getMessage()) );
         throw e;
        }finally{
            this.Cerrar();

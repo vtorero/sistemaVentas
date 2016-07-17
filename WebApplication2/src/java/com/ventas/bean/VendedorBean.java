@@ -2,6 +2,7 @@ package com.ventas.bean;
 
 import com.ventas.dao.VendedorDao;
 import com.ventas.model.Vendedor;
+import com.ventas.util.MyUtil;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -68,6 +69,7 @@ public void operar(){
             this.listar();
             
         } catch (Exception e) {
+            MyUtil.mensajes("Registro", e);
         }
     }
         public void modificar(){
@@ -78,6 +80,8 @@ public void operar(){
             this.listar();
             
         } catch (Exception e) {
+            MyUtil.mensajes("Modificación", e);
+            
         }
     }
     
@@ -87,6 +91,7 @@ public void operar(){
             dao = new VendedorDao();
             lstVendedores= dao.listar();
         } catch (Exception e) {
+            MyUtil.mensajes("Listado", e);
         }
     }
         
@@ -101,6 +106,7 @@ public void operar(){
             this.accion="Modificar";
             }
         } catch (Exception e) {
+            MyUtil.mensajes("Lectura", e);
         }
       
       }
@@ -112,7 +118,8 @@ public void operar(){
             dao.eliminar(ven);
             this.listar();        
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error de Eliminación", e.getMessage()));
+            MyUtil.mensajes("Eliminación", e);
+           
       
         }
     }

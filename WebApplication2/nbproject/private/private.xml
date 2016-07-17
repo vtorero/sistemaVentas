@@ -5,17 +5,14 @@
         <group>
             <file>file:/D:/sistemaVentas/WebApplication2/web/articulo.xhtml</file>
             <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/bean/VendedorBean.java</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/web/empresa.xhtml</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/util/DisplayImage.java</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/web/persona.xhtml</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/web/WEB-INF/web.xml</file>
+            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/model/Empresa.java</file>
+            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/dao/DocumentoDao.java</file>
+            <file>file:/D:/sistemaVentas/WebApplication2/web/cliente.xhtml</file>
             <file>file:/D:/sistemaVentas/WebApplication2/web/vendedor.xhtml</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/bean/ArticuloBean.java</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/dao/Dao.java</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/web/WEB-INF/plantilla.xhtml</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/dao/ClienteDao.java</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/dao/ArticuloDao.java</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/model/Articulo.java</file>
+            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/model/Documento.java</file>
+            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/model/DetalleVenta.java</file>
+            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/model/Producto.java</file>
+            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/dao/EmpresaDao.java</file>
             <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/dao/VendedorDao.java</file>
             <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/model/Venta.java</file>
         </group>

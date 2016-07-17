@@ -2,7 +2,7 @@
 package com.ventas.model;
 
 public class Documento {
-private int cdoc ;
+private int dcod ;
 private int demp;
 private String dnro;
 private String dfch;
@@ -21,13 +21,15 @@ private double dcom;
 private double dcit;
 private String dest;
 
-    public int getCdoc() {
-        return cdoc;
+    public int getDcod() {
+        return dcod;
     }
 
-    public void setCdoc(int cdoc) {
-        this.cdoc = cdoc;
+    public void setDcod(int dcod) {
+        this.dcod = dcod;
     }
+
+  
 
     public int getDemp() {
         return demp;
