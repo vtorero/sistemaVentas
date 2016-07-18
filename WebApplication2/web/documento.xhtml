@@ -10,7 +10,7 @@
 
         <ui:composition template="./WEB-INF/plantilla.xhtml">
    <ui:define name="content">  
-       <f:event type="preRenderView" listener="#{documentoBean.listar()}"/>
+       <f:event type="preRenderView" listener="#{empresaBean.listar()}"/>
         <h2>Documentos</h2> 
        <p:growl showDetail="true" id="msj"/>
         <h:form id="frm">
@@ -43,12 +43,11 @@
        <p:dialog header="Documento: #{documentoBean.documento.dcod}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="drop" resizable="true">
             <h:form enctype="multipart/form-data">
                 <p:panelGrid columns="2" columnClasses="label,value">   
-               
-                     <h:outputLabel value="Nombre" />
-                     <p:inputText id="txtNombre"  required="true" value="#{documentoBean.documento.demp}" size="40"/>
-               
-               
-                    <h:outputLabel value="Ruc"/>
+                                    <h:outputLabel value="Nombre" />
+                                    <p:selectOneMenu id="empresalista" value="#{documentoBean.documento.demp}" filter="true" filterMatchMode="contains">
+                                        <f:selectItems value="#{empresaBean.lstEmpresas}" var="emp" itemLabel="#{emp.erzs}" itemValue="#{emp.ecod}"></f:selectItems>
+                        </p:selectOneMenu>
+                   <h:outputLabel value="Ruc"/>
                     <p:inputText id="txtRuc" value="#{documentoBean.documento.demp}" size="15"/>
                
                     <h:outputLabel value="Direccion"/>

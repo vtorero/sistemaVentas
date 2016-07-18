@@ -125,7 +125,8 @@ public class DocumentoDao extends Dao {
 public void modificar(Documento doc) throws Exception{
        try {
        this.Conectar();
-           PreparedStatement st = this.getCn().prepareStatement("UPDATE documento SET "
+           PreparedStatement st;
+           st = this.getCn().prepareStatement("UPDATE documento SET "
                    + "dEmp=?,dNro=?,dFch=STR_TO_DATE(?,'%d/%m/%Y'),dCli=?,dMon=?,dTic=?,dBrt=?,dCds=?,dDsc=?,dIgv=?,dTig=?,dTnt=?,"
                    + "dTpg=?,dDif=?,dCom=?,dCit=?,dEst=? WHERE dCod = ?");
            st.setInt(1,doc.getDemp()); 
