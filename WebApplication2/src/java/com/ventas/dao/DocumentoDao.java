@@ -54,7 +54,7 @@ public class DocumentoDao extends Dao {
            Documento doc = new Documento();
            doc.setDcod(rs.getInt("dCod"));
            doc.setDemp(rs.getInt("dEmp"));
-           doc.setDnro(rs.getString("eNro"));
+           doc.setDnro(rs.getString("dNro"));
            doc.setDfch(rs.getString("dFch"));
            doc.setDcli(rs.getInt("dCli"));
            doc.setDmon(rs.getString("dMon"));
@@ -62,8 +62,8 @@ public class DocumentoDao extends Dao {
            doc.setDbrt(rs.getDouble("dBrt"));
            doc.setDcds(rs.getDouble("dCds"));
            doc.setDdsc(rs.getDouble("dDsc"));
-           doc.setDigv(rs.getDouble("dDigv"));
-           doc.setDtig(rs.getDouble("dDtig"));
+           doc.setDigv(rs.getDouble("dIgv"));
+           doc.setDtig(rs.getDouble("dTig"));
            doc.setDtnt(rs.getDouble("dTnt"));
            doc.setDtpg(rs.getDouble("dTpg"));
            doc.setDdif(rs.getInt("dDif"));
@@ -95,7 +95,7 @@ public class DocumentoDao extends Dao {
                docs = new Documento();
               docs.setDcod(rs.getInt("dCod"));
            docs.setDemp(rs.getInt("dEmp"));
-           docs.setDnro(rs.getString("eNro"));
+           docs.setDnro(rs.getString("dNro"));
            docs.setDfch(rs.getString("dFch"));
            docs.setDcli(rs.getInt("dCli"));
            docs.setDmon(rs.getString("dMon"));
@@ -103,8 +103,8 @@ public class DocumentoDao extends Dao {
            docs.setDbrt(rs.getDouble("dBrt"));
            docs.setDcds(rs.getDouble("dCds"));
            docs.setDdsc(rs.getDouble("dDsc"));
-           docs.setDigv(rs.getDouble("dDigv"));
-           docs.setDtig(rs.getDouble("dDtig"));
+           docs.setDigv(rs.getDouble("dIgv"));
+           docs.setDtig(rs.getDouble("dTig"));
            docs.setDtnt(rs.getDouble("dTnt"));
            docs.setDtpg(rs.getDouble("dTpg"));
            docs.setDdif(rs.getInt("dDif"));
@@ -126,8 +126,10 @@ public void modificar(Documento doc) throws Exception{
        try {
        this.Conectar();
            PreparedStatement st = this.getCn().prepareStatement("UPDATE documento SET "
-                   + "dEmp=?,dNro=?,dFch=STR_TO_DATE(?,'%d/%m/%Y'),dCli=?,dMon=?,dTic=?,dBrt=?,dCds=?,dDsc=?,dIgv=?,dTig=?,dTnt=?,dTpg=?,dDif=?,dCom=?,dCit=?,dEst=? WHERE dCod = ?");
-            st.setString(2, doc.getDnro());
+                   + "dEmp=?,dNro=?,dFch=STR_TO_DATE(?,'%d/%m/%Y'),dCli=?,dMon=?,dTic=?,dBrt=?,dCds=?,dDsc=?,dIgv=?,dTig=?,dTnt=?,"
+                   + "dTpg=?,dDif=?,dCom=?,dCit=?,dEst=? WHERE dCod = ?");
+           st.setInt(1,doc.getDemp()); 
+           st.setString(2, doc.getDnro());
            st.setString(3, doc.getDfch());
            st.setInt(4, doc.getDcli());
            st.setString(5, doc.getDmon());
@@ -143,7 +145,7 @@ public void modificar(Documento doc) throws Exception{
            st.setDouble(15,doc.getDcom());
            st.setDouble(16,doc.getDcit());
            st.setString(17,doc.getDest());
-           st.setInt(19,doc.getDcod());
+           st.setInt(18,doc.getDcod());
            st.executeUpdate();
        } catch (Exception e) {
        throw e;
