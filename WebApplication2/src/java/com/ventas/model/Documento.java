@@ -16,7 +16,7 @@ private double ddsc;
 private double digv;  
 private double dtig;
 private double dtnt;  
-private double dtpg;
+private String dtpg;
 private int ddif; 
 private double dcom;
 private double dcit;
@@ -136,11 +136,11 @@ private String dest;
         this.dtnt = dtnt;
     }
 
-    public double getDtpg() {
+    public String getDtpg() {
         return dtpg;
     }
 
-    public void setDtpg(double dtpg) {
+    public void setDtpg(String dtpg) {
         this.dtpg = dtpg;
     }
 
