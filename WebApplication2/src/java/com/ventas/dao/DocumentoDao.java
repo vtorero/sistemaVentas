@@ -15,24 +15,25 @@ public class DocumentoDao extends Dao {
        this.Conectar();
        
            PreparedStatement st = this.getCn().prepareStatement("INSERT into documento"
-           + " (dEmp,dNro,dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst) values(?,?,STR_TO_DATE(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+           + " (dTip,dEmp,dNro,dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst) values(?,?,STR_TO_DATE(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
            st.setInt(1,doc.getDemp());
-           st.setString(2, doc.getDnro());
-           st.setString(3, doc.getDfch());
-           st.setInt(4, doc.getDcli());
-           st.setString(5, doc.getDmon());
-           st.setDouble(6, doc.getDtic());
-            st.setDouble(7, doc.getDbrt());
-            st.setDouble(8,doc.getDcds());
-            st.setDouble(9,doc.getDdsc());     
-           st.setDouble(10,doc.getDigv());
-           st.setDouble(11,doc.getDtig());
-           st.setDouble(12,doc.getDtnt());
-           st.setDouble(13,doc.getDtpg());
-           st.setDouble(14,doc.getDdif());
-           st.setDouble(15,doc.getDcom());
-           st.setDouble(16,doc.getDcit());
-           st.setString(17,doc.getDest());
+           st.setString(2,doc.getDtip());
+           st.setString(3, doc.getDnro());
+           st.setString(4, doc.getDfch());
+           st.setInt(5, doc.getDcli());
+           st.setString(6, doc.getDmon());
+           st.setDouble(7, doc.getDtic());
+            st.setDouble(8, doc.getDbrt());
+            st.setDouble(9,doc.getDcds());
+            st.setDouble(10,doc.getDdsc());     
+           st.setDouble(11,doc.getDigv());
+           st.setDouble(12,doc.getDtig());
+           st.setDouble(13,doc.getDtnt());
+           st.setDouble(14,doc.getDtpg());
+           st.setDouble(15,doc.getDdif());
+           st.setDouble(16,doc.getDcom());
+           st.setDouble(17,doc.getDcit());
+           st.setString(18,doc.getDest());
            st.executeUpdate();
        } catch (Exception e) {
        throw e;
@@ -47,13 +48,14 @@ public class DocumentoDao extends Dao {
        try {
            this.Conectar();
            PreparedStatement st = this.getCn().prepareCall("SELECT "
-                   + "dCod,dEmp,dNro,dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst FROM documento");
+                   + "dCod,dEmp,dTip,dNro,dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst FROM documento");
            rs = st.executeQuery();
            lista = new ArrayList<>();
            while(rs.next()){
            Documento doc = new Documento();
            doc.setDcod(rs.getInt("dCod"));
            doc.setDemp(rs.getInt("dEmp"));
+           doc.setDtip(rs.getString("dTip"));
            doc.setDnro(rs.getString("dNro"));
            doc.setDfch(rs.getString("dFch"));
            doc.setDcli(rs.getInt("dCli"));
@@ -88,13 +90,14 @@ public class DocumentoDao extends Dao {
        try {
            this.Conectar();
            PreparedStatement st = this.getCn().prepareCall("SELECT"
-                   + " dCod,dEmp,dNro,dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst FROM documento WHERE dCod=?");
+                   + " dCod,dEmp,dTip,dNro,dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst FROM documento WHERE dCod=?");
            st.setInt(1,doc.getDcod());
            rs =st.executeQuery();
            while (rs.next()) {
                docs = new Documento();
               docs.setDcod(rs.getInt("dCod"));
            docs.setDemp(rs.getInt("dEmp"));
+           docs.setDtip(rs.getString("dTip"));
            docs.setDnro(rs.getString("dNro"));
            docs.setDfch(rs.getString("dFch"));
            docs.setDcli(rs.getInt("dCli"));
@@ -127,26 +130,27 @@ public void modificar(Documento doc) throws Exception{
        this.Conectar();
            PreparedStatement st;
            st = this.getCn().prepareStatement("UPDATE documento SET "
-                   + "dEmp=?,dNro=?,dFch=STR_TO_DATE(?,'%d/%m/%Y'),dCli=?,dMon=?,dTic=?,dBrt=?,dCds=?,dDsc=?,dIgv=?,dTig=?,dTnt=?,"
+                   + "dEmp=?,dTip=?,dNro=?,dFch=STR_TO_DATE(?,'%d/%m/%Y'),dCli=?,dMon=?,dTic=?,dBrt=?,dCds=?,dDsc=?,dIgv=?,dTig=?,dTnt=?,"
                    + "dTpg=?,dDif=?,dCom=?,dCit=?,dEst=? WHERE dCod = ?");
            st.setInt(1,doc.getDemp()); 
-           st.setString(2, doc.getDnro());
-           st.setString(3, doc.getDfch());
-           st.setInt(4, doc.getDcli());
-           st.setString(5, doc.getDmon());
-           st.setDouble(6, doc.getDtic());
-            st.setDouble(7, doc.getDbrt());
-            st.setDouble(8,doc.getDcds());
-            st.setDouble(9,doc.getDdsc());     
-           st.setDouble(10,doc.getDigv());
-           st.setDouble(11,doc.getDtig());
-           st.setDouble(12,doc.getDtnt());
-           st.setDouble(13,doc.getDtpg());
-           st.setDouble(14,doc.getDdif());
-           st.setDouble(15,doc.getDcom());
-           st.setDouble(16,doc.getDcit());
-           st.setString(17,doc.getDest());
-           st.setInt(18,doc.getDcod());
+           st.setString(2, doc.getDtip());
+           st.setString(3, doc.getDnro());
+           st.setString(4, doc.getDfch());
+           st.setInt(5, doc.getDcli());
+           st.setString(6, doc.getDmon());
+           st.setDouble(7, doc.getDtic());
+            st.setDouble(8, doc.getDbrt());
+            st.setDouble(9,doc.getDcds());
+            st.setDouble(10,doc.getDdsc());     
+           st.setDouble(11,doc.getDigv());
+           st.setDouble(12,doc.getDtig());
+           st.setDouble(13,doc.getDtnt());
+           st.setDouble(14,doc.getDtpg());
+           st.setDouble(15,doc.getDdif());
+           st.setDouble(16,doc.getDcom());
+           st.setDouble(17,doc.getDcit());
+           st.setString(18,doc.getDest());
+           st.setInt(19,doc.getDcod());
            st.executeUpdate();
        } catch (Exception e) {
        throw e;

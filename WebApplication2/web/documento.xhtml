@@ -11,6 +11,7 @@
         <ui:composition template="./WEB-INF/plantilla.xhtml">
    <ui:define name="content">  
        <f:event type="preRenderView" listener="#{empresaBean.listar()}"/>
+       <f:event type="preRenderView" listener="#{documentoBean.listar()}"/>
         <h2>Documentos</h2> 
        <p:growl showDetail="true" id="msj"/>
         <h:form id="frm">
@@ -42,13 +43,22 @@
          
        <p:dialog header="Documento: #{documentoBean.documento.dcod}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="drop" resizable="true">
             <h:form enctype="multipart/form-data">
-                <p:panelGrid columns="2" columnClasses="label,value">   
-                                    <h:outputLabel value="Nombre" />
-                                    <p:selectOneMenu id="empresalista" value="#{documentoBean.documento.demp}" filter="true" filterMatchMode="contains">
-                                        <f:selectItems value="#{empresaBean.lstEmpresas}" var="emp" itemLabel="#{emp.erzs}" itemValue="#{emp.ecod}"></f:selectItems>
+                <p:panelGrid columns="4" columnClasses="label,value">   
+                 <h:outputLabel value="Nombre" />
+                       <p:selectOneMenu id="empresalista" value="#{documentoBean.documento.demp}" filter="true" filterMatchMode="contains">
+                         <f:selectItems value="#{empresaBean.lstEmpresas}" var="emp" itemLabel="#{emp.erzs}" itemValue="#{emp.ecod}"></f:selectItems>
                         </p:selectOneMenu>
-                   <h:outputLabel value="Ruc"/>
-                    <p:inputText id="txtRuc" value="#{documentoBean.documento.demp}" size="15"/>
+                   <h:outputLabel value="Tipo Documento"/>
+                   <p:selectOneMenu id="tipodocu" value="#{documentoBean.documento.dtip}" filter="true" filterMatchMode="contains">
+                         <f:selectItem itemLabel="Seleccionar" itemValue="#{null}"></f:selectItem>
+                         <f:selectItem itemLabel="Factura" itemValue="FA"></f:selectItem>
+                         <f:selectItem itemLabel="Boleta de venta" itemValue="BV"></f:selectItem>
+                         <f:selectItem itemLabel="Nota de abono" itemValue="NA"></f:selectItem>
+                         <f:selectItem itemLabel="Nota de cargo" itemValue="NC"></f:selectItem>
+                         <f:selectItem itemLabel="Ticket" itemValue="TK"></f:selectItem>
+                         <f:selectItem itemLabel="Guia de remisión" itemValue="GR"></f:selectItem>
+                         <f:selectItem itemLabel="Guia de transporte" itemValue="GT"></f:selectItem>
+                        </p:selectOneMenu>
                
                     <h:outputLabel value="Direccion"/>
                     <p:inputText id="txtDir" value="#{documentoBean.documento.dcli}" size="40"/>

@@ -4,6 +4,7 @@ package com.ventas.model;
 public class Documento {
 private int dcod ;
 private int demp;
+private String dtip;
 private String dnro;
 private String dfch;
 private int dcli;
@@ -27,6 +28,14 @@ private String dest;
 
     public void setDcod(int dcod) {
         this.dcod = dcod;
+    }
+
+    public String getDtip() {
+        return dtip;
+    }
+
+    public void setDtip(String dtip) {
+        this.dtip = dtip;
     }
 
   
