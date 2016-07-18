@@ -69,6 +69,7 @@ public void operar(){
             this.listar();
             
         } catch (Exception e) {
+            MyUtil.mensajes("Registro", e);
         }
     }
         public void modificar(){
@@ -79,6 +80,8 @@ public void operar(){
             this.listar();
             
         } catch (Exception e) {
+            MyUtil.mensajes("Modificación", e);
+            
         }
     }
     
@@ -88,6 +91,7 @@ public void operar(){
             dao = new VendedorDao();
             lstVendedores= dao.listar();
         } catch (Exception e) {
+            MyUtil.mensajes("Listado", e);
         }
     }
         
@@ -102,6 +106,7 @@ public void operar(){
             this.accion="Modificar";
             }
         } catch (Exception e) {
+            MyUtil.mensajes("Lectura", e);
         }
       
       }
@@ -113,6 +118,9 @@ public void operar(){
             dao.eliminar(ven);
             this.listar();        
         } catch (Exception e) {
+            MyUtil.mensajes("Eliminación", e);
+           
+      
         }
     }
 

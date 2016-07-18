@@ -1,6 +1,5 @@
 package com.ventas.model;
 
-import java.sql.Date;
 
 public class Empresa {
 private int ecod;

@@ -15,7 +15,7 @@
         <h2>Clientes</h2> 
        <p:growl showDetail="true" id="msj"/>
         <h:form id="frm">
-            <p:dataTable id="data" value="#{clienteBean.lstClientes}" var="cliente">
+            <p:dataTable id="data" value="#{clienteBean.lstClientes}" var="cliente" style="text-align: center">
                  <p:column headerText="Nombres">
             <h:outputText value="#{cliente.crzs}" />
         </p:column>   
@@ -35,8 +35,8 @@
                         <p:commandLink value="Eliminar" actionListener="#{clienteBean.eliminar(cliente)}" update="data"/>
                 </p:column>
             </p:dataTable>
-            <p:commandButton value="Nuevo"  actionListener="#{clienteBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos" />
-            <p:commandButton value="Listar" actionListener="#{clienteBean.listar()}" update="data"/>
+            <p:commandButton value="Agregar" actionListener="#{clienteBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos" />
+            
         </h:form>
         <p:dialog header="Modificar Cliente: #{clienteBean.cliente.crzs}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode" resizable="true">
             <h:form enctype="multipart/form-data">
