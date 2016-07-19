@@ -12,6 +12,7 @@
    <ui:define name="content">  
        <f:event type="preRenderView" listener="#{empresaBean.listar()}"/>
        <f:event type="preRenderView" listener="#{documentoBean.listar()}"/>
+       <f:event type="preRenderView" listener="#{clienteBean.listar()}"/>
         <h2>Documentos</h2> 
        <p:growl showDetail="true" id="msj"/>
         <h:form id="frm">
@@ -21,8 +22,10 @@
                      <h:outputText value="#{documento.demp}" />
         </p:column>   
         
-                <p:column headerText="R.U.C">
-                    <p:outputLabel value="#{documento.dnro}"/>      
+                <p:column headerText="Tipo">
+                    <p:outputLabel value="#{documento.dtip}">
+                        <f:converter converterId="documentoConverter"/>
+                    </p:outputLabel>
                 </p:column>
                    <p:column headerText="Dirección">
                        <p:outputLabel value="#{documento.dfch}"/>
@@ -70,8 +73,10 @@
                     
                     <h:outputLabel value="Fecha:"/>
                     <p:inputMask id="date" value="#{documentoBean.documento.dfch}" mask="99/99/9999" size="9"/>
-                   
-           
+                    <h:outputLabel value="Cliente"/>
+                    <p:selectOneMenu id="clientelista" value="#{documentoBean.documento.dcli}" filter="true" filterMatchMode="contains">
+                        <f:selectItems value="#{clienteBean.lstClientes}" var="cli" itemLabel="#{cli.crzs}" itemValue="#{cli.ccod}"></f:selectItems>
+                        </p:selectOneMenu>
             <f:facet name="footer">
                 <p:commandButton value="#{documentoBean.accion}" actionListener="#{documentoBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>

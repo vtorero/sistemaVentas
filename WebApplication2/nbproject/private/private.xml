@@ -3,43 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/util/DisplayImage.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/web/vendedor.xhtml</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/web/WEB-INF/plantilla.xhtml</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/util/MyUtil.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/web/empresa.xhtml</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/model/Vendedor.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/bean/ArticuloBean.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/web/articulo.xhtml</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/model/Producto.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/model/Articulo.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/web/cliente.xhtml</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/dao/Dao.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/web/WEB-INF/web.xml</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/dao/ArticuloDao.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/dao/ClienteDao.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/bean/ClienteBean.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/bean/VendedorBean.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/bean/EmpresaBean.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/model/Persona.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/dao/EmpresaDao.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/dao/VendedorDao.java</file>
-            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/model/Cliente.java</file>
-=======
             <file>file:/D:/sistemaVentas/WebApplication2/web/articulo.xhtml</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/bean/VendedorBean.java</file>
+            <file>file:/D:/sistemaVentas/WebApplication2/web/documento.xhtml</file>
             <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/model/Empresa.java</file>
             <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/dao/DocumentoDao.java</file>
             <file>file:/D:/sistemaVentas/WebApplication2/web/cliente.xhtml</file>
             <file>file:/D:/sistemaVentas/WebApplication2/web/vendedor.xhtml</file>
             <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/model/Documento.java</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/model/DetalleVenta.java</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/model/Producto.java</file>
+            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/bean/DocumentoBean.java</file>
             <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/dao/EmpresaDao.java</file>
-            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/dao/VendedorDao.java</file>
+            <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/util/MyUtil.java</file>
             <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/model/Venta.java</file>
->>>>>>> 54cac74416c7d6c2b2e8dee640045267dc7b1e8d
         </group>
     </open-files>
 </project-private>
