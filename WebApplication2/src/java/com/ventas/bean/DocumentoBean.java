@@ -16,9 +16,18 @@ public class DocumentoBean {
         private Documento documento = new Documento();
         private Articulo articulo = new Articulo();
         private int cantidad;
+        private double total;
         private List<Documento> lstDocumentos;
         private List<ItemDocumento> lista = new ArrayList();
         private String accion; 
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
 
     public Articulo getArticulo() {
         return articulo;
@@ -148,6 +157,7 @@ public void operar(){
     ItemDocumento det = new ItemDocumento();
     det.setInum(cantidad);
     det.setArticulo(articulo);
+    this.setTotal(cantidad*articulo.getApru());
     this.lista.add(det);
    }    
     

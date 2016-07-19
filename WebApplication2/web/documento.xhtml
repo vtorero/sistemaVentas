@@ -97,27 +97,29 @@
                     <p:commandButton value="Cancelar" actionListener="#{documentoBean.operar()}" oncomplete="PF('wdlgDatos').hide()" />
             </p:panelGrid>
              </h:form>
-           <h:form id="dato">
-               <p:dataTable id="dataArticulos"  value="#{documentoBean.lista}" var="item" style="width:700px">
-                 <p:column headerText="Descripción">
+           <h2>Lista de Articulos:</h2>
+                <h:form id="dato">
+                    <p:dataTable id="dataArticulos"  value="#{documentoBean.lista}" var="item" style="width:675px;">
+                    <p:column headerText="Descripción">
                      <h:outputText value="#{item.articulo.ads1}" />
-        </p:column>   
-        
-                <p:column headerText="Unidad de Venta">
+                    </p:column>   
+                     <p:column headerText="Unidad de Venta">
                     <p:outputLabel value="#{item.articulo.auvt}" />
-           
-                </p:column>
+                    </p:column>
                    <p:column headerText="Precio">
-                       <p:outputLabel value="#{item.articulo.apru}"/>
+                    <p:outputLabel value="#{item.articulo.apru}"/>
                    </p:column>
-                <p:column headerText="Eliminar">
+                    <p:column headerText="Eliminar">
                     <p:commandButton value="Eliminar"/>
-                </p:column>
+                    </p:column>
+                           <f:facet name="footer">
+                        total <h:outputLabel value="#{documentoBean.total}"/>
+                    </f:facet>
             </p:dataTable>
+                 
                </h:form>
         </p:dialog>
             </ui:define>
         </ui:composition>
-
     </body>
 </html>
