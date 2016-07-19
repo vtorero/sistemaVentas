@@ -8,7 +8,7 @@ public class ItemDocumento {
     private String inro;
     private int inum;
     private int iart;
-    private String iDs1;
+    private String ids1;
     private String iuvt;
     private double ipru;
     private double icom;
@@ -68,14 +68,15 @@ public class ItemDocumento {
         this.iart = iart;
     }
 
-    public String getiDs1() {
-        return iDs1;
+    public String getIds1() {
+        return ids1;
     }
 
-    public void setiDs1(String iDs1) {
-        this.iDs1 = iDs1;
+    public void setIds1(String ids1) {
+        this.ids1 = ids1;
     }
 
+  
     public String getIuvt() {
         return iuvt;
     }
