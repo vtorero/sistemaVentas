@@ -47,7 +47,7 @@
        <p:dialog header="Documento: #{documentoBean.documento.dcod}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="drop" resizable="true">
             <h:form enctype="multipart/form-data">
                 <p:panelGrid columns="4" columnClasses="label,value">   
-                 <h:outputLabel value="Nombre" />
+                 <h:outputLabel value="Empresa"/>
                        <p:selectOneMenu id="empresalista" value="#{documentoBean.documento.demp}" filter="true" filterMatchMode="contains">
                          <f:selectItems value="#{empresaBean.lstEmpresas}" var="emp" itemLabel="#{emp.erzs}" itemValue="#{emp.ecod}"></f:selectItems>
                         </p:selectOneMenu>
@@ -62,7 +62,6 @@
                          <f:selectItem itemLabel="Guia de remisión" itemValue="GR"></f:selectItem>
                          <f:selectItem itemLabel="Guia de transporte" itemValue="GT"></f:selectItem>
                         </p:selectOneMenu>
-               
                     <h:outputLabel value="Tipo de pago"/>
                     <p:selectOneMenu id="tipopago" value="#{documentoBean.documento.dtpg}" filter="true" filterMatchMode="contains">
                          <f:selectItem itemLabel="Seleccionar" itemValue="#{null}"></f:selectItem>
@@ -70,7 +69,15 @@
                          <f:selectItem itemLabel="Contado diferido" itemValue="2"></f:selectItem>
                          <f:selectItem itemLabel="Credito cuenta corriente" itemValue="3"></f:selectItem>
                     </p:selectOneMenu>
-                    
+                      <h:outputLabel value="Moneda"/>
+                      <p:selectOneMenu id="txtmoneda" value="#{documentoBean.documento.dmon}">
+                         <f:selectItem itemLabel="Seleccionar" itemValue="#{null}"></f:selectItem>
+                         <f:selectItem itemLabel="Soles" itemValue="1"></f:selectItem>
+                         <f:selectItem itemLabel="Dolares" itemValue="2"></f:selectItem>
+                         <f:selectItem itemLabel="Euros" itemValue="3"></f:selectItem>
+                         <f:selectItem itemLabel="Yenes" itemValue="4"></f:selectItem>
+                         <f:selectItem itemLabel="L.E" itemValue="5"></f:selectItem>
+                    </p:selectOneMenu>
                     <h:outputLabel value="Fecha:"/>
                     <p:inputMask id="date" value="#{documentoBean.documento.dfch}" mask="99/99/9999" size="9"/>
                     <h:outputLabel value="Cliente"/>
