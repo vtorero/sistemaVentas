@@ -1,8 +1,11 @@
 package com.ventas.bean;
 
 import com.ventas.dao.DocumentoDao;
+import com.ventas.model.Articulo;
 import com.ventas.model.Documento;
+import com.ventas.model.ItemDocumento;
 import com.ventas.util.MyUtil;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -11,9 +14,38 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class DocumentoBean {
         private Documento documento = new Documento();
+        private Articulo articulo = new Articulo();
+        private int cantidad;
         private List<Documento> lstDocumentos;
+        private List<ItemDocumento> lista = new ArrayList();
         private String accion; 
 
+    public Articulo getArticulo() {
+        return articulo;
+    }
+
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public List<ItemDocumento> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<ItemDocumento> lista) {
+        this.lista = lista;
+    }
+
+             
+      
     public Documento getDocumento() {
         return documento;
     }
@@ -111,5 +143,12 @@ public void operar(){
                 
         }
     }
+        
+    public void agregar(){
+    ItemDocumento det = new ItemDocumento();
+    det.setInum(cantidad);
+    det.setArticulo(articulo);
+    this.lista.add(det);
+   }    
     
 }

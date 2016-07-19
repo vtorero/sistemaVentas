@@ -19,7 +19,18 @@ public class ItemDocumento {
     private double iigv;
     private double itnt;
     private String iest;
+    private Articulo articulo;
 
+    public Articulo getArticulo() {
+        return articulo;
+    }
+
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
+    }
+
+    
+    
     public int getIcod() {
         return icod;
     }

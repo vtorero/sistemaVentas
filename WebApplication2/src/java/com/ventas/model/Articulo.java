@@ -22,6 +22,32 @@ public class Articulo {
   private double asto;
   private double asts;
   private InputStream afot;
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.cart;
+        return hash;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Articulo other = (Articulo) obj;
+        if (this.cart != other.cart) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Articulo{" + "cart=" + cart + '}';
+    }
     
     public int getCart() {
         return cart;

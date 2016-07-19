@@ -45,7 +45,7 @@
             
         </h:form>
          
-       <p:dialog header="Documento: #{documentoBean.documento.dcod}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="drop" resizable="true">
+       <p:dialog header="Documento: #{documentoBean.documento.dcod}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="drop" style="width: 700px;" resizable="true">
             <h:form enctype="multipart/form-data">
                 <p:panelGrid columns="4" columnClasses="label,value">   
                  <h:outputLabel value="Empresa"/>
@@ -86,29 +86,29 @@
                         <f:selectItems value="#{clienteBean.lstClientes}" var="cli" itemLabel="#{cli.crzs}" itemValue="#{cli.ccod}"></f:selectItems>
                         </p:selectOneMenu>
                     <h:outputLabel value="Articulo"/>
-                      <p:selectOneMenu id="articulolista" value="#{documentoBean.documento.dcli}" filter="true" filterMatchMode="contains">
-                          <f:selectItems value="#{articuloBean.lstArticulos}" var="art" itemLabel="#{art.ads1}" itemValue="#{art.cart}"></f:selectItems>
+                    <p:selectOneMenu id="articulolista" value="#{documentoBean.articulo}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">
+                          <f:selectItems value="#{articuloBean.lstArticulos}" var="art" itemLabel="#{art.ads1}" itemValue="#{art}"></f:selectItems>
                         </p:selectOneMenu>
                     <h:outputLabel value="Cantidad"/>
-                    <h:inputText id="cantidad" size="2"/>
+                    <h:inputText id="cantidad" value="#{documentoBean.cantidad}" size="2"/>
                     <h:outputLabel value="Operar"/>
-                    <p:commandButton value="Agregar" actionListener="#{documentoBean.agregar()}" oncomplete="PF('wdlgDatos').hide()" update="dataArticulos" ajax="false"/>
+                    <p:commandButton value="Agregar" actionListener="#{documentoBean.agregar()}" update=":dato:dataArticulos"/>
                     <h:outputLabel value="Guardar"/>
-                    <p:commandButton value="Guardar" actionListener="#{documentoBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update="dataArticulos" ajax="false"/>
+                    <p:commandButton value="Cancelar" actionListener="#{documentoBean.operar()}" oncomplete="PF('wdlgDatos').hide()" />
             </p:panelGrid>
              </h:form>
-           <h:form>
-               <p:dataTable id="dataArticulos"  var="documento" style="width: 650px">
-                 <p:column headerText="Codigo">
-                     <h:outputText value="22" />
+           <h:form id="dato">
+               <p:dataTable id="dataArticulos"  value="#{documentoBean.lista}" var="item" style="width:700px">
+                 <p:column headerText="Descripción">
+                     <h:outputText value="#{item.articulo.ads1}" />
         </p:column>   
         
-                <p:column headerText="Descripción">
-                    <p:outputLabel value="22" />
+                <p:column headerText="Unidad de Venta">
+                    <p:outputLabel value="#{item.articulo.auvt}" />
            
                 </p:column>
                    <p:column headerText="Precio">
-                       <p:outputLabel value="12.00"/>
+                       <p:outputLabel value="#{item.articulo.apru}"/>
                    </p:column>
                 <p:column headerText="Eliminar">
                     <p:commandButton value="Eliminar"/>

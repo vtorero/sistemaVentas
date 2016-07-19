@@ -1,6 +1,7 @@
 package com.ventas.bean;
 
 import com.ventas.dao.ItemDocumentoDao;
+import com.ventas.model.Articulo;
 import com.ventas.model.ItemDocumento;
 import com.ventas.util.MyUtil;
 import java.util.List;
@@ -11,8 +12,18 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class ItemDocumentoBean {
         private ItemDocumento itemdocumento = new ItemDocumento();
+        private Articulo articulo = new Articulo();
         private List<ItemDocumento> lstItemDocumentos;
         private String accion; 
+
+        
+    public Articulo getArticulo() {
+        return articulo;
+    }
+
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
+    }
 
     public ItemDocumento getItemDocumento() {
         return itemdocumento;
