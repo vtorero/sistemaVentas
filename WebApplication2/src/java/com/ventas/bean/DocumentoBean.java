@@ -10,17 +10,17 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class DocumentoBean {
-        private Documento vendedor = new Documento();
+        private Documento documento = new Documento();
         private List<Documento> lstDocumentos;
         private String accion; 
 
     public Documento getDocumento() {
-        return vendedor;
+        return documento;
     }
 
   
     public void setDocumento(Documento vendedor) {
-        this.vendedor = vendedor;
+        this.documento = vendedor;
     }
 
     public List<Documento> getLstDocumentos() {
@@ -54,7 +54,7 @@ public void operar(){
         DocumentoDao dao;
         try {
             dao = new DocumentoDao();
-            dao.registrar(vendedor);
+            dao.registrar(documento);
             this.listar();
             
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public void operar(){
         DocumentoDao dao;
         try {
             dao = new DocumentoDao();
-            dao.modificar(vendedor);
+            dao.modificar(documento);
             this.listar();
             
         } catch (Exception e) {
@@ -91,7 +91,7 @@ public void operar(){
             dao = new DocumentoDao();
             temp = dao.leerID(ven);
             if (temp != null){
-            this.vendedor = temp;
+            this.documento = temp;
             this.accion="Modificar";
             }
         } catch (Exception e) {
@@ -111,4 +111,5 @@ public void operar(){
                 
         }
     }
+    
 }
