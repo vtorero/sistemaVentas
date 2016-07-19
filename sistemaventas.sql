@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 15-07-2016 a las 23:31:28
+-- Tiempo de generación: 19-07-2016 a las 21:49:44
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -101,8 +101,9 @@ INSERT INTO `cliente` (`cCod`, `cRuc`, `cRzS`, `cDir`, `cLug`, `cMap`, `cFnc`, `
 
 DROP TABLE IF EXISTS `documento`;
 CREATE TABLE IF NOT EXISTS `documento` (
-  `cDoc` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `dCod` tinyint(4) NOT NULL AUTO_INCREMENT,
   `dEmp` tinyint(4) DEFAULT NULL,
+  `dTip` char(2) NOT NULL,
   `dNro` varchar(9) DEFAULT NULL,
   `dFch` date DEFAULT NULL,
   `dCli` tinyint(4) DEFAULT NULL,
@@ -119,8 +120,15 @@ CREATE TABLE IF NOT EXISTS `documento` (
   `dCom` double(5,2) DEFAULT NULL,
   `dCit` double(12,2) DEFAULT NULL,
   `dEst` char(1) DEFAULT NULL,
-  PRIMARY KEY (`cDoc`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`dCod`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `documento`
+--
+
+INSERT INTO `documento` (`dCod`, `dEmp`, `dTip`, `dNro`, `dFch`, `dCli`, `dMon`, `dTic`, `dBrt`, `dCds`, `dDsc`, `dIgv`, `dTig`, `dTnt`, `dTpg`, `dDif`, `dCom`, `dCit`, `dEst`) VALUES
+(1, 12, 'BV', '232122111', '2016-07-05', 2, NULL, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, '3', 0, 0.00, 0.00, NULL);
 
 -- --------------------------------------------------------
 
@@ -145,10 +153,17 @@ CREATE TABLE IF NOT EXISTS `documento-item` (
   `iDsc` double(12,2) DEFAULT NULL,
   `iTai` double(12,2) DEFAULT NULL,
   `iIgv` double(12,2) DEFAULT NULL,
-  `iTNt` double(12,2) DEFAULT NULL,
+  `iTnt` double(12,2) DEFAULT NULL,
   `iEst` char(1) DEFAULT NULL,
   PRIMARY KEY (`iCod`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `documento-item`
+--
+
+INSERT INTO `documento-item` (`iCod`, `iEmp`, `iTip`, `iNro`, `iNum`, `iArt`, `iDs1`, `iUvt`, `iPru`, `iCom`, `iCnt`, `iBrt`, `iDsc`, `iTai`, `iIgv`, `iTnt`, `iEst`) VALUES
+(1, 2, 'FA', '1', 2, 1, 'asaasas', 'caja', 110.00, 0.30, 3, 1.00, 0.00, NULL, 11.00, 122.00, '1');
 
 -- --------------------------------------------------------
 
