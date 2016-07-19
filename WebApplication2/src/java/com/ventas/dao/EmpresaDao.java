@@ -80,7 +80,7 @@ public class EmpresaDao extends Dao {
        ResultSet rs;
        try {
            this.Conectar();
-           PreparedStatement st = this.getCn().prepareCall("SELECT eCod,eRzs,eRuc,eDir,eLug,eMap,eTl1,eTl2,eFax,DATE_FORMAT(eFio,'%d/%m/%Y') eFio,eRep,eIgv,eUfa,eUbv,eUna,eUnc,eUtk,eUgr,eUgt FROM empresa WHERE eCod=?");
+           PreparedStatement st = this.getCn().prepareCall("SELECT eCod,eRzs,eRuc,eDir,eLug,eMap,eTl1,eTl2,eFax,DATE_FORMAT(eFio,'%d/%m/%Y')eFio,eRep,eIgv,eUfa,eUbv,eUna,eUnc,eUtk,eUgr,eUgt FROM empresa WHERE eCod=?");
            st.setInt(1,emp.getEcod());
            rs =st.executeQuery();
            while (rs.next()) {

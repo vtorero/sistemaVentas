@@ -29,7 +29,7 @@ public class DocumentoDao extends Dao {
            st.setDouble(11,doc.getDigv());
            st.setDouble(12,doc.getDtig());
            st.setDouble(13,doc.getDtnt());
-           st.setDouble(14,doc.getDtpg());
+           st.setString(14,doc.getDtpg());
            st.setDouble(15,doc.getDdif());
            st.setDouble(16,doc.getDcom());
            st.setDouble(17,doc.getDcit());
@@ -48,7 +48,7 @@ public class DocumentoDao extends Dao {
        try {
            this.Conectar();
            PreparedStatement st = this.getCn().prepareCall("SELECT "
-                   + "dCod,dEmp,dTip,dNro,dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst FROM documento");
+                   + "dCod,dEmp,dTip,dNro,DATE_FORMAT(dFch,'%d/%m/%Y') dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst FROM documento");
            rs = st.executeQuery();
            lista = new ArrayList<>();
            while(rs.next()){
@@ -67,7 +67,7 @@ public class DocumentoDao extends Dao {
            doc.setDigv(rs.getDouble("dIgv"));
            doc.setDtig(rs.getDouble("dTig"));
            doc.setDtnt(rs.getDouble("dTnt"));
-           doc.setDtpg(rs.getDouble("dTpg"));
+           doc.setDtpg(rs.getString("dTpg"));
            doc.setDdif(rs.getInt("dDif"));
            doc.setDcom(rs.getDouble("dCom"));
            doc.setDcit(rs.getDouble("dCit"));
@@ -90,7 +90,7 @@ public class DocumentoDao extends Dao {
        try {
            this.Conectar();
            PreparedStatement st = this.getCn().prepareCall("SELECT"
-                   + " dCod,dEmp,dTip,dNro,dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst FROM documento WHERE dCod=?");
+                   + " dCod,dEmp,dTip,dNro,DATE_FORMAT(dFch,'%d/%m/%Y') dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst FROM documento WHERE dCod=?");
            st.setInt(1,doc.getDcod());
            rs =st.executeQuery();
            while (rs.next()) {
@@ -109,7 +109,7 @@ public class DocumentoDao extends Dao {
            docs.setDigv(rs.getDouble("dIgv"));
            docs.setDtig(rs.getDouble("dTig"));
            docs.setDtnt(rs.getDouble("dTnt"));
-           docs.setDtpg(rs.getDouble("dTpg"));
+           docs.setDtpg(rs.getString("dTpg"));
            docs.setDdif(rs.getInt("dDif"));
            docs.setDcom(rs.getDouble("dCom"));
            docs.setDcit(rs.getDouble("dCit"));
@@ -145,7 +145,7 @@ public void modificar(Documento doc) throws Exception{
            st.setDouble(11,doc.getDigv());
            st.setDouble(12,doc.getDtig());
            st.setDouble(13,doc.getDtnt());
-           st.setDouble(14,doc.getDtpg());
+           st.setString(14,doc.getDtpg());
            st.setDouble(15,doc.getDdif());
            st.setDouble(16,doc.getDcom());
            st.setDouble(17,doc.getDcit());
