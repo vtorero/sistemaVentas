@@ -20,7 +20,7 @@
                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:dataTable id="data" value="#{documentoBean.lstDocumentos}" var="documento" style="text-align: center">
                  <p:column headerText="Empresa">
-                     <h:outputText value="#{documento.demp}" />
+                     <h:outputText value="#{empresaBean.Dataget(documento.demp)}" />
         </p:column>   
         
                 <p:column headerText="Tipo">
@@ -45,7 +45,7 @@
             
         </h:form>
          
-       <p:dialog header="Documento: #{documentoBean.documento.dcod}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="drop" style="width: 700px;" resizable="true">
+       <p:dialog header="Documento: #{documentoBean.documento.dcod}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="explode" style="width: 700px;" resizable="true">
             <h:form enctype="multipart/form-data">
                 <p:panelGrid columns="4" columnClasses="label,value">   
                  <h:outputLabel value="Empresa"/>
@@ -94,7 +94,7 @@
                     <h:outputLabel value="Operar"/>
                     <p:commandButton value="Agregar" actionListener="#{documentoBean.agregar()}" update=":dato:dataArticulos"/>
                     <h:outputLabel value="Guardar"/>
-                    <p:commandButton value="Cancelar" actionListener="#{documentoBean.operar()}" oncomplete="PF('wdlgDatos').hide()" />
+                    <p:commandButton value="#{documentoBean.accion}" actionListener="#{documentoBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" />
             </p:panelGrid>
              </h:form>
            <h2>Lista de Articulos:</h2>

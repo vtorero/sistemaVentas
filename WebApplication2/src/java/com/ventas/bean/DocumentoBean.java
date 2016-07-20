@@ -108,7 +108,6 @@ public void operar(){
             dao = new DocumentoDao();
             dao.modificar(documento);
             this.listar();
-            
         } catch (Exception e) {
             MyUtil.mensajes("Modificación", e);
             

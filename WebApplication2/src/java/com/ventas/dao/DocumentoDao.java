@@ -15,7 +15,7 @@ public class DocumentoDao extends Dao {
        this.Conectar();
        
            PreparedStatement st = this.getCn().prepareStatement("INSERT into documento"
-           + " (dTip,dEmp,dNro,dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst) values(?,?,STR_TO_DATE(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+           + " (dEmp,dTip,dNro,dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst) values(?,?,?,STR_TO_DATE(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
            st.setInt(1,doc.getDemp());
            st.setString(2,doc.getDtip());
            st.setString(3, doc.getDnro());

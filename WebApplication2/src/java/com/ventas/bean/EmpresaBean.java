@@ -99,7 +99,13 @@ public void operar(){
       
       }
       
-           public void eliminar(Empresa emp){
+      public String Dataget(int id){
+      EmpresaDao dao;
+       dao = new EmpresaDao();
+      return dao.traerDatos(id);
+      }
+      
+       public void eliminar(Empresa emp){
         EmpresaDao dao;
         try {
             dao = new EmpresaDao();

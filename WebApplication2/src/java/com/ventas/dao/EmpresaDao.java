@@ -74,6 +74,24 @@ public class EmpresaDao extends Dao {
        }
        return lista;
    }
+     
+       public String traerDatos(int id){
+       ResultSet rs;
+       String data ="";
+           try {
+               this.Conectar();
+           PreparedStatement st = this.getCn().prepareCall("SELECT eRzS FROM empresa WHERE eCod=?");
+           st.setInt(1,id);
+           rs =st.executeQuery();
+           while (rs.next()) {
+               data=rs.getString(1);
+           }
+               
+           } catch (Exception e) {
+               System.out.println (e.getMessage());
+           }
+            return data;
+       }
        
       public Empresa leerID(Empresa emp) throws Exception{
        Empresa emps = null;
