@@ -155,7 +155,7 @@ public void operar(){
         
     public void agregar(){
     ItemDocumento det = new ItemDocumento();
-    det.setInum(cantidad);
+    det.setIcnt(cantidad);
     det.setArticulo(articulo);
     this.setTotal(cantidad*articulo.getApru());
     this.lista.add(det);
