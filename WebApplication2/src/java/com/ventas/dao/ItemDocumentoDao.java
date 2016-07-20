@@ -40,13 +40,14 @@ public class ItemDocumentoDao extends Dao {
        }
    } 
     
-       public List<ItemDocumento> listar() throws Exception{
+       public List<ItemDocumento> listar(int id) throws Exception{
    List<ItemDocumento> lista;
    ResultSet rs;
        try {
            this.Conectar();
            PreparedStatement st = this.getCn().prepareCall("SELECT "
-                   + " iCod,iEmp,iTip,iNro,iNum,iArt,iDs1,iUvt,iPru,iCom,iCnt,iBrt,iDsc,iTai,iIgv,iTnt,iEst FROM documento-item");
+                   + " iCod,iEmp,iTip,iNro,iNum,iArt,iDs1,iUvt,iPru,iCom,iCnt,iBrt,iDsc,iTai,iIgv,iTnt,iEst FROM documentoitem where dCod=?");
+           st.setInt(1,id);
            rs = st.executeQuery();
            lista = new ArrayList<>();
            while(rs.next()){

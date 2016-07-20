@@ -1,6 +1,7 @@
 package com.ventas.bean;
 
 import com.ventas.dao.DocumentoDao;
+import com.ventas.dao.ItemDocumentoDao;
 import com.ventas.model.Articulo;
 import com.ventas.model.Documento;
 import com.ventas.model.ItemDocumento;
@@ -95,7 +96,7 @@ public void operar(){
         DocumentoDao dao;
         try {
             dao = new DocumentoDao();
-            dao.registrar(documento);
+            dao.registrar(documento,lista);
             this.listar();
             
         } catch (Exception e) {
@@ -124,15 +125,18 @@ public void operar(){
         }
     }
         
-      public void leerID(Documento ven)  {
+      public void leerID(Documento doc)  {
          DocumentoDao dao;
+         ItemDocumentoDao daoi;
          Documento temp;
         try {
             dao = new DocumentoDao();
-            temp = dao.leerID(ven);
+            daoi= new ItemDocumentoDao();
+            temp = dao.leerID(doc);
             if (temp != null){
             this.documento = temp;
             this.accion="Modificar";
+            this.lista=daoi.listar(doc.getDcod());
             }
         } catch (Exception e) {
             MyUtil.mensajes("Lectura", e);

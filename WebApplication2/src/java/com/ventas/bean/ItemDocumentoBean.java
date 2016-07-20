@@ -66,7 +66,7 @@ public void operar(){
         try {
             dao = new ItemDocumentoDao();
             dao.registrar(itemdocumento);
-            this.listar();
+            //this.listar();
             
         } catch (Exception e) {
             MyUtil.mensajes("Registro", e);
@@ -77,7 +77,7 @@ public void operar(){
         try {
             dao = new ItemDocumentoDao();
             dao.modificar(itemdocumento);
-            this.listar();
+            //this.listar();
             
         } catch (Exception e) {
             MyUtil.mensajes("Modificación", e);
@@ -85,11 +85,11 @@ public void operar(){
         }
     }
     
-        public void listar(){
+        public void listar(int id){
         ItemDocumentoDao dao;
         try {
             dao = new ItemDocumentoDao();
-            lstItemDocumentos= dao.listar();
+            lstItemDocumentos= dao.listar(id);
         } catch (Exception e) {
             MyUtil.mensajes("Listado", e);
         }
@@ -116,7 +116,7 @@ public void operar(){
         try {
             dao = new ItemDocumentoDao();
             dao.eliminar(ven);
-            this.listar();        
+            //this.listar();        
         } catch (Exception e) {
             MyUtil.mensajes("Eliminación", e);
                 

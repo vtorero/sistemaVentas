@@ -80,7 +80,9 @@ public class EmpresaDao extends Dao {
        String data ="";
            try {
                this.Conectar();
-           PreparedStatement st = this.getCn().prepareCall("SELECT eRzS FROM empresa WHERE eCod=?");
+
+               
+               PreparedStatement st = this.getCn().prepareCall("SELECT eRzS FROM empresa WHERE eCod=?");
            st.setInt(1,id);
            rs =st.executeQuery();
            while (rs.next()) {

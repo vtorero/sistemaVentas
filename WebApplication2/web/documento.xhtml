@@ -101,16 +101,16 @@
                 <h:form id="dato">
                     <p:dataTable id="dataArticulos"  value="#{documentoBean.lista}" var="item" style="width:675px;text-align:center">
                     <p:column headerText="Descripción">
-                     <h:outputText value="#{item.articulo.ads1}" />
+                        <h:outputText value="#{item.ids1}" />
                     </p:column>   
                      <p:column headerText="Unidad de Venta">
-                    <p:outputLabel value="#{item.articulo.auvt}" />
+                         <p:outputLabel value="#{item.iuvt}" />
                     </p:column>
                    <p:column headerText="Cantidad">
                        <p:outputLabel value="#{item.icnt}"/>
                    </p:column>
                    <p:column headerText="Precio">
-                    <p:outputLabel value="#{item.articulo.apru}"/>
+                       <p:outputLabel value="#{item.itip}"/>
                    </p:column>
                     <p:column headerText="Eliminar">
                     <p:commandButton value="Eliminar"/>

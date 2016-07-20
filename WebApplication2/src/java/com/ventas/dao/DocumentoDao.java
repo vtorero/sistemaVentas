@@ -2,6 +2,7 @@
 package com.ventas.dao;
 
 import com.ventas.model.Documento;
+import com.ventas.model.ItemDocumento;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class DocumentoDao extends Dao {
     
-    public void registrar(Documento doc) throws Exception{
+    public void registrar(Documento doc,List<ItemDocumento> lista) throws Exception{
        try {
        this.Conectar();
        
@@ -35,6 +36,29 @@ public class DocumentoDao extends Dao {
            st.setDouble(17,doc.getDcit());
            st.setString(18,doc.getDest());
            st.executeUpdate();
+           st.close();
+        
+           int id_last=0; 
+           PreparedStatement st2 = this.getCn().prepareStatement("SELECT LAST_INSERT_ID() FROM `documento` LIMIT 1");
+           ResultSet r;
+            r = st2.executeQuery();
+            while (r.next()) {
+             id_last=r.getInt(1);
+           }
+            
+           for(ItemDocumento item: lista){
+               
+               PreparedStatement st3 = this.getCn().prepareStatement("INSERT INTO documentoitem values(dCod,iEmp,iTip) (?,?,?) ");
+               st3.setInt(1, id_last);
+               st3.setInt(2, item.getArticulo().getCart());
+               st3.setString(3, doc.getDtip());
+           
+               
+               
+           }
+           
+           
+           
        } catch (Exception e) {
        throw e;
        }finally{
