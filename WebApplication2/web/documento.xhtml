@@ -13,6 +13,7 @@
        <f:event type="preRenderView" listener="#{empresaBean.listar()}"/>
        <f:event type="preRenderView" listener="#{documentoBean.listar()}"/>
        <f:event type="preRenderView" listener="#{clienteBean.listar()}"/>
+       <f:event type="preRenderView" listener="#{articuloBean.listar()}"/>
         <h2>Documentos</h2> 
        <p:growl showDetail="true" id="msj"/>
         <h:form id="frm">
@@ -27,11 +28,11 @@
                         <f:converter converterId="documentoConverter"/>
                     </p:outputLabel>
                 </p:column>
-                   <p:column headerText="Dirección">
+                   <p:column headerText="Fecha">
                        <p:outputLabel value="#{documento.dfch}"/>
                 </p:column>
-                <p:column headerText="Teléfono">
-                    <p:outputLabel value="#{documento.dest}"/>
+                <p:column headerText="Monto a cobrar">
+                    <p:outputLabel value="#{documento.dtnt}"/>
                 </p:column>
                   <p:column headerText="Modificar">
                       <p:commandLink value="Modificar" actionListener="#{documentoBean.leerID(documento)}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos"/>
@@ -44,7 +45,7 @@
             
         </h:form>
          
-       <p:dialog header="Documento: #{documentoBean.documento.dcod}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="drop" resizable="true">
+       <p:dialog header="Documento: #{documentoBean.documento.dcod}" widgetVar="wdlgDatos" id="dlgDatos"  showEffect="fade" hideEffect="drop" style="width: 700px;" resizable="true">
             <h:form enctype="multipart/form-data">
                 <p:panelGrid columns="4" columnClasses="label,value">   
                  <h:outputLabel value="Empresa"/>
@@ -84,16 +85,41 @@
                     <p:selectOneMenu id="clientelista" value="#{documentoBean.documento.dcli}" filter="true" filterMatchMode="contains">
                         <f:selectItems value="#{clienteBean.lstClientes}" var="cli" itemLabel="#{cli.crzs}" itemValue="#{cli.ccod}"></f:selectItems>
                         </p:selectOneMenu>
-            <f:facet name="footer">
-                <p:commandButton value="#{documentoBean.accion}" actionListener="#{documentoBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
-            <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>
-            </f:facet>
-                    </p:panelGrid>
-
+                    <h:outputLabel value="Articulo"/>
+                    <p:selectOneMenu id="articulolista" value="#{documentoBean.articulo}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">
+                          <f:selectItems value="#{articuloBean.lstArticulos}" var="art" itemLabel="#{art.ads1}" itemValue="#{art}"></f:selectItems>
+                        </p:selectOneMenu>
+                    <h:outputLabel value="Cantidad"/>
+                    <h:inputText id="cantidad" value="#{documentoBean.cantidad}" size="2"/>
+                    <h:outputLabel value="Operar"/>
+                    <p:commandButton value="Agregar" actionListener="#{documentoBean.agregar()}" update=":dato:dataArticulos"/>
+                    <h:outputLabel value="Guardar"/>
+                    <p:commandButton value="Cancelar" actionListener="#{documentoBean.operar()}" oncomplete="PF('wdlgDatos').hide()" />
+            </p:panelGrid>
              </h:form>
+           <h2>Lista de Articulos:</h2>
+                <h:form id="dato">
+                    <p:dataTable id="dataArticulos"  value="#{documentoBean.lista}" var="item" style="width:675px;">
+                    <p:column headerText="Descripción">
+                     <h:outputText value="#{item.articulo.ads1}" />
+                    </p:column>   
+                     <p:column headerText="Unidad de Venta">
+                    <p:outputLabel value="#{item.articulo.auvt}" />
+                    </p:column>
+                   <p:column headerText="Precio">
+                    <p:outputLabel value="#{item.articulo.apru}"/>
+                   </p:column>
+                    <p:column headerText="Eliminar">
+                    <p:commandButton value="Eliminar"/>
+                    </p:column>
+                           <f:facet name="footer">
+                        total <h:outputLabel value="#{documentoBean.total}"/>
+                    </f:facet>
+            </p:dataTable>
+                 
+               </h:form>
         </p:dialog>
             </ui:define>
         </ui:composition>
-
     </body>
 </html>

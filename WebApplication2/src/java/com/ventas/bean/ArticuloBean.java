@@ -2,8 +2,7 @@ package com.ventas.bean;
 
 import com.ventas.dao.ArticuloDao;
 import com.ventas.model.Articulo;
-import com.ventas.model.Vendedor;
-import java.io.InputStream;
+import com.ventas.util.MyUtil;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -16,20 +15,11 @@ import org.primefaces.model.UploadedFile;
 @ViewScoped
 public class ArticuloBean {
     private Articulo articulo = new Articulo();
-    private Vendedor vendedor = new Vendedor();
     private List<Articulo> lstArticulos;
     private UploadedFile file;
-        private String accion; 
+    private String accion; 
 
-    public Vendedor getVendedor() {
-        return vendedor;
-    }
-
-    public void setVendedor(Vendedor vendedor) {
-        this.vendedor = vendedor;
-    }
-
-        
+ 
     public Articulo getArticulo() {
         return articulo;
     }
@@ -73,6 +63,7 @@ public void operar(){
             this.listar();
             
         } catch (Exception e) {
+             MyUtil.mensajes("Registro", e);
         }
     }
         public void modificar(){
@@ -83,6 +74,7 @@ public void operar(){
             this.listar();
             
         } catch (Exception e) {
+             MyUtil.mensajes("Modificar", e);
         }
     }
     
@@ -106,6 +98,7 @@ public void operar(){
             this.accion="Modificar";
             }
         } catch (Exception e) {
+             MyUtil.mensajes("lectura", e);
         }
       
       }
@@ -117,6 +110,7 @@ public void operar(){
             dao.eliminar(ven);
             this.listar();        
         } catch (Exception e) {
+             MyUtil.mensajes("Eliminación", e);
         }
     }
 

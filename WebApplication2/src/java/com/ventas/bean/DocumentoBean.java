@@ -1,8 +1,11 @@
 package com.ventas.bean;
 
 import com.ventas.dao.DocumentoDao;
+import com.ventas.model.Articulo;
 import com.ventas.model.Documento;
+import com.ventas.model.ItemDocumento;
 import com.ventas.util.MyUtil;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -10,17 +13,55 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class DocumentoBean {
-        private Documento vendedor = new Documento();
+        private Documento documento = new Documento();
+        private Articulo articulo = new Articulo();
+        private int cantidad;
+        private double total;
         private List<Documento> lstDocumentos;
+        private List<ItemDocumento> lista = new ArrayList();
         private String accion; 
 
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public Articulo getArticulo() {
+        return articulo;
+    }
+
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public List<ItemDocumento> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<ItemDocumento> lista) {
+        this.lista = lista;
+    }
+
+             
+      
     public Documento getDocumento() {
-        return vendedor;
+        return documento;
     }
 
   
     public void setDocumento(Documento vendedor) {
-        this.vendedor = vendedor;
+        this.documento = vendedor;
     }
 
     public List<Documento> getLstDocumentos() {
@@ -54,7 +95,7 @@ public void operar(){
         DocumentoDao dao;
         try {
             dao = new DocumentoDao();
-            dao.registrar(vendedor);
+            dao.registrar(documento);
             this.listar();
             
         } catch (Exception e) {
@@ -65,7 +106,7 @@ public void operar(){
         DocumentoDao dao;
         try {
             dao = new DocumentoDao();
-            dao.modificar(vendedor);
+            dao.modificar(documento);
             this.listar();
             
         } catch (Exception e) {
@@ -91,7 +132,7 @@ public void operar(){
             dao = new DocumentoDao();
             temp = dao.leerID(ven);
             if (temp != null){
-            this.vendedor = temp;
+            this.documento = temp;
             this.accion="Modificar";
             }
         } catch (Exception e) {
@@ -111,4 +152,13 @@ public void operar(){
                 
         }
     }
+        
+    public void agregar(){
+    ItemDocumento det = new ItemDocumento();
+    det.setInum(cantidad);
+    det.setArticulo(articulo);
+    this.setTotal(cantidad*articulo.getApru());
+    this.lista.add(det);
+   }    
+    
 }

@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/venta/converter/documentoConverter.java</file>
             <file>file:/D:/sistemaVentas/WebApplication2/web/persona.xhtml</file>
             <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/venta/converter/SexoConverter.java</file>
@@ -17,6 +18,17 @@
             <file>file:/D:/sistemaVentas/WebApplication2/web/cliente.xhtml</file>
             <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/bean/DocumentoBean.java</file>
             <file>file:/D:/sistemaVentas/WebApplication2/src/java/com/ventas/model/Venta.java</file>
+=======
+            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/bean/ItemDocumentoBean.java</file>
+            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/dao/ItemDocumentoDao.java</file>
+            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/model/Articulo.java</file>
+            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/web/documento.xhtml</file>
+            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/dao/DocumentoDao.java</file>
+            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/bean/appBean.java</file>
+            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/bean/DocumentoBean.java</file>
+            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/nbproject/build-impl.xml</file>
+            <file>file:/D:/nuevacarpeta/sistemaVentas/WebApplication2/src/java/com/ventas/model/ItemDocumento.java</file>
+>>>>>>> ac09ff258440e37446662885e5c6183b16189ff3
         </group>
     </open-files>
 </project-private>
