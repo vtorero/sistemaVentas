@@ -90,7 +90,7 @@
                           <f:selectItems value="#{articuloBean.lstArticulos}" var="art" itemLabel="#{art.ads1}" itemValue="#{art}"></f:selectItems>
                         </p:selectOneMenu>
                     <h:outputLabel value="Cantidad"/>
-                    <h:inputText id="cantidad" value="#{documentoBean.cantidad}" size="2"/>
+                    <p:inputText id="cantidad" value="#{documentoBean.cantidad}" size="2"/>
                     <h:outputLabel value="Operar"/>
                     <p:commandButton value="Agregar" actionListener="#{documentoBean.agregar()}" update=":dato:dataArticulos"/>
                     <h:outputLabel value="Guardar"/>
@@ -99,13 +99,16 @@
              </h:form>
            <h2>Lista de Articulos:</h2>
                 <h:form id="dato">
-                    <p:dataTable id="dataArticulos"  value="#{documentoBean.lista}" var="item" style="width:675px;">
+                    <p:dataTable id="dataArticulos"  value="#{documentoBean.lista}" var="item" style="width:675px;text-align:center">
                     <p:column headerText="Descripción">
                      <h:outputText value="#{item.articulo.ads1}" />
                     </p:column>   
                      <p:column headerText="Unidad de Venta">
                     <p:outputLabel value="#{item.articulo.auvt}" />
                     </p:column>
+                   <p:column headerText="Cantidad">
+                       <p:outputLabel value="#{item.icnt}"/>
+                   </p:column>
                    <p:column headerText="Precio">
                     <p:outputLabel value="#{item.articulo.apru}"/>
                    </p:column>
