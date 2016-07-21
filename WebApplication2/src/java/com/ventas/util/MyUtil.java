@@ -19,6 +19,6 @@ public class MyUtil {
 
      
 public static void mensajes(String tipo,Exception e){
-FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error de "+ tipo, e.getMessage()));
+FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de "+ tipo, e.getMessage()));
 }
 }

@@ -48,16 +48,16 @@ public class DocumentoDao extends Dao {
             
            for(ItemDocumento item: lista){
                
-               PreparedStatement st3 = this.getCn().prepareStatement("INSERT INTO documentoitem values(dCod,iEmp,iTip) (?,?,?) ");
-               st3.setInt(1, id_last);
-               st3.setInt(2, item.getArticulo().getCart());
-               st3.setString(3, doc.getDtip());
-           
-               
-               
+           try (PreparedStatement st3 = this.getCn().prepareStatement("INSERT INTO documentoitem (dCod,iEmp,iTip,iDs1) values(?,?,?,?) ")) {
+               st3.setInt(1,id_last);
+               st3.setInt(2, item.getIemp());
+               st3.setString(3, item.getItip());
+               st3.setString(4, item.getIds1());
+               st3.executeUpdate();
+               st3.close();
            }
-           
-           
+         
+           }
            
        } catch (Exception e) {
        throw e;

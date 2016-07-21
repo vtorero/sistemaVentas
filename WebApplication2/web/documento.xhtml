@@ -50,7 +50,8 @@
                 <p:panelGrid columns="4" columnClasses="label,value">   
                  <h:outputLabel value="Empresa"/>
                        <p:selectOneMenu id="empresalista" value="#{documentoBean.documento.demp}" filter="true" filterMatchMode="contains">
-                         <f:selectItems value="#{empresaBean.lstEmpresas}" var="emp" itemLabel="#{emp.erzs}" itemValue="#{emp.ecod}"></f:selectItems>
+                         <f:selectItem itemLabel="Seleccionar" itemValue="#{null}"></f:selectItem>
+                           <f:selectItems value="#{empresaBean.lstEmpresas}" var="emp" itemLabel="#{emp.erzs}" itemValue="#{emp.ecod}"></f:selectItems>
                         </p:selectOneMenu>
                    <h:outputLabel value="Tipo Documento"/>
                    <p:selectOneMenu id="tipodocu" value="#{documentoBean.documento.dtip}" filter="true" filterMatchMode="contains">
@@ -82,8 +83,8 @@
                     <h:outputLabel value="Fecha:"/>
                     <p:inputMask id="date" value="#{documentoBean.documento.dfch}" mask="99/99/9999" size="9"/>
                     <h:outputLabel value="Cliente"/>
-                    <p:selectOneMenu id="clientelista" value="#{documentoBean.documento.dcli}" filter="true" filterMatchMode="contains">
-                        <f:selectItems value="#{clienteBean.lstClientes}" var="cli" itemLabel="#{cli.crzs}" itemValue="#{cli.ccod}"></f:selectItems>
+                    <p:selectOneMenu id="clientelista" value="#{documentoBean.cliente}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">
+                        <f:selectItems value="#{clienteBean.lstClientes}" var="cli" itemLabel="#{cli.crzs}" itemValue="#{cli}"></f:selectItems>
                         </p:selectOneMenu>
                     <h:outputLabel value="Articulo"/>
                     <p:selectOneMenu id="articulolista" value="#{documentoBean.articulo}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">
@@ -95,8 +96,8 @@
                     <p:commandButton value="Agregar" actionListener="#{documentoBean.agregar()}" update=":dato:dataArticulos"/>
                     <h:outputLabel value="Guardar"/>
                     <p:commandButton value="#{documentoBean.accion}" actionListener="#{documentoBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" />
-            </p:panelGrid>
-             </h:form>
+                    </p:panelGrid>
+                 </h:form>
            <h2>Lista de Articulos:</h2>
                 <h:form id="dato">
                     <p:dataTable id="dataArticulos"  value="#{documentoBean.lista}" var="item" style="width:675px;text-align:center">
@@ -110,7 +111,13 @@
                        <p:outputLabel value="#{item.icnt}"/>
                    </p:column>
                    <p:column headerText="Precio">
-                       <p:outputLabel value="#{item.itip}"/>
+                       <p:outputLabel value="#{item.ipru}"/>
+                   </p:column>
+                   <p:column headerText="% Descuento">
+                       <p:outputLabel value="#{item.idsc}"/>
+                   </p:column>
+                    <p:column headerText="Total Bruto">
+                    <p:outputLabel value="#{item.ibrt}"/>
                    </p:column>
                     <p:column headerText="Eliminar">
                     <p:commandButton value="Eliminar"/>

@@ -6,13 +6,9 @@
 package com.ventas.model;
 
 import java.io.InputStream;
-import java.util.Date;
 
 
-/**
- *
- * @author vjimenez
- */
+
 public class Cliente {
    private int ccod;
   private String cruc;
@@ -31,9 +27,36 @@ public class Cliente {
   private String ccat;
   private double cpds;
   private int vcod;
-
 private InputStream cfot;;
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + this.ccod;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if (this.ccod != other.ccod) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "ccod=" + ccod + '}';
+    }
  
+
     public int getCcod() {
         return ccod;
     }

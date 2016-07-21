@@ -85,10 +85,11 @@
                  label="Seleccionar"
                  sizeLimit="512000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                  update="fotoVendedor"><br/>
-                            <h:outputLink value="DisplayImage?id=#{clienteBean.cliente.ccod}&amp;campo=cFot&amp;tabla=cliente&amp;codigo=cCod" target="_blank" >
-                        <h:graphicImage id="fotoVendedor" value="DisplayImage?id=#{clienteBean.cliente.ccod}}&amp;campo=cFot&amp;tabla=cliente&amp;codigo=cCod" width="100" height="80"></h:graphicImage>
-                    </h:outputLink>
-                        </p:fileUpload>                
+                            <p:lightBox styleClass="imagebox"><h:outputLink value="DisplayImage?id=#{clienteBean.cliente.ccod}&amp;campo=cFot&amp;tabla=cliente&amp;codigo=cCod" title="#{clienteBean.cliente.crzs}">
+                    <h:graphicImage id="fotoVendedor" value="DisplayImage?id=#{clienteBean.cliente.ccod}}&amp;campo=cFot&amp;tabla=cliente&amp;codigo=cCod" width="100" height="80"></h:graphicImage>
+                                </h:outputLink>
+                            </p:lightBox>
+                    </p:fileUpload>                
             </h:panelGroup>
             <f:facet name="footer">
                 <p:commandButton value="#{clienteBean.accion}" actionListener="#{clienteBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>

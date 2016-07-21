@@ -94,10 +94,11 @@
                  label="Seleccionar"
                  sizeLimit="512000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                  update="fotoVendedor">
-                            <p:lightBox styleClass="imagebox" id="fotoVendedor"><h:outputLink value="DisplayImage?id=#{vendedorBean.vendedor.vcod}&amp;campo=vFot&amp;tabla=vendedor&amp;codigo=vCod" title="#{vendedorBean.vendedor.vrzs}">  
-        <h:graphicImage value="DisplayImage?id=#{vendedorBean.vendedor.vcod}&amp;campo=vFot&amp;tabla=vendedor&amp;codigo=vCod" id="foto" style="height: 77px;width:100px"/>  
-    </h:outputLink>
-  </p:lightBox>
+                  <p:lightBox styleClass="imagebox">
+                        <h:outputLink value="DisplayImage?id=#{vendedorBean.vendedor.vcod}&amp;campo=vFot&amp;tabla=vendedor&amp;codigo=vCod" title="#{vendedorBean.vendedor.vrzs}">  
+                         <h:graphicImage value="DisplayImage?id=#{vendedorBean.vendedor.vcod}&amp;campo=vFot&amp;tabla=vendedor&amp;codigo=vCod" id="fotoVendedor" style="height: 77px;width:100px"/>  
+                </h:outputLink>
+                    </p:lightBox>
                       </p:fileUpload> 
  </h:panelGroup>
             <f:facet name="footer">

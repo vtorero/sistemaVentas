@@ -3,6 +3,7 @@ package com.ventas.bean;
 import com.ventas.dao.DocumentoDao;
 import com.ventas.dao.ItemDocumentoDao;
 import com.ventas.model.Articulo;
+import com.ventas.model.Cliente;
 import com.ventas.model.Documento;
 import com.ventas.model.ItemDocumento;
 import com.ventas.util.MyUtil;
@@ -15,6 +16,7 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class DocumentoBean {
         private Documento documento = new Documento();
+        private Cliente cliente = new Cliente();
         private Articulo articulo = new Articulo();
         private int cantidad;
         private double total;
@@ -22,6 +24,15 @@ public class DocumentoBean {
         private List<ItemDocumento> lista = new ArrayList();
         private String accion; 
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+        
     public double getTotal() {
         return total;
     }
@@ -129,6 +140,7 @@ public void operar(){
          DocumentoDao dao;
          ItemDocumentoDao daoi;
          Documento temp;
+         Articulo art;
         try {
             dao = new DocumentoDao();
             daoi= new ItemDocumentoDao();
@@ -136,7 +148,7 @@ public void operar(){
             if (temp != null){
             this.documento = temp;
             this.accion="Modificar";
-            this.lista=daoi.listar(doc.getDcod());
+            this.lista =daoi.listar(doc.getDcod());
             }
         } catch (Exception e) {
             MyUtil.mensajes("Lectura", e);
@@ -159,8 +171,11 @@ public void operar(){
     public void agregar(){
     ItemDocumento det = new ItemDocumento();
     det.setIcnt(cantidad);
-    det.setArticulo(articulo);
-    this.setTotal(cantidad*articulo.getApru());
+    det.setIds1(articulo.getAds1());
+    det.setIuvt(articulo.getAuvt());
+    det.setIpru(articulo.getApru());
+    det.setIbrt(articulo.getApru()*cantidad);
+    det.setIdsc(cliente.getCpds());
     this.lista.add(det);
    }    
     

@@ -64,13 +64,13 @@
                  label="Seleccionar"
                  sizeLimit="512000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                  update="fotoArticulo">
-                <p:lightBox styleClass="imagebox" id="fotoArticulo"><h:outputLink value="DisplayImage?id=#{articuloBean.articulo.cart}&amp;campo=aFot&amp;tabla=articulo&amp;codigo=cArt" title="#{articuloBean.articulo.ads1}">  
-        <h:graphicImage value="DisplayImage?id=#{articuloBean.articulo.cart}&amp;campo=aFot&amp;tabla=articulo&amp;codigo=cArt" id="goto" style="height: 77px;width:100px"/>  
+                <p:lightBox styleClass="imagebox"><h:outputLink value="DisplayImage?id=#{articuloBean.articulo.cart}&amp;campo=aFot&amp;tabla=articulo&amp;codigo=cArt" title="#{articuloBean.articulo.ads1}">  
+        <h:graphicImage id="fotoArticulo" value="DisplayImage?id=#{articuloBean.articulo.cart}&amp;campo=aFot&amp;tabla=articulo&amp;codigo=cArt"  style="height: 77px;width:100px"/>  
     </h:outputLink>
   </p:lightBox>
                 </p:fileUpload>
-            </h:panelGroup>         
-            <f:facet name="footer">
+            </h:panelGroup>
+        <f:facet name="footer">
                 <p:commandButton value="#{articuloBean.accion}" actionListener="#{articuloBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>
             </f:facet>

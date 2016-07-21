@@ -121,10 +121,6 @@ public List<Cliente> listar() throws Exception{
           clis.setVcod(rs.getInt("vCod"));
           clis.setCfot(rs.getBinaryStream("cFot"));
 
-
-
-            
-
               }
            
        } catch (Exception e) {

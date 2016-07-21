@@ -69,7 +69,7 @@ public class ItemDocumentoDao extends Dao {
            doc.setIigv(rs.getDouble("iIgv"));
            doc.setItnt(rs.getDouble("iTnt"));
            doc.setIest(rs.getString("iEst"));
-           lista.add(doc);
+            lista.add(doc);
            }
        } catch (Exception e) {
            throw e;
