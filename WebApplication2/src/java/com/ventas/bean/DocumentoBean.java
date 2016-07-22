@@ -23,6 +23,7 @@ public class DocumentoBean {
         private List<Documento> lstDocumentos;
         private List<ItemDocumento> lista = new ArrayList();
         private String accion; 
+        private int nro=1; 
 
     public Cliente getCliente() {
         return cliente;
@@ -105,7 +106,7 @@ public void operar(){
     }
       public void registrar(){
         DocumentoDao dao;
-        try {
+            try {
             dao = new DocumentoDao();
             dao.registrar(documento,lista);
             this.listar();
@@ -113,6 +114,7 @@ public void operar(){
         } catch (Exception e) {
             MyUtil.mensajes("Registro", e);
         }
+           this.nro=1;
     }
         public void modificar(){
         DocumentoDao dao;
@@ -169,14 +171,19 @@ public void operar(){
     }
         
     public void agregar(){
+       
     ItemDocumento det = new ItemDocumento();
     det.setIcnt(cantidad);
+    det.setItip(this.documento.getDtip());
+    det.setInum(nro);
+    det.setIart(articulo.getCart());
     det.setIds1(articulo.getAds1());
     det.setIuvt(articulo.getAuvt());
     det.setIpru(articulo.getApru());
     det.setIbrt(articulo.getApru()*cantidad);
     det.setIdsc(cliente.getCpds());
     this.lista.add(det);
+    nro++;
    }    
     
 }
