@@ -180,6 +180,7 @@ public void operar(){
     det.setIds1(articulo.getAds1());
     det.setIuvt(articulo.getAuvt());
     det.setIpru(articulo.getApru());
+    det.setIdsc(documento.getDdsc());
     det.setIbrt(articulo.getApru()*cantidad);
     det.setIdsc(cliente.getCpds());
     this.lista.add(det);
