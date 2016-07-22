@@ -10,9 +10,10 @@
 
         <ui:composition template="./WEB-INF/plantilla.xhtml">
    <ui:define name="content">
+         
        <f:event type="preRenderView" listener="#{empresaBean.listar()}"/>
        <h2>Empresas</h2>       
-        <p:growl id="msj"/>
+       <p:growl id="growl" showDetail="true" sticky="true" />  
         <h:form id="frm">
             <p:dataTable id="data" value="#{empresaBean.lstEmpresas}" var="empresa" style="text-align: center">
                    <p:column headerText="Razón social">
@@ -55,13 +56,13 @@
             <h:outputLabel value="Fax"/>
             <p:inputText id="txtFax" value="#{empresaBean.empresa.efax}" size="9"/>
             <h:outputLabel value="Fecha inicio de operaciones"/>
-            <p:inputMask id="date" value="#{empresaBean.empresa.efio}" mask="99/99/9999"/>
+            <p:inputMask id="date" value="#{empresaBean.empresa.efio}" mask="99/99/9999" size="10"/>
             <h:outputLabel value="Representante legal"/>
             <p:inputText id="txtRep" value="#{empresaBean.empresa.erep}" size="40"/>
              <h:outputLabel value="I.G.V"/>
              <p:inputText id="txtigv" value="#{empresaBean.empresa.eigv}" size="4"/>
             <f:facet name="footer">
-            <p:commandButton value="#{empresaBean.accion}" actionListener="#{empresaBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data"/>
+            <p:commandButton value="#{empresaBean.accion}" actionListener="#{empresaBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data,growl"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>
             </f:facet>
            </p:panelGrid>

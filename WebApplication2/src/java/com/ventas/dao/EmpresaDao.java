@@ -14,7 +14,7 @@ public class EmpresaDao extends Dao {
        try {
        this.Conectar();
        
-           PreparedStatement st = this.getCn().prepareStatement("INSERT into empresa (eRzs,eRuc,eDir,eLug,eMap,eTl1,eTl2,eFax,eFio,eRep,eIgv) values(?,?,?,?,?,?,?,?,?,?,?)");
+           PreparedStatement st = this.getCn().prepareStatement("INSERT into empresa (eRzs,eRuc,eDir,eLug,eMap,eTl1,eTl2,eFax,eFio,eRep,eIgv) values(?,?,?,?,?,?,?,?,STR_TO_DATE(?,'%d/%m/%Y'),?,?)");
            st.setString(1,emp.getErzs());
            st.setString(2, emp.getEruc());
            st.setString(3, emp.getEdir());

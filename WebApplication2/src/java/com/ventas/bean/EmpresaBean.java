@@ -7,6 +7,7 @@ package com.ventas.bean;
 
 import com.ventas.dao.EmpresaDao;
 import com.ventas.model.Empresa;
+import com.ventas.util.MyUtil;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -60,8 +61,10 @@ public void operar(){
             dao = new EmpresaDao();
             dao.registrar(empresa);
             this.listar();
+            MyUtil.mensajeinfo("Empresa creada correctamente");
             
         } catch (Exception e) {
+            MyUtil.mensajes("Registro", e);
         }
     }
         public void modificar(){
@@ -70,8 +73,10 @@ public void operar(){
             dao = new EmpresaDao();
             dao.modificar(empresa);
             this.listar();
-            
+            MyUtil.mensajeinfo("Empresa modificada correctamente");
         } catch (Exception e) {
+            MyUtil.mensajes("Modificación", e);
+            
         }
     }
     
