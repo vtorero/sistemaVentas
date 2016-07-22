@@ -80,6 +80,7 @@ public void operar(){
             dao = new ClienteDao();
             dao.registrar(cliente);
             this.listar();
+            MyUtil.mensajeinfo("Cliente registrado correctamente");
             
         } catch (Exception e) {
         }
@@ -90,6 +91,7 @@ public void operar(){
             dao = new ClienteDao();
             dao.modificar(cliente);
             this.listar();
+            MyUtil.mensajeinfo("Cliente modificado correctamente");
             
         } catch (Exception e) {
         }
@@ -101,6 +103,7 @@ public void operar(){
             dao = new ClienteDao();
             lstClientes= dao.listar();
         } catch (Exception e) {
+                MyUtil.mensajes("Listado", e);
         }
     }
         
@@ -115,6 +118,7 @@ public void operar(){
             this.accion="Modificar";
             }
         } catch (Exception e) {
+                MyUtil.mensajes("Lectura", e);
         }
       
       }
@@ -126,6 +130,7 @@ public void operar(){
             dao.eliminar(ven);
             this.listar();        
         } catch (Exception e) {
+                MyUtil.mensajes("Eliminación", e);
         }
     }
 

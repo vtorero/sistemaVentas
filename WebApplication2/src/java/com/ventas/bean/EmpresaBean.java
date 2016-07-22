@@ -86,6 +86,7 @@ public void operar(){
             dao = new EmpresaDao();
             lstEmpresas= dao.listar();
         } catch (Exception e) {
+                MyUtil.mensajes("Listado", e);
         }
     }
         

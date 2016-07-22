@@ -11,7 +11,7 @@
    <ui:define name="content">  
        <f:event type="preRenderView" listener="#{articuloBean.listar()}"/>
         <h2>Articulos</h2> 
-       <p:growl showDetail="false" id="msj"/>
+             <p:growl showDetail="true" id="growl"/>
         <h:form id="frm">
             <p:dataTable id="data" value="#{articuloBean.lstArticulos}" var="articulo" style="text-align: center">
                  <p:column headerText="Nombre Corto">
@@ -71,7 +71,7 @@
                 </p:fileUpload>
             </h:panelGroup>
         <f:facet name="footer">
-                <p:commandButton value="#{articuloBean.accion}" actionListener="#{articuloBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" ajax="false"/>
+                <p:commandButton value="#{articuloBean.accion}" actionListener="#{articuloBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data,growl" ajax="false"/>
             <p:commandButton value="Cancelar" onclick="wdlgDatos.hide()"/>
             </f:facet>
            </p:panelGrid>

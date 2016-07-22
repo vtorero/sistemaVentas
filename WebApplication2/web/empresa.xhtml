@@ -13,7 +13,7 @@
          
        <f:event type="preRenderView" listener="#{empresaBean.listar()}"/>
        <h2>Empresas</h2>       
-       <p:growl id="growl" showDetail="true" sticky="true" />  
+       <p:growl showDetail="true" id="growl"/>
         <h:form id="frm">
             <p:dataTable id="data" value="#{empresaBean.lstEmpresas}" var="empresa" style="text-align: center">
                    <p:column headerText="Razón social">

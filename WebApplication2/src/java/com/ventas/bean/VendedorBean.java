@@ -67,7 +67,7 @@ public void operar(){
             dao = new VendedorDao();
             dao.registrar(vendedor);
             this.listar();
-            
+            MyUtil.mensajeinfo("Vendedor registrado correctamente");
         } catch (Exception e) {
             MyUtil.mensajes("Registro", e);
         }
@@ -78,6 +78,7 @@ public void operar(){
             dao = new VendedorDao();
             dao.modificar(vendedor);
             this.listar();
+            MyUtil.mensajeinfo("Vendedor modificado correctamente");
             
         } catch (Exception e) {
             MyUtil.mensajes("Modificación", e);

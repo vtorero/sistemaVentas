@@ -10,9 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
 
 /**
  *
@@ -159,8 +156,7 @@ public void modificar(Cliente cli) throws Exception{
            st.setInt(18, cli.getCcod());
            st.executeUpdate();
        } catch (Exception e) {
-       FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Error",  "Mensaje: " + e.getMessage()) );
+   
         throw e;
        }finally{
            this.Cerrar();

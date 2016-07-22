@@ -61,7 +61,7 @@ public void operar(){
             dao = new ArticuloDao();
             dao.registrar(articulo);
             this.listar();
-            
+             MyUtil.mensajeinfo("Articulo registrado correctamente");
         } catch (Exception e) {
              MyUtil.mensajes("Registro", e);
         }
@@ -72,6 +72,7 @@ public void operar(){
             dao = new ArticuloDao();
             dao.modificar(articulo);
             this.listar();
+            MyUtil.mensajeinfo("Articulo modificado correctamente");
             
         } catch (Exception e) {
              MyUtil.mensajes("Modificar", e);
@@ -84,6 +85,7 @@ public void operar(){
             dao = new ArticuloDao();
             lstArticulos= dao.listar();
         } catch (Exception e) {
+            MyUtil.mensajes("Listado", e);
         }
     }
         
