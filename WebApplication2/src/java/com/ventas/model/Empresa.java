@@ -13,7 +13,7 @@ private String etl2;
 private String efax;
 private String efio;
 private String erep;
-private String eigv;
+private Double eigv;
 private String eufa;
 private String  eubv;
 private String euna ;
@@ -21,6 +21,34 @@ private String eunc;
 private String eutk;
 private String eugr;
 private String eugt;
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.ecod;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Empresa other = (Empresa) obj;
+        if (this.ecod != other.ecod) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Empresa{" + "ecod=" + ecod + '}';
+    }
+
 
     public int getEcod() {
         return ecod;
@@ -110,11 +138,11 @@ private String eugt;
         this.erep = erep;
     }
 
-    public String getEigv() {
+    public Double getEigv() {
         return eigv;
     }
 
-    public void setEigv(String eigv) {
+    public void setEigv(Double eigv) {
         this.eigv = eigv;
     }
 

@@ -16,6 +16,7 @@
        <f:event type="preRenderView" listener="#{articuloBean.listar()}"/>
         <h2>Documentos</h2> 
        <p:growl showDetail="true" id="msj"/>
+      
         <h:form id="frm">
                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:dataTable id="data" value="#{documentoBean.lstDocumentos}" var="documento" style="text-align: center">
@@ -41,7 +42,7 @@
                         <p:commandLink value="Eliminar" actionListener="#{documentoBean.eliminar(documento)}" update="data"/>
                 </p:column>
             </p:dataTable>
-            <p:commandButton value="Agregar"  actionListener="#{documentoBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos" />
+            <p:commandButton value="Agregar"  actionListener="#{documentoBean.setAccion('Registrar')}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos,msj" />
             
         </h:form>
          
@@ -49,10 +50,10 @@
             <h:form enctype="multipart/form-data">
                 <p:panelGrid columns="4" columnClasses="label,value">   
                  <h:outputLabel value="Empresa"/>
-                       <p:selectOneMenu id="empresalista" value="#{documentoBean.documento.demp}" filter="true" filterMatchMode="contains">
-                         <f:selectItem itemLabel="Seleccionar" itemValue="#{null}"></f:selectItem>
-                           <f:selectItems value="#{empresaBean.lstEmpresas}" var="emp" itemLabel="#{emp.erzs}" itemValue="#{emp.ecod}"></f:selectItems>
-                        </p:selectOneMenu>
+                 <p:selectOneMenu id="empresalista" value="#{documentoBean.documento.demp}" filter="true" filterMatchMode="contains">
+                 <f:selectItem itemLabel="Seleccionar" itemValue="#{null}"></f:selectItem>
+                 <f:selectItems value="#{empresaBean.lstEmpresas}" var="emp" itemLabel="#{emp.erzs}" itemValue="#{emp.ecod}"></f:selectItems>
+                 </p:selectOneMenu>
                    <h:outputLabel value="Tipo Documento"/>
                    <p:selectOneMenu id="tipodocu" value="#{documentoBean.documento.dtip}" filter="true" filterMatchMode="contains">
                          <f:selectItem itemLabel="Seleccionar" itemValue="#{null}"></f:selectItem>
@@ -83,16 +84,19 @@
                     <h:outputLabel value="Fecha:"/>
                     <p:inputMask id="date" value="#{documentoBean.documento.dfch}" mask="99/99/9999" size="9"/>
                     <h:outputLabel value="Cliente"/>
-                    <p:selectOneMenu id="clientelista" value="#{documentoBean.cliente}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">
-                        <f:selectItems value="#{clienteBean.lstClientes}" var="cli" itemLabel="#{cli.crzs}" itemValue="#{cli}"></f:selectItems>
+                    <p:selectOneMenu id="clientelista" value="#{documentoBean.documento.dcli}" filter="true" filterMatchMode="contains">
+                        <f:selectItem itemLabel="Seleccionar" itemValue="#{null}"></f:selectItem>
+                        <f:selectItems value="#{clienteBean.lstClientes}" var="cli" itemLabel="#{cli.crzs}" itemValue="#{cli.ccod}"></f:selectItems>
                         </p:selectOneMenu>
                     <h:outputLabel value="Articulo"/>
                     <p:selectOneMenu id="articulolista" value="#{documentoBean.articulo}" filter="true" filterMatchMode="contains" converter="omnifaces.SelectItemsConverter">
-                          <f:selectItems value="#{articuloBean.lstArticulos}" var="art" itemLabel="#{art.ads1}" itemValue="#{art}"></f:selectItems>
+                        <f:selectItem itemLabel="Seleccionar" itemValue="#{null}"></f:selectItem>  
+                        <f:selectItems value="#{articuloBean.lstArticulos}" var="art" itemLabel="#{art.ads1}" itemValue="#{art}"></f:selectItems>
                         </p:selectOneMenu>
                     <h:outputLabel value="Cantidad"/>
                     <p:inputText id="cantidad" value="#{documentoBean.cantidad}" size="2"/>
-                    <h:outputLabel value="Operar"/>
+                    <h:outputText value="#{documentoBean.totalpagar}"/>
+                     <h:outputLabel value="Operar"/>
                     <p:commandButton value="Agregar" actionListener="#{documentoBean.agregar()}" update=":dato:dataArticulos"/>
                     <h:outputLabel value="Guardar"/>
                     <p:commandButton value="#{documentoBean.accion}" actionListener="#{documentoBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" />
@@ -101,30 +105,34 @@
            <h2>Lista de Articulos:</h2>
                 <h:form id="dato">
                     <p:dataTable id="dataArticulos"  value="#{documentoBean.lista}" var="item" style="width:675px;text-align:center">
-                    <p:column headerText="Descripción">
+                        <p:column headerText="Item">
+                            <h:outputText value="#{item.inum}" />
+                    </p:column> 
+                        <p:column headerText="Descripción">
                         <h:outputText value="#{item.ids1}" />
                     </p:column>   
                      <p:column headerText="Unidad de Venta">
                          <p:outputLabel value="#{item.iuvt}" />
                     </p:column>
-                   <p:column headerText="Cantidad">
-                       <p:outputLabel value="#{item.icnt}"/>
-                   </p:column>
                    <p:column headerText="Precio">
                        <p:outputLabel value="#{item.ipru}"/>
+                   </p:column>
+                    <p:column headerText="Cantidad">
+                       <p:outputLabel value="#{item.icnt}"/>
+                   </p:column>
+                   <p:column headerText="Total Bruto">
+                        <p:outputLabel value="#{item.ibrt}"/>
                    </p:column>
                    <p:column headerText="% Descuento">
                        <p:outputLabel value="#{item.idsc}"/>
                    </p:column>
-                    <p:column headerText="Total Bruto">
-                    <p:outputLabel value="#{item.ibrt}"/>
+                  <p:column headerText="% I.G.V">
+                   <p:outputLabel value="#{item.iigv}"/>
                    </p:column>
                     <p:column headerText="Eliminar">
                     <p:commandButton value="Eliminar"/>
                     </p:column>
-                           <f:facet name="footer">
-                        total <h:outputLabel value="#{documentoBean.total}"/>
-                    </f:facet>
+                        
             </p:dataTable>
                  
                </h:form>

@@ -1,10 +1,13 @@
 package com.ventas.bean;
 
+import com.ventas.dao.ClienteDao;
 import com.ventas.dao.DocumentoDao;
+import com.ventas.dao.EmpresaDao;
 import com.ventas.dao.ItemDocumentoDao;
 import com.ventas.model.Articulo;
 import com.ventas.model.Cliente;
 import com.ventas.model.Documento;
+import com.ventas.model.Empresa;
 import com.ventas.model.ItemDocumento;
 import com.ventas.util.MyUtil;
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class DocumentoBean {
+        private Empresa empresa = new Empresa();
         private Documento documento = new Documento();
         private Cliente cliente = new Cliente();
         private Articulo articulo = new Articulo();
@@ -24,16 +28,29 @@ public class DocumentoBean {
         private List<ItemDocumento> lista = new ArrayList();
         private String accion; 
         private int nro=1; 
+        private Double totalpagar=0.00;
 
-    public Cliente getCliente() {
+    public Double getTotalpagar() {
+        return totalpagar;
+    }
+    public void setTotalpagar(Double totalpagar) {
+        this.totalpagar = totalpagar;
+    }
+   
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+       public Cliente getCliente() {
         return cliente;
     }
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-        
+    }        
     public double getTotal() {
         return total;
     }
@@ -106,9 +123,17 @@ public void operar(){
     }
       public void registrar(){
         DocumentoDao dao;
+        EmpresaDao edao;
+        ClienteDao cdao;
+        Empresa temp;
+        Cliente temp2;
             try {
+           edao = new EmpresaDao();
+           cdao= new ClienteDao();
+           temp = edao.obtener_datos(this.documento.getDemp());
+           temp2 = cdao.obtener_datos(documento.getDcli());
             dao = new DocumentoDao();
-            dao.registrar(documento,lista);
+            dao.registrar(temp,temp2,documento,lista);
             this.listar();
             
         } catch (Exception e) {
@@ -142,7 +167,6 @@ public void operar(){
          DocumentoDao dao;
          ItemDocumentoDao daoi;
          Documento temp;
-         Articulo art;
         try {
             dao = new DocumentoDao();
             daoi= new ItemDocumentoDao();
@@ -170,21 +194,35 @@ public void operar(){
         }
     }
         
-    public void agregar(){
-       
+    public void agregar() throws Exception{
     ItemDocumento det = new ItemDocumento();
-    det.setIcnt(cantidad);
+    Cliente clitempo;
+    ClienteDao  cdao;
+    cdao = new ClienteDao();
+    clitempo = cdao.obtener_datos(documento.getDcli());
+    Empresa emptemp;
+    EmpresaDao edao;
+    edao = new EmpresaDao();
+    emptemp = edao.obtener_datos(documento.getDemp());
+    det.setIemp(this.documento.getDemp());
     det.setItip(this.documento.getDtip());
     det.setInum(nro);
     det.setIart(articulo.getCart());
     det.setIds1(articulo.getAds1());
     det.setIuvt(articulo.getAuvt());
     det.setIpru(articulo.getApru());
-    det.setIdsc(documento.getDdsc());
+    det.setIcom(articulo.getAcom());
+    det.setIcnt(cantidad);
     det.setIbrt(articulo.getApru()*cantidad);
-    det.setIdsc(cliente.getCpds());
+    det.setIdsc(det.getIbrt()*(clitempo.getCpds()/100));
+    det.setItai(det.getIbrt()-det.getIdsc());
+    det.setIigv(det.getItai()*(emptemp.getEigv()/100));
+    det.setItnt(det.getItai()+det.getIigv());
+    totalpagar+=det.getItnt();
+    documento.setDtnt(totalpagar);
     this.lista.add(det);
     nro++;
+    
    }    
     
 }

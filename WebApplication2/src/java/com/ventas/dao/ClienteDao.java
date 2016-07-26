@@ -128,7 +128,48 @@ public List<Cliente> listar() throws Exception{
 }
        return clis;
 }
-          
+
+      public Cliente obtener_datos(int codigo) throws Exception{
+       Cliente clis = null;
+       ResultSet rs;
+       try {
+           this.Conectar();
+           PreparedStatement st = this.getCn().prepareCall("SELECT "
+            + "cCod,cRuc,cRzS,cDir,cLug,cMap,DATE_FORMAT(cFnc,'%d/%m/%Y') cFnc,cTl1,cTl2,cCl1,cCl2,cCe1,cCe2,DATE_FORMAT(cFio,'%d/%m/%Y') cFio,cCat,cPds,vCod,cFot FROM cliente WHERE cCod=?");
+           st.setInt(1,codigo);
+           rs =st.executeQuery();
+           while (rs.next()) {
+           clis = new Cliente();
+          clis.setCcod(rs.getInt("cCod"));
+          clis.setCruc(rs.getString("cRuc"));
+          clis.setCrzs(rs.getString("cRzS"));
+          clis.setCdir(rs.getString("cDir"));
+          clis.setClug(rs.getString("cLug"));
+          clis.setCmap(rs.getString("cMap"));
+          clis.setCfnc(rs.getString("cFnc"));
+          clis.setCtl1(rs.getString("cTl1"));
+          clis.setCtl2(rs.getString("cTl2"));
+          clis.setCcl1(rs.getString("cCl1"));
+          clis.setCcl2(rs.getString("cCl2"));
+          clis.setCce1(rs.getString("cCe1"));
+          clis.setCce2(rs.getString("cCe2"));
+          clis.setCfio(rs.getString("cfio"));
+          clis.setCcat(rs.getString("cCat"));
+          clis.setCpds(rs.getDouble("cPds"));
+          clis.setVcod(rs.getInt("vCod"));
+          clis.setCfot(rs.getBinaryStream("cFot"));
+
+              }
+           
+       } catch (Exception e) {
+           throw e;
+       }
+   finally{
+           this.Cerrar();
+}
+       return clis;
+}
+      
 public void modificar(Cliente cli) throws Exception{
        try {
 

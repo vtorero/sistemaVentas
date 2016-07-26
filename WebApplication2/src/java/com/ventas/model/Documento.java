@@ -22,6 +22,33 @@ private double dcom;
 private double dcit;
 private String dest;
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + this.dcod;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Documento other = (Documento) obj;
+        if (this.dcod != other.dcod) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Documento{" + "dcod=" + dcod + '}';
+    }
+
     public int getDcod() {
         return dcod;
     }

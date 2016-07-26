@@ -25,7 +25,7 @@ public class EmpresaDao extends Dao {
            st.setString(8, emp.getEfax());
            st.setString(9, emp.getEfio());
            st.setString(10, emp.getErep());
-           st.setString(11, emp.getEigv());
+           st.setDouble(11, emp.getEigv());
            st.executeUpdate();
        } catch (Exception e) {
        throw e;
@@ -55,7 +55,7 @@ public class EmpresaDao extends Dao {
            emp.setEfax(rs.getString("eFax"));
            emp.setEfio(rs.getString("eFio"));
            emp.setErep(rs.getString("eRep"));
-           emp.setEigv(rs.getString("eIgv"));
+           emp.setEigv(rs.getDouble("eIgv"));
            emp.setEufa(rs.getString("eUfa"));
            emp.setEubv(rs.getString("eUbv"));
            emp.setEuna(rs.getString("eUna"));
@@ -116,7 +116,7 @@ public class EmpresaDao extends Dao {
              emps.setEfax(rs.getString("eFax"));
              emps.setEfio(rs.getString("eFio"));
              emps.setErep(rs.getString("eRep"));
-             emps.setEigv(rs.getString("eIgv"));
+             emps.setEigv(rs.getDouble("eIgv"));
              emps.setEufa(rs.getString("eUfa"));
              emps.setEubv(rs.getString("eUbv"));
              emps.setEuna(rs.getString("eUna"));
@@ -136,7 +136,49 @@ public class EmpresaDao extends Dao {
 }
        return emps;
 }
-          
+  
+      public Empresa obtener_datos(int codigo) throws Exception{
+       Empresa emps = null;
+       ResultSet rs;
+       try {
+           this.Conectar();
+           PreparedStatement st = this.getCn().prepareCall("SELECT eCod,eRzs,eRuc,eDir,eLug,eMap,eTl1,eTl2,eFax,DATE_FORMAT(eFio,'%d/%m/%Y')eFio,eRep,eIgv,eUfa,eUbv,eUna,eUnc,eUtk,eUgr,eUgt FROM empresa WHERE eCod=?");
+           st.setInt(1,codigo);
+           rs =st.executeQuery();
+           while (rs.next()) {
+               emps = new Empresa();
+              emps.setEcod(rs.getInt("eCod"));
+              emps.setErzs(rs.getString("eRzS"));
+              emps.setEruc(rs.getString("eRuc"));
+              emps.setEdir(rs.getString("eDir"));
+              emps.setElug(rs.getString("eLug"));
+              emps.setEmap(rs.getString("eMap"));
+             emps.setEtl1(rs.getString("eTl1"));
+             emps.setEtl2(rs.getString("eTl2"));
+             emps.setEfax(rs.getString("eFax"));
+             emps.setEfio(rs.getString("eFio"));
+             emps.setErep(rs.getString("eRep"));
+             emps.setEigv(rs.getDouble("eIgv"));
+             emps.setEufa(rs.getString("eUfa"));
+             emps.setEubv(rs.getString("eUbv"));
+             emps.setEuna(rs.getString("eUna"));
+            emps.setEunc(rs.getString("eUnc"));
+            emps.setEutk(rs.getString("eUtk"));
+            emps.setEugr(rs.getString("eUgr"));
+            emps.setEugt(rs.getString("eUgt"));
+            
+
+              }
+           
+       } catch (Exception e) {
+           throw e;
+       }
+   finally{
+           this.Cerrar();
+}
+       return emps;
+}      
+      
 public void modificar(Empresa emp) throws Exception{
        try {
        this.Conectar();
@@ -151,7 +193,7 @@ public void modificar(Empresa emp) throws Exception{
            st.setString(8, emp.getEfax());
            st.setString(9, emp.getEfio());
            st.setString(10, emp.getErep());
-           st.setString(11, emp.getEigv());
+           st.setDouble(11, emp.getEigv());
            st.setString(12,emp.getEufa());
            st.setString(13,emp.getEubv());
            st.setString(14,emp.getEuna());

@@ -1,7 +1,9 @@
 
 package com.ventas.dao;
 
+import com.ventas.model.Cliente;
 import com.ventas.model.Documento;
+import com.ventas.model.Empresa;
 import com.ventas.model.ItemDocumento;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +13,7 @@ import java.util.List;
 
 public class DocumentoDao extends Dao {
     
-    public void registrar(Documento doc,List<ItemDocumento> lista) throws Exception{
+    public void registrar(Empresa emp,Cliente cli,Documento doc,List<ItemDocumento> lista) throws Exception{
        try {
        this.Conectar();
        
@@ -21,13 +23,13 @@ public class DocumentoDao extends Dao {
            st.setString(2,doc.getDtip());
            st.setString(3, doc.getDnro());
            st.setString(4, doc.getDfch());
-           st.setInt(5, doc.getDcli());
+           st.setInt(5, cli.getCcod());
            st.setString(6, doc.getDmon());
            st.setDouble(7, doc.getDtic());
-            st.setDouble(8, doc.getDbrt());
-            st.setDouble(9,doc.getDcds());
-            st.setDouble(10,doc.getDdsc());     
-           st.setDouble(11,doc.getDigv());
+           st.setDouble(8, doc.getDbrt());
+           st.setDouble(9,cli.getCpds());
+           st.setDouble(10,9000);     
+           st.setDouble(11,emp.getEigv());
            st.setDouble(12,doc.getDtig());
            st.setDouble(13,doc.getDtnt());
            st.setString(14,doc.getDtpg());
@@ -37,7 +39,6 @@ public class DocumentoDao extends Dao {
            st.setString(18,doc.getDest());
            st.executeUpdate();
            st.close();
-        
            int id_last=0; 
            PreparedStatement st2 = this.getCn().prepareStatement("SELECT LAST_INSERT_ID() FROM `documento` LIMIT 1");
            ResultSet r;
@@ -48,11 +49,22 @@ public class DocumentoDao extends Dao {
             
            for(ItemDocumento item: lista){
                
-           try (PreparedStatement st3 = this.getCn().prepareStatement("INSERT INTO documentoitem (dCod,iEmp,iTip,iDs1) values(?,?,?,?) ")) {
+           try (PreparedStatement st3 = this.getCn().prepareStatement("INSERT INTO documentoitem (dCod,iEmp,iTip,iNum,iArt,iDs1,iUvt,iPru,iCom,iCnt,iBrt,iDsc,iTai,iIgv,iTnt) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ")) {
                st3.setInt(1,id_last);
                st3.setInt(2, item.getIemp());
                st3.setString(3, item.getItip());
-               st3.setString(4, item.getIds1());
+               st3.setInt(4, item.getInum());
+               st3.setInt(5, item.getIart());
+               st3.setString(6, item.getIds1());
+               st3.setString(7, item.getIuvt());
+               st3.setDouble(8, item.getIpru());
+               st3.setDouble(9, item.getIcom());
+               st3.setInt(10, item.getIcnt());
+               st3.setDouble(11, item.getIbrt());
+               st3.setDouble(12, item.getIdsc());
+               st3.setDouble(13, item.getItai());
+               st3.setDouble(14, item.getIigv());
+               st3.setDouble(15, item.getItnt());
                st3.executeUpdate();
                st3.close();
            }
@@ -60,7 +72,8 @@ public class DocumentoDao extends Dao {
            }
            
        } catch (Exception e) {
-       throw e;
+        throw e;
+       
        }finally{
            this.Cerrar();
        }
@@ -187,7 +200,7 @@ public void modificar(Documento doc) throws Exception{
     public void eliminar(Documento doc) throws Exception{
        try {
        this.Conectar();
-           PreparedStatement st = this.getCn().prepareStatement("DELETE FROM documento  WHERE eCod = ?");
+           PreparedStatement st = this.getCn().prepareStatement("DELETE FROM documento  WHERE dCod = ?");
            st.setInt(1,doc.getDcod());
            st.executeUpdate();
        } catch (Exception e) {
