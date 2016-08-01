@@ -66,7 +66,7 @@ public class DocumentoDao extends Dao {
                st3.setDouble(13, item.getItai());
                st3.setDouble(14, item.getIigv());
                st3.setDouble(15, item.getItnt());
-               dao.movimiento_stock(item.getArticulo().getCart(),"S", item.getIcnt());
+               dao.movimiento_stock(item.getIart(),"S",item.getIcnt());
                st3.executeUpdate();
                st3.close();
                

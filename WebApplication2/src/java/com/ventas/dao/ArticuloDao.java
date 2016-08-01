@@ -124,24 +124,27 @@ public List<Articulo> listar() throws Exception{
 public void movimiento_stock(int id,String tipo,double cantidad) throws Exception{
     try {
         this.Conectar();
-        
-            int cant_actual=0; 
-           PreparedStatement st1 = this.getCn().prepareStatement("SELECT stock FROM `articulo_movimiento` where cArt=? ORDER by id DESC limit 1");
+              int cant_actual=0;
+              int cant_seguridad=0;
+           PreparedStatement st1 = this.getCn().prepareStatement("SELECT aSts,Stock FROM `articulo` a ,`articulo_movimiento` m  where a.cArt=? ORDER by id DESC limit 1");
            ResultSet r;
            st1.setInt(1,id);
             r = st1.executeQuery();
             while (r.next()) {
-             cant_actual=r.getInt(1);
+             cant_seguridad=r.getInt(1);
+             cant_actual=r.getInt(2);
            }
-        try (PreparedStatement st = this.getCn().prepareStatement("INSERT INTO articulo_movimiento (cArt,tipo,cantidad,stock) VALUES "
-                + "(?,?,?,?)")) {
+            if(cant_actual<=cant_seguridad){
+            FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Stock por agotarse",  "Mensaje: Revise el stock de este Articulo"));
+            }
+       PreparedStatement st = this.getCn().prepareStatement("INSERT INTO articulo_movimiento (cArt,tipo,cantidad,stock) VALUES(?,?,?,?)");
             st.setInt(1,id);
             st.setString(2,tipo);
             st.setDouble(3,cantidad);
             st.setDouble(4,cant_actual-cantidad);
             st.executeUpdate();
-        }
-    } catch (Exception e) {
+        }catch (Exception e){ 
           FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Error",  "Mensaje: " + e.getMessage()) );
         throw e;
