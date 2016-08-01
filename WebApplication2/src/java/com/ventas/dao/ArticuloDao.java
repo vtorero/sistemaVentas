@@ -133,14 +133,14 @@ public void movimiento_stock(int id,String tipo,double cantidad) throws Exceptio
             while (r.next()) {
              cant_actual=r.getInt(1);
            }
-               PreparedStatement st = this.getCn().prepareStatement("UPDATE articulo_movimiento SET "
-                   + "cantidad=?,tipo=?,stock=? WHERE cArt = ?");
-           st.setDouble(1,cantidad);
-           st.setString(2,tipo);
-           st.setDouble(3,cant_actual-cantidad);
-           st.setInt(4,id);
-          st.executeUpdate();
-          st.close();
+        try (PreparedStatement st = this.getCn().prepareStatement("INSERT INTO articulo_movimiento (cArt,tipo,cantidad,stock) VALUES "
+                + "(?,?,?,?)")) {
+            st.setInt(1,id);
+            st.setString(2,tipo);
+            st.setDouble(3,cantidad);
+            st.setDouble(4,cant_actual-cantidad);
+            st.executeUpdate();
+        }
     } catch (Exception e) {
           FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Error",  "Mensaje: " + e.getMessage()) );
