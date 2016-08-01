@@ -218,7 +218,7 @@ public void operar(){
     det.setItai(det.getIbrt()-det.getIdsc());
     det.setIigv(det.getItai()*(emptemp.getEigv()/100));
     det.setItnt(det.getItai()+det.getIigv());
-    totalpagar+=det.getItnt();
+    totalpagar+=Math.round(det.getItnt());
     documento.setDtnt(totalpagar);
     this.lista.add(det);
     nro++;

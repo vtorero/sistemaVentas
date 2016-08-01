@@ -33,7 +33,10 @@
                        <p:outputLabel value="#{documento.dfch}"/>
                 </p:column>
                 <p:column headerText="Monto a cobrar">
-                    <p:outputLabel value="#{documento.dtnt}"/>
+                    <p:outputLabel value="#{documento.dmon}">
+                        <f:converter converterId="monedaConverter"/>&nbsp;
+                    </p:outputLabel>
+                    <p:outputLabel value="#{documento.dtnt}"/>                   
                 </p:column>
                   <p:column headerText="Modificar">
                       <p:commandLink value="Modificar" actionListener="#{documentoBean.leerID(documento)}" oncomplete="PF('wdlgDatos').show()" update=":dlgDatos"/>
@@ -95,7 +98,10 @@
                         </p:selectOneMenu>
                     <h:outputLabel value="Cantidad"/>
                     <p:inputText id="cantidad" value="#{documentoBean.cantidad}" size="2"/>
-                    <h:outputText value="#{documentoBean.totalpagar}"/>
+                    <p:outputLabel value="#{documentoBean.documento.dmon}">
+                        <f:converter converterId="monedaConverter"/>&nbsp;
+                    </p:outputLabel>
+                    <h:outputText value="#{documentoBean.documento.dtnt}"/>
                      <h:outputLabel value="Operar"/>
                     <p:commandButton value="Agregar" actionListener="#{documentoBean.agregar()}" update=":dato:dataArticulos"/>
                     <h:outputLabel value="Guardar"/>

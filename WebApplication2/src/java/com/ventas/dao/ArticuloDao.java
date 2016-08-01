@@ -33,8 +33,24 @@ public class ArticuloDao extends Dao {
            st.setDouble(6, art.getAsto());
            st.setDouble(7, art.getAsts());
            st.setBinaryStream(8,art.getAfot());
-           
            st.executeUpdate();
+           st.close();
+            int id_last=0; 
+           PreparedStatement st1 = this.getCn().prepareStatement("SELECT LAST_INSERT_ID() FROM `articulo` LIMIT 1");
+           ResultSet r;
+            r = st1.executeQuery();
+            while (r.next()) {
+             id_last=r.getInt(1);
+           }
+           st1.close();
+           PreparedStatement st2 = this.getCn().prepareStatement("INSERT into articulo_movimiento (cArt,tipo,cantidad,stock)"
+                   + "values(?,?,?,?)");
+            st2.setInt(1,id_last);
+           st2.setString(2, "I");
+           st2.setDouble(3, art.getAsto());
+           st2.setDouble(4, art.getAsto());
+            st2.executeUpdate();
+            st2.close();
        } catch (Exception e) {
        throw e;
        }finally{
@@ -103,7 +119,39 @@ public List<Articulo> listar() throws Exception{
 }
        return arts;
 }
-          
+
+
+public void movimiento_stock(int id,String tipo,double cantidad) throws Exception{
+    try {
+        this.Conectar();
+        
+            int cant_actual=0; 
+           PreparedStatement st1 = this.getCn().prepareStatement("SELECT stock FROM `articulo_movimiento` where cArt=? ORDER by id DESC limit 1");
+           ResultSet r;
+           st1.setInt(1,id);
+            r = st1.executeQuery();
+            while (r.next()) {
+             cant_actual=r.getInt(1);
+           }
+               PreparedStatement st = this.getCn().prepareStatement("UPDATE articulo_movimiento SET "
+                   + "cantidad=?,tipo=?,stock=? WHERE cArt = ?");
+           st.setDouble(1,cantidad);
+           st.setString(2,tipo);
+           st.setDouble(3,cant_actual-cantidad);
+           st.setInt(4,id);
+          st.executeUpdate();
+          st.close();
+    } catch (Exception e) {
+          FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Error",  "Mensaje: " + e.getMessage()) );
+        throw e;
+    }finally{
+        this.Cerrar();}
+
+
+}      
+
+
 public void modificar(Articulo art) throws Exception{
        try {
 

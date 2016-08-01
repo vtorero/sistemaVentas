@@ -46,7 +46,8 @@ public class DocumentoDao extends Dao {
             while (r.next()) {
              id_last=r.getInt(1);
            }
-            
+            ArticuloDao dao;
+            dao = new ArticuloDao();
            for(ItemDocumento item: lista){
                
            try (PreparedStatement st3 = this.getCn().prepareStatement("INSERT INTO documentoitem (dCod,iEmp,iTip,iNum,iArt,iDs1,iUvt,iPru,iCom,iCnt,iBrt,iDsc,iTai,iIgv,iTnt) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ")) {
@@ -65,8 +66,12 @@ public class DocumentoDao extends Dao {
                st3.setDouble(13, item.getItai());
                st3.setDouble(14, item.getIigv());
                st3.setDouble(15, item.getItnt());
+               dao.movimiento_stock(item.getArticulo().getCart(), "S", item.getIcnt());
                st3.executeUpdate();
                st3.close();
+               
+               
+               
            }
          
            }
