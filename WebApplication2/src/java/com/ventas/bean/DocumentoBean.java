@@ -1,5 +1,6 @@
 package com.ventas.bean;
 
+import com.ventas.dao.ArticuloDao;
 import com.ventas.dao.ClienteDao;
 import com.ventas.dao.DocumentoDao;
 import com.ventas.dao.EmpresaDao;
@@ -197,8 +198,12 @@ public void operar(){
    
         public void eliminar_item(ItemDocumento item){
         ItemDocumentoDao idao;
+        ArticuloDao adao;
             try {
+                
+                adao=new ArticuloDao();
                 idao=new ItemDocumentoDao();
+                adao.movimiento_stock(item.getIart(),"I",item.getIcnt());
                 idao.eliminar(item);
                 this.lista =idao.listar(item.getdCod());
             } catch (Exception e) {
