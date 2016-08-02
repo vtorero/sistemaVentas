@@ -46,13 +46,14 @@ public class ItemDocumentoDao extends Dao {
        try {
            this.Conectar();
            PreparedStatement st = this.getCn().prepareCall("SELECT "
-                   + " iCod,iEmp,iTip,iNro,iNum,iArt,iDs1,iUvt,iPru,iCom,iCnt,iBrt,iDsc,iTai,iIgv,iTnt,iEst FROM documentoitem where dCod=?");
+                   + " iCod,dCod,iEmp,iTip,iNro,iNum,iArt,iDs1,iUvt,iPru,iCom,iCnt,iBrt,iDsc,iTai,iIgv,iTnt,iEst FROM documentoitem where dCod=?");
            st.setInt(1,id);
            rs = st.executeQuery();
            lista = new ArrayList<>();
            while(rs.next()){
            ItemDocumento doc = new ItemDocumento();
            doc.setIcod(rs.getInt("iCod"));
+           doc.setdCod(rs.getInt("dCod"));
            doc.setIemp(rs.getInt("iEmp"));
            doc.setItip(rs.getString("iTip"));
            doc.setInro(rs.getString("iNro"));
@@ -87,12 +88,13 @@ public class ItemDocumentoDao extends Dao {
        try {
            this.Conectar();
            PreparedStatement st = this.getCn().prepareCall("SELECT"
-                   + " iCod,iEmp,iTip,iNro,iNum,iArt,iDs1,iUvt,iPru,iCom,iCnt,iBrt,iDsc,iTai,iIgv,iTnt,iEst FROM documento WHERE iCod=?");
+                   + " iCod,dCod,iEmp,iTip,iNro,iNum,iArt,iDs1,iUvt,iPru,iCom,iCnt,iBrt,iDsc,iTai,iIgv,iTnt,iEst FROM documento WHERE iCod=?");
            st.setInt(1,idoc.getIcod());
            rs =st.executeQuery();
            while (rs.next()) {
            docs = new ItemDocumento();
            docs.setIcod(rs.getInt("iCod"));
+           docs.setdCod(rs.getInt("dCod"));
            docs.setIemp(rs.getInt("iEmp"));
            docs.setItip(rs.getString("iTip"));
            docs.setInro(rs.getString("iNro"));
@@ -153,8 +155,8 @@ public void modificar(ItemDocumento idoc) throws Exception{
     public void eliminar(ItemDocumento idoc) throws Exception{
        try {
        this.Conectar();
-           PreparedStatement st = this.getCn().prepareStatement("DELETE FROM documento-ITEM  WHERE iCod = ?");
-           st.setInt(1,idoc.getIart());
+           PreparedStatement st = this.getCn().prepareStatement("DELETE FROM documentoitem  WHERE iCod = ?");
+           st.setInt(1,idoc.getIcod());
            st.executeUpdate();
        } catch (Exception e) {
        throw e;

@@ -193,6 +193,21 @@ public void operar(){
                 
         }
     }
+
+   
+        public void eliminar_item(ItemDocumento item){
+        ItemDocumentoDao idao;
+            try {
+                idao=new ItemDocumentoDao();
+                idao.eliminar(item);
+                this.lista =idao.listar(item.getdCod());
+            } catch (Exception e) {
+                MyUtil.mensajes("Eliminación  Item", e);
+            }
+                
+        
+        }
+        
         
     public void agregar() throws Exception{
     ItemDocumento det = new ItemDocumento();
@@ -204,6 +219,7 @@ public void operar(){
     EmpresaDao edao;
     edao = new EmpresaDao();
     emptemp = edao.obtener_datos(documento.getDemp());
+    det.setdCod(this.documento.getDcod());
     det.setIemp(this.documento.getDemp());
     det.setItip(this.documento.getDtip());
     det.setInum(nro);

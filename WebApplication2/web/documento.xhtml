@@ -16,8 +16,7 @@
        <f:event type="preRenderView" listener="#{articuloBean.listar()}"/>
         <h2>Documentos</h2> 
        <p:growl showDetail="true" id="msj"/>
-      
-        <h:form id="frm">
+              <h:form id="frm">
                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:dataTable id="data" value="#{documentoBean.lstDocumentos}" var="documento" style="text-align: center">
                  <p:column headerText="Empresa">
@@ -103,14 +102,14 @@
                     </p:outputLabel>
                     <h:outputText value="#{documentoBean.documento.dtnt}"/>
                      <h:outputLabel value="Operar"/>
-                    <p:commandButton value="Agregar" actionListener="#{documentoBean.agregar()}" update=":dato:dataArticulos"/>
+                    <p:commandButton value="Agregar" actionListener="#{documentoBean.agregar()}" update=":dato:dataitems"/>
                     <h:outputLabel value="Guardar"/>
-                    <p:commandButton value="#{documentoBean.accion}" actionListener="#{documentoBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data" />
+                    <p:commandButton value="#{documentoBean.accion}" actionListener="#{documentoBean.operar()}" oncomplete="PF('wdlgDatos').hide()" update=":frm:data,msj" />
                     </p:panelGrid>
                  </h:form>
            <h2>Lista de Articulos:</h2>
                 <h:form id="dato">
-                    <p:dataTable id="dataArticulos"  value="#{documentoBean.lista}" var="item" style="width:675px;text-align:center">
+                    <p:dataTable id="dataitems"  value="#{documentoBean.lista}" var="item" style="width:675px;text-align:center">
                         <p:column headerText="Item">
                             <h:outputText value="#{item.inum}" />
                     </p:column> 
@@ -135,8 +134,8 @@
                   <p:column headerText="% I.G.V">
                    <p:outputLabel value="#{item.iigv}"/>
                    </p:column>
-                    <p:column headerText="Eliminar">
-                    <p:commandButton value="Eliminar"/>
+                    <p:column headerText="Eliminar"> 
+                        <p:commandLink value="Eliminar" actionListener="#{documentoBean.eliminar_item(item)}" update="dataitems"/>
                     </p:column>
                         
             </p:dataTable>

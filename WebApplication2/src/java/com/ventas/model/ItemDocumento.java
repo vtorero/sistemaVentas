@@ -3,6 +3,7 @@ package com.ventas.model;
 
 public class ItemDocumento {
     private int icod;
+    private int dCod;
     private int iemp;
     private String itip;
     private String inro;
@@ -39,6 +40,15 @@ public class ItemDocumento {
         this.icod = icod;
     }
 
+    public int getdCod() {
+        return dCod;
+    }
+
+    public void setdCod(int dCod) {
+        this.dCod = dCod;
+    }
+
+    
     public int getIemp() {
         return iemp;
     }
