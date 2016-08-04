@@ -142,7 +142,11 @@ public void movimiento_stock(int id,String tipo,double cantidad) throws Exceptio
             st.setInt(1,id);
             st.setString(2,tipo);
             st.setDouble(3,cantidad);
+            if(tipo.equals("S")){
             st.setDouble(4,cant_actual-cantidad);
+            }else{
+             st.setDouble(4,cant_actual+cantidad);
+            }         
             st.executeUpdate();
             
         }catch (Exception e){ 

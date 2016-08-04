@@ -109,7 +109,10 @@
                  </h:form>
            <h2>Lista de Articulos:</h2>
                 <h:form id="dato">
-                    <p:dataTable id="dataitems"  value="#{documentoBean.lista}" var="item" style="width:675px;text-align:center">
+                    <p:dataTable id="dataitems" value="#{documentoBean.lista}" var="item" style="width:675px;text-align:center" rows="5"
+                                  paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10">
                         <p:column headerText="Item">
                             <h:outputText value="#{item.inum}" />
                     </p:column> 

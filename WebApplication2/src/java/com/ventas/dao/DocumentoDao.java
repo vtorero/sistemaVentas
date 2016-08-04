@@ -194,14 +194,18 @@ public void modificar(Documento doc) throws Exception{
            st.setString(18,doc.getDest());
            st.setInt(19,doc.getDcod());
            st.executeUpdate();
+                    
+           
        } catch (Exception e) {
        throw e;
        }finally{
            this.Cerrar();
         
-       }
+            }
+      }
+       
    
-   } 
+
     public void eliminar(Documento doc) throws Exception{
        try {
        this.Conectar();

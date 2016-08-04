@@ -2,6 +2,7 @@ package com.ventas.bean;
 
 import com.ventas.dao.ArticuloDao;
 import com.ventas.dao.ClienteDao;
+import com.ventas.dao.Dao;
 import com.ventas.dao.DocumentoDao;
 import com.ventas.dao.EmpresaDao;
 import com.ventas.dao.ItemDocumentoDao;
@@ -11,6 +12,7 @@ import com.ventas.model.Documento;
 import com.ventas.model.Empresa;
 import com.ventas.model.ItemDocumento;
 import com.ventas.util.MyUtil;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -214,7 +216,7 @@ public void operar(){
         }
         
         
-    public void agregar() throws Exception{
+    public void agregar() throws Exception {
     ItemDocumento det = new ItemDocumento();
     Cliente clitempo;
     ClienteDao  cdao;
@@ -242,8 +244,39 @@ public void operar(){
     totalpagar+=Math.round(det.getItnt());
     documento.setDtnt(totalpagar);
     this.lista.add(det);
-    nro++;
+   
+            ArticuloDao dao;
+            dao = new ArticuloDao();
+            Dao d;
+            d = new Dao();
+            d.Conectar();
+            
+           try (PreparedStatement st3 = d.getCn().prepareStatement("INSERT INTO documentoitem (dCod,iEmp,iTip,iNum,iArt,iDs1,iUvt,iPru,iCom,iCnt,iBrt,iDsc,iTai,iIgv,iTnt) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
+               st3.setInt(1,documento.getDcod());
+               st3.setInt(2, det.getIemp());
+               st3.setString(3, det.getItip());
+               st3.setInt(4, nro);
+               st3.setInt(5, det.getIart());
+               st3.setString(6, det.getIds1());
+               st3.setString(7, det.getIuvt());
+               st3.setDouble(8, det.getIpru());
+               st3.setDouble(9, det.getIcom());
+               st3.setInt(10, det.getIcnt());
+               st3.setDouble(11, det.getIbrt());
+               st3.setDouble(12, det.getIdsc());
+               st3.setDouble(13, det.getItai());
+               st3.setDouble(14, det.getIigv());
+               st3.setDouble(15, det.getItnt());
+               dao.movimiento_stock(det.getIart(),"I",det.getIcnt());
+               st3.executeUpdate();
+               st3.close();
+               d.Cerrar();
+           
+           }
+            nro++;
+           }
+    
     
    }    
     
-}
+
