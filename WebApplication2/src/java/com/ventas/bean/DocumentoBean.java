@@ -267,7 +267,7 @@ public void operar(){
                st3.setDouble(13, det.getItai());
                st3.setDouble(14, det.getIigv());
                st3.setDouble(15, det.getItnt());
-               dao.movimiento_stock(det.getIart(),"I",det.getIcnt());
+               dao.movimiento_stock(det.getIart(),"S",det.getIcnt());
                st3.executeUpdate();
                st3.close();
                d.Cerrar();
