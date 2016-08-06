@@ -134,11 +134,13 @@ public void movimiento_stock(int id,String tipo,double cantidad) throws Exceptio
              cant_seguridad=r.getInt(1);
              cant_actual=r.getInt(2);
            }
-            if(cant_actual>=cant_seguridad){
+            if(cant_actual<=cant_seguridad){
                          FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Stock por agotarse",  "Revise el stock de este Articulo"));
+            context.addMessage(null, new FacesMessage("Stock por agotarse",  "Revise el stock de este Articulo"));
             }
-       PreparedStatement st = this.getCn().prepareStatement("INSERT INTO articulo_movimiento (cArt,tipo,cantidad,stock) VALUES(?,?,?,?)");
+            st1.close();
+                  
+            PreparedStatement st = this.getCn().prepareStatement("INSERT INTO articulo_movimiento (cArt,tipo,cantidad,stock) VALUES(?,?,?,?)");
             st.setInt(1,id);
             st.setString(2,tipo);
             st.setDouble(3,cantidad);
@@ -148,6 +150,14 @@ public void movimiento_stock(int id,String tipo,double cantidad) throws Exceptio
              st.setDouble(4,cant_actual+cantidad);
             }         
             st.executeUpdate();
+            st.close();
+            
+            PreparedStatement st2 = this.getCn().prepareStatement("UPDATE articulo set aSto=? where cArt=?");
+            st2.setDouble(1,cant_actual-cantidad);
+            st2.setInt(2, id);
+            st2.executeUpdate();
+            st2.close();
+              
             
         }catch (Exception e){ 
           FacesContext context = FacesContext.getCurrentInstance();
