@@ -20,6 +20,7 @@ import javax.faces.context.FacesContext;
  * @author vjimenez
  */
 public class ArticuloDao extends Dao {  
+    
      public void registrar(Articulo art) throws Exception{
        try {
        this.Conectar();
@@ -74,6 +75,7 @@ public List<Articulo> listar() throws Exception{
           art.setAds2(rs.getString("aDs2"));
           art.setAuvt(rs.getString("aUvt"));
           art.setApru(rs.getDouble("aPru"));
+          art.setAcom(rs.getDouble("aCom"));
           art.setAsto(rs.getDouble("aSto"));
           art.setAsts(rs.getDouble("aSts"));
           lista.add(art);
@@ -105,6 +107,7 @@ public List<Articulo> listar() throws Exception{
           arts.setAds2(rs.getString("aDs2"));
           arts.setAuvt(rs.getString("aUvt"));
           arts.setApru(rs.getDouble("aPru"));
+          arts.setAcom(rs.getDouble("aCom"));
           arts.setAsto(rs.getDouble("aSto"));
           arts.setAsts(rs.getDouble("aSts"));
           InputStream fin2 = rs.getBinaryStream("aFot");
@@ -146,17 +149,23 @@ public void movimiento_stock(int id,String tipo,double cantidad) throws Exceptio
             st.setDouble(3,cantidad);
             if(tipo.equals("S")){
             st.setDouble(4,cant_actual-cantidad);
-            }else{
-             st.setDouble(4,cant_actual+cantidad);
-            }         
-            st.executeUpdate();
-            st.close();
-            
-            PreparedStatement st2 = this.getCn().prepareStatement("UPDATE articulo set aSto=? where cArt=?");
+             PreparedStatement st2 = this.getCn().prepareStatement("UPDATE articulo set aSto=? where cArt=?");
             st2.setDouble(1,cant_actual-cantidad);
             st2.setInt(2, id);
             st2.executeUpdate();
             st2.close();
+            }else{
+             st.setDouble(4,cant_actual+cantidad);
+              PreparedStatement st2 = this.getCn().prepareStatement("UPDATE articulo set aSto=? where cArt=?");
+            st2.setDouble(1,cant_actual+cantidad);
+            st2.setInt(2, id);
+            st2.executeUpdate();
+            st2.close();
+            }         
+            st.executeUpdate();
+            st.close();
+            
+           
               
             
         }catch (Exception e){ 
@@ -187,6 +196,29 @@ public void modificar(Articulo art) throws Exception{
            st.setBinaryStream(8,art.getAfot());
            st.setInt(9, art.getCart());
            st.executeUpdate();
+            
+             int cant_seguridad=0;
+           int cant_actual=0;
+         
+           PreparedStatement st1 = this.getCn().prepareStatement("SELECT aSts,Stock FROM `articulo` a ,`articulo_movimiento` m  where a.cArt=? ORDER by id DESC limit 1");
+           ResultSet r;
+           st1.setInt(1,art.getCart());
+            r = st1.executeQuery();
+            while (r.next()) {
+             cant_seguridad=r.getInt(1);
+             cant_actual=r.getInt(2);
+           }
+            if(art.getAsto()>cant_actual){
+             PreparedStatement st2 = this.getCn().prepareStatement("INSERT INTO articulo_movimiento (cArt,tipo,cantidad,stock) VALUES(?,?,?,?)");
+            st2.setInt(1,art.getCart());
+            st2.setString(2,"I");
+            st2.setDouble(3, art.getAsto()-cant_actual);
+            st2.setDouble(4,art.getAsto());
+            st2.executeUpdate();
+            st2.close();
+            }
+            
+            
        } catch (Exception e) {
        FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Error",  "Mensaje: " + e.getMessage()) );
