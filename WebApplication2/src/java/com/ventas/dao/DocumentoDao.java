@@ -21,7 +21,7 @@ public class DocumentoDao extends Dao {
            + " (dEmp,dTip,dNro,dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst) values(?,?,?,STR_TO_DATE(?,'%d/%m/%Y'),?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
            st.setInt(1,doc.getDemp());
            st.setString(2,doc.getDtip());
-           st.setString(3, doc.getDnro());
+           st.setString(3, emp.getEruc());
            st.setString(4, doc.getDfch());
            st.setInt(5, cli.getCcod());
            st.setString(6, doc.getDmon());
@@ -165,6 +165,48 @@ public class DocumentoDao extends Dao {
 }
        return docs;
 }
+      
+       public Documento traer_datos(int id) throws Exception{
+       Documento docs = null;
+       ResultSet rs;
+       try {
+           this.Conectar();
+           PreparedStatement st = this.getCn().prepareCall("SELECT"
+                   + " dCod,dEmp,dTip,dNro,DATE_FORMAT(dFch,'%d/%m/%Y') dFch,dCli,dMon,dTic,dBrt,dCds,dDsc,dIgv,dTig,dTnt,dTpg,dDif,dCom,dCit,dEst FROM documento WHERE dCod=?");
+           st.setInt(1,id);
+           rs =st.executeQuery();
+           while (rs.next()) {
+               docs = new Documento();
+              docs.setDcod(rs.getInt("dCod"));
+           docs.setDemp(rs.getInt("dEmp"));
+           docs.setDtip(rs.getString("dTip"));
+           docs.setDnro(rs.getString("dNro"));
+           docs.setDfch(rs.getString("dFch"));
+           docs.setDcli(rs.getInt("dCli"));
+           docs.setDmon(rs.getString("dMon"));
+           docs.setDtic(rs.getDouble("dTic"));
+           docs.setDbrt(rs.getDouble("dBrt"));
+           docs.setDcds(rs.getDouble("dCds"));
+           docs.setDdsc(rs.getDouble("dDsc"));
+           docs.setDigv(rs.getDouble("dIgv"));
+           docs.setDtig(rs.getDouble("dTig"));
+           docs.setDtnt(rs.getDouble("dTnt"));
+           docs.setDtpg(rs.getString("dTpg"));
+           docs.setDdif(rs.getInt("dDif"));
+           docs.setDcom(rs.getDouble("dCom"));
+           docs.setDcit(rs.getDouble("dCit"));
+           docs.setDest(rs.getString("dEst"));
+              }
+           
+       } catch (Exception e) {
+           throw e;
+       }
+   finally{
+           this.Cerrar();
+}
+       return docs;
+}
+      
           
 public void modificar(Documento doc) throws Exception{
        try {
