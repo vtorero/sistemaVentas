@@ -28,7 +28,7 @@ public class DocumentoDao extends Dao {
            st.setDouble(7, doc.getDtic());
            st.setDouble(8, doc.getDbrt());
            st.setDouble(9,cli.getCpds());
-           st.setDouble(10,9000);     
+           st.setDouble(10,cli.getVcod());     
            st.setDouble(11,emp.getEigv());
            st.setDouble(12,doc.getDtig());
            st.setDouble(13,doc.getDtnt());
@@ -66,7 +66,6 @@ public class DocumentoDao extends Dao {
                st3.setDouble(13, item.getItai());
                st3.setDouble(14, item.getIigv());
                st3.setDouble(15, item.getItnt());
-               //dao.movimiento_stock(item.getIart(),"S",item.getIcnt());
                st3.executeUpdate();
                st3.close();
                
@@ -209,7 +208,7 @@ public void modificar(Documento doc) throws Exception{
     public void eliminar(Documento doc) throws Exception{
        try {
        this.Conectar();
-           PreparedStatement st = this.getCn().prepareStatement("DELETE FROM documento  WHERE dCod = ?");
+           PreparedStatement st = this.getCn().prepareStatement("DELETE FROM documento WHERE dCod = ?");
            st.setInt(1,doc.getDcod());
            st.executeUpdate();
        } catch (Exception e) {

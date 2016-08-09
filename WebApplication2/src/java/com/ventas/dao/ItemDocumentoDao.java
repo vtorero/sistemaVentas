@@ -3,6 +3,7 @@ package com.ventas.dao;
 
 
 import com.ventas.model.ItemDocumento;
+import com.ventas.util.MyUtil;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -159,6 +160,7 @@ public void modificar(ItemDocumento idoc) throws Exception{
            st.setInt(1,idoc.getIcod());
            st.executeUpdate();
        } catch (Exception e) {
+           MyUtil.mensajes("Eliminación Items", e);
        throw e;
        }finally{
            this.Cerrar();

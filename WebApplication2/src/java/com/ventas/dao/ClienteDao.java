@@ -176,7 +176,7 @@ public void modificar(Cliente cli) throws Exception{
        this.Conectar();
 
            PreparedStatement st = this.getCn().prepareStatement("UPDATE cliente SET "
-                   + "cRuc=?,cRzS=?,cDir=?,cLug=?,cMap=?,cFnc=STR_TO_DATE(?,'%d/%m/%Y'),cTl1=?,cTl2=?,cCl1=?,cCl2=?,cCe1=?,cCe2=?,cFio=STR_TO_DATE(?,'%d/%m/%Y'),cCat=?,cPds=?,vCod=?,cFot=? WHERE cCod = ?");
+           + "cRuc=?,cRzS=?,cDir=?,cLug=?,cMap=?,cFnc=STR_TO_DATE(?,'%d/%m/%Y'),cTl1=?,cTl2=?,cCl1=?,cCl2=?,cCe1=?,cCe2=?,cFio=STR_TO_DATE(?,'%d/%m/%Y'),cCat=?,cPds=?,vCod=?,cFot=? WHERE cCod = ?");
            st.setString(1,cli.getCruc());
            st.setString(2, cli.getCrzs());
            st.setString(3, cli.getCdir());

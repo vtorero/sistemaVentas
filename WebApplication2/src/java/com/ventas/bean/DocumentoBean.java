@@ -202,21 +202,30 @@ public void operar(){
         ItemDocumentoDao idao;
         ArticuloDao adao;
             try {
-                
                 adao=new ArticuloDao();
                 idao=new ItemDocumentoDao();
                 adao.movimiento_stock(item.getIart(),"I",item.getIcnt());
                 idao.eliminar(item);
-                this.lista =idao.listar(item.getdCod());
+                Dao d;
+                 d = new Dao();
+                 d.Conectar();
+               PreparedStatement st3 = d.getCn().prepareStatement("UPDATE documento set dTnt=? where dCod=?");
+               st3.setDouble(1,(documento.getDtnt()-item.getItnt()));
+               st3.setInt(2,documento.getDcod());
+               st3.executeUpdate();
+               st3.close();
+               d.Cerrar();
+               this.lista =idao.listar(item.getdCod());
+                
             } catch (Exception e) {
-                MyUtil.mensajes("Eliminación  Item", e);
+                MyUtil.mensajes("Eliminación Item", e);
             }
                 
         
         }
         
         
-    public void agregar() throws Exception {
+    public void agregar() throws Exception {   
     ItemDocumento det = new ItemDocumento();
     Cliente clitempo;
     ClienteDao  cdao;
@@ -241,7 +250,7 @@ public void operar(){
     det.setItai(det.getIbrt()-det.getIdsc());
     det.setIigv(det.getItai()*(emptemp.getEigv()/100));
     det.setItnt(det.getItai()+det.getIigv());
-    totalpagar+=Math.round(det.getItnt());
+    totalpagar+=det.getItnt();
     documento.setDtnt(totalpagar);
     this.lista.add(det);
    
@@ -270,8 +279,7 @@ public void operar(){
                dao.movimiento_stock(det.getIart(),"S",det.getIcnt());
                st3.executeUpdate();
                st3.close();
-               d.Cerrar();
-           
+               d.Cerrar();   
            }
             nro++;
            }

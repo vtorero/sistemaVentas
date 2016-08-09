@@ -131,11 +131,11 @@
                    <p:column headerText="Total Bruto">
                         <p:outputLabel value="#{item.ibrt}"/>
                    </p:column>
-                   <p:column headerText="% Descuento">
-                       <p:outputLabel value="#{item.idsc}"/>
-                   </p:column>
-                  <p:column headerText="% I.G.V">
+                  <p:column headerText="I.G.V">
                    <p:outputLabel value="#{item.iigv}"/>
+                   </p:column>
+                         <p:column headerText="Total">
+                             <p:outputLabel value="#{item.itnt}"/>
                    </p:column>
                     <p:column headerText="Eliminar"> 
                         <p:commandLink value="Eliminar" actionListener="#{documentoBean.eliminar_item(item)}" update="dataitems"/>
