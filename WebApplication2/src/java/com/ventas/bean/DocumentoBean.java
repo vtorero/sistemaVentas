@@ -13,6 +13,7 @@ import com.ventas.model.Empresa;
 import com.ventas.model.ItemDocumento;
 import com.ventas.util.MyUtil;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -32,6 +33,7 @@ public class DocumentoBean {
         private String accion; 
         private int nro=1; 
         private Double totalpagar=0.00;
+        private Double totalDescuento=0.00;
 
     public Double getTotalpagar() {
         return totalpagar;
@@ -192,8 +194,7 @@ public void operar(){
             dao.eliminar(ven);
             this.listar();        
         } catch (Exception e) {
-            MyUtil.mensajes("Eliminación", e);
-                
+            MyUtil.mensajes("Eliminación", e);    
         }
     }
 
@@ -235,6 +236,20 @@ public void operar(){
     EmpresaDao edao;
     edao = new EmpresaDao();
     emptemp = edao.obtener_datos(documento.getDemp());
+    
+     Dao d;
+    d = new Dao();
+    d.Conectar();
+    Double tipo_cambio=0.00;
+     PreparedStatement st1 = d.getCn().prepareStatement("SELECT tipo_cambio FROM `tipo_cambio` where codigo=? ORDER by id DESC limit 1");
+           ResultSet r;
+           st1.setString(1,this.documento.getDmon());
+            r = st1.executeQuery();
+            while (r.next()) {
+             tipo_cambio=r.getDouble(1);
+             
+           }
+    
     det.setdCod(this.documento.getDcod());
     det.setIemp(this.documento.getDemp());
     det.setItip(this.documento.getDtip());
@@ -242,23 +257,26 @@ public void operar(){
     det.setIart(articulo.getCart());
     det.setIds1(articulo.getAds1());
     det.setIuvt(articulo.getAuvt());
-    det.setIpru(articulo.getApru());
+    det.setIpru(articulo.getApru()/tipo_cambio);
     det.setIcom(articulo.getAcom());
     det.setIcnt(cantidad);
-    det.setIbrt(articulo.getApru()*cantidad);
+   
+    
+    det.setIbrt((articulo.getApru()*cantidad)/tipo_cambio);
     det.setIdsc(det.getIbrt()*(clitempo.getCpds()/100));
-    det.setItai(det.getIbrt()-det.getIdsc());
+    det.setItai((det.getIbrt()-det.getIdsc()));
     det.setIigv(det.getItai()*(emptemp.getEigv()/100));
     det.setItnt(det.getItai()+det.getIigv());
-    totalpagar+=det.getItnt();
+    totalpagar+=(det.getItnt());
+    totalDescuento+=det.getIdsc();
     documento.setDtnt(totalpagar);
+    documento.setDcds(totalDescuento);
     this.lista.add(det);
    
             ArticuloDao dao;
             dao = new ArticuloDao();
-            Dao d;
-            d = new Dao();
-            d.Conectar();
+       
+            
             
            try (PreparedStatement st3 = d.getCn().prepareStatement("INSERT INTO documentoitem (dCod,iEmp,iTip,iNum,iArt,iDs1,iUvt,iPru,iCom,iCnt,iBrt,iDsc,iTai,iIgv,iTnt) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
                st3.setInt(1,documento.getDcod());
@@ -270,7 +288,7 @@ public void operar(){
                st3.setString(7, det.getIuvt());
                st3.setDouble(8, det.getIpru());
                st3.setDouble(9, det.getIcom());
-               st3.setInt(10, det.getIcnt());
+               st3.setInt(10,det.getIcnt());
                st3.setDouble(11, det.getIbrt());
                st3.setDouble(12, det.getIdsc());
                st3.setDouble(13, det.getItai());

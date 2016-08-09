@@ -21,7 +21,7 @@
                     <p:outputLabel value="#{articulo.auvt}"/>      
                 </p:column>
                    <p:column headerText="Precio Venta">
-                       <p:outputLabel value="#{articulo.apru}"/>
+                      <p:outputLabel value=" S/. #{articulo.apru}"/>
                 </p:column>
                 <p:column headerText="Stock">
                     <p:outputLabel value="#{articulo.asto}"/>
@@ -50,7 +50,7 @@
             <p:inputText id="txtuni" value="#{articuloBean.articulo.auvt}" size="15"/>
              <h:outputLabel value="Comisión"/>
              <p:inputText id="txtcom" value="#{articuloBean.articulo.acom}" size="5"/>
-            <h:outputLabel value="Precio unitario"/>
+            <h:outputLabel value="Precio S/."/>
             <p:inputText id="preciou" value="#{articuloBean.articulo.apru}" size="5"/>
            <h:outputLabel value="Stock"/>
            <p:inputText id="txtTlf1" value="#{articuloBean.articulo.asto}" size="5"/>

@@ -28,7 +28,7 @@ public class DocumentoDao extends Dao {
            st.setDouble(7, doc.getDtic());
            st.setDouble(8, doc.getDbrt());
            st.setDouble(9,cli.getCpds());
-           st.setDouble(10,cli.getVcod());     
+           st.setDouble(10,doc.getDdsc());     
            st.setDouble(11,emp.getEigv());
            st.setDouble(12,doc.getDtig());
            st.setDouble(13,doc.getDtnt());
